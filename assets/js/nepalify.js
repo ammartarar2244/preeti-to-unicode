@@ -324,6 +324,24 @@ class Nepalify {
     }
 
     /**
+     * Converts Roman/English phonetic text to Devanagari Unicode.
+     * @param {string} text Roman/English input text
+     * @returns {string} Devanagari Unicode text
+     */
+    static transliterateRomanToUnicode(text) {
+        if (!text) return "";
+
+        // Tokenize by word, keeping spaces, punctuation, symbols and newlines intact
+        const tokens = text.split(/(\s+|[^\w\']+)/);
+        return tokens.map(token => {
+            if (/^[a-zA-Z\']+$/.test(token)) {
+                return Nepalify.transliterateWord(token);
+            }
+            return token;
+        }).join('');
+    }
+
+    /**
      * Intercepts keyboard inputs on a DOM element and converts them to Devanagari based on layout
      * @param {HTMLElement} element The target textarea or input
      * @param {string} layoutName 'romanized', 'traditional', or 'romanize'
@@ -342,6 +360,7 @@ class Nepalify {
             if (bindings.click) element.removeEventListener('click', bindings.click);
             if (bindings.focus) element.removeEventListener('focus', bindings.focus);
             if (bindings.input) element.removeEventListener('input', bindings.input);
+            if (bindings.paste) element.removeEventListener('paste', bindings.paste);
             Nepalify.activeBindings.delete(element);
         }
 
@@ -462,10 +481,37 @@ class Nepalify {
                 }
             };
 
+            const pasteHandler = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const clipboardData = e.clipboardData || window.clipboardData;
+                const pastedText = clipboardData.getData('text');
+                
+                const transliterated = Nepalify.transliterateRomanToUnicode(pastedText);
+
+                const start = element.selectionStart;
+                const end = element.selectionEnd;
+                const val = element.value;
+
+                element.value = val.substring(0, start) + transliterated + val.substring(end);
+                
+                const newPos = start + transliterated.length;
+                element.setSelectionRange(newPos, newPos);
+
+                element.dispatchEvent(new Event('input', { bubbles: true }));
+                
+                if (element._translitState) {
+                    element._translitState.buffer = "";
+                    element._translitState.lastLen = 0;
+                }
+            };
+
             bindingsObj.keypress = keypressHandler;
             bindingsObj.keydown = keydownHandler;
             bindingsObj.click = resetHandler;
             bindingsObj.focus = resetHandler;
+            bindingsObj.paste = pasteHandler;
         } else if (layoutName === 'romanize') {
             // Nepali to English (Romanize / Reverse Transliterate)
             const inputHandler = () => {
@@ -493,6 +539,7 @@ class Nepalify {
                     if (bindingsObj.click) element.addEventListener('click', bindingsObj.click);
                     if (bindingsObj.focus) element.addEventListener('focus', bindingsObj.focus);
                     if (bindingsObj.input) element.addEventListener('input', bindingsObj.input);
+                    if (bindingsObj.paste) element.addEventListener('paste', bindingsObj.paste);
                     
                     Nepalify.activeBindings.set(element, bindingsObj);
                 }
@@ -505,6 +552,7 @@ class Nepalify {
                     if (bindings.click) element.removeEventListener('click', bindings.click);
                     if (bindings.focus) element.removeEventListener('focus', bindings.focus);
                     if (bindings.input) element.removeEventListener('input', bindings.input);
+                    if (bindings.paste) element.removeEventListener('paste', bindings.paste);
                     
                     Nepalify.activeBindings.delete(element);
                     delete element._translitState;

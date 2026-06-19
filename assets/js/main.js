@@ -155,17 +155,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 typingArea.placeholder = "पारम्परिक प्रीति लेआउटमा टाइप गर्नुहोस् (जैसे: s = क, t = त)...";
                 typingArea.className = "editor-textarea nepali-font";
             } else if (layout === 'romanized') {
-                typingArea.placeholder = "रोमनाइज्ड नेपालीमा टाइप गर्नुहोस् (जैसे: k = क, a = ा, m = म = काम)...";
+                typingArea.placeholder = "अंग्रेजीमा टाइप गर्नुहोस् (जैसे: namaste = नमस्ते, mero naam = मेरो नाम)...";
                 typingArea.className = "editor-textarea nepali-font";
             } else if (layout === 'romanize') {
                 typingArea.placeholder = "यहाँ नेपाली युनिकोड पेस्ट गर्नुहोस् वा टाइप गर्नुहोस् (Devanagari to Roman English)...";
                 typingArea.className = "editor-textarea";
             } else {
-                typingArea.placeholder = "Type phonetically or standard English here...";
+                typingArea.placeholder = "Type standard English here...";
                 typingArea.className = "editor-textarea";
             }
 
-            showToast(`Switched layout to ${layout.toUpperCase()}`);
+            const layoutNames = {
+                'romanized': 'English to Nepali',
+                'traditional': 'Traditional',
+                'romanize': 'Nepali to English',
+                'english': 'English'
+            };
+            showToast(`Switched layout to ${layoutNames[layout] || layout}`);
         };
 
         // Attach listeners to selectors
