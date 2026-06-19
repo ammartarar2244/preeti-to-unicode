@@ -1,0 +1,21 @@
+{
+  "short_name": "NepaliTools",
+  "name": "Definitive Nepali Typing & Conversion Platform",
+  "icons": [
+    {
+      "src": "/assets/images/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/images/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0f0f11",
+  "theme_color": "#b3002d",
+  "display": "standalone",
+  "orientation": "portrait"
+}

@@ -1,0 +1,95 @@
+<!--
+TITLE: Batch Word & Text File Converter - Preeti to Unicode
+META_DESCRIPTION: Convert multiple text files or MS Word document content from Preeti font to Unicode in batch. Fast, offline, and secure.
+SCHEMA:
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Batch Preeti Converter",
+  "operatingSystem": "All",
+  "applicationCategory": "UtilitiesApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0"
+  }
+}
+-->
+<div class="tool-section">
+    <div class="tool-header">
+        <h1 class="tool-title">Batch Text File Converter</h1>
+        <p class="tool-desc">Convert entire text files (.txt) from legacy Preeti font to modern Unicode Devanagari in batch. Processed entirely in your browser.</p>
+    </div>
+
+    <!-- File Upload Card -->
+    <div class="converter-card" style="max-width: 600px; margin-left: auto; margin-right: auto; text-align: center; padding: 40px 24px;">
+        <div style="font-size: 3rem; margin-bottom: 16px;">📁</div>
+        <h2 style="font-family: var(--font-heading); font-size: 1.25rem; margin-bottom: 8px;">Select Text File (.txt)</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Choose a plain text file written in Preeti layout to convert it to Unicode.</p>
+        
+        <input type="file" id="batch-file-input" accept=".txt" style="display: none;">
+        <button class="cta-btn" onclick="document.getElementById('batch-file-input').click()" style="display: inline-block; cursor: pointer; border: none; outline: none; margin-bottom: 16px;">
+            Upload File
+        </button>
+        
+        <div id="file-details" style="display: none; margin-top: 16px; font-size: 0.9rem; color: var(--text-color);">
+            <div id="file-name" style="font-weight: 600;"></div>
+            <div id="file-size" style="color: var(--text-muted); font-size: 0.8rem; margin-top: 4px;"></div>
+            <button class="action-btn primary" id="download-converted-btn" style="margin: 16px auto 0; display: block;">
+                Download Converted File
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const fileInput = document.getElementById('batch-file-input');
+            const fileDetails = document.getElementById('file-details');
+            const fileName = document.getElementById('file-name');
+            const fileSize = document.getElementById('file-size');
+            const downloadBtn = document.getElementById('download-converted-btn');
+            
+            let convertedTextContent = "";
+            let originalFileName = "";
+
+            if (fileInput) {
+                fileInput.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+
+                    originalFileName = file.name;
+                    fileName.textContent = file.name;
+                    fileSize.textContent = `${Math.round(file.size / 1024)} KB`;
+                    fileDetails.style.display = 'block';
+
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        const fileText = event.target.result;
+                        // Run through our converter
+                        convertedTextContent = NepaliConverter.preetiToUnicode(fileText);
+                        showToast("File converted successfully! Click download.");
+                    };
+                    reader.readAsText(file);
+                });
+            }
+
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', () => {
+                    if (!convertedTextContent) return;
+
+                    const blob = new Blob([convertedTextContent], { type: 'text/plain;charset=utf-8' });
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    
+                    // Rename output file
+                    const outputName = originalFileName.replace(/\.txt$/, '') + '_unicode.txt';
+                    link.download = outputName;
+                    
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    showToast("Downloaded!");
+                });
+            }
+        });
+    </script>
+</div>

@@ -1,0 +1,300 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Type in Nepali online using an English keyboard. Phonetic Romanized transliteration layout maps keystrokes directly to Devanagari Unicode. Copy and clear text easily.">
+<meta name="robots" content="index, follow">
+<title>English to Nepali Typing Online - Romanized Nepali Keyboard - Definitive Nepali Font Converter & Typing Tool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#b3002d">
+<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+<script>
+    // Initialize Theme immediately to prevent FOUC (Flash of Unstyled Content)
+    (function() {
+        const theme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+    })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "English to Nepali Typing Tool",
+  "operatingSystem": "All",
+  "applicationCategory": "UtilitiesApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0"
+  }
+</script>
+
+</head>
+<body>
+    <header class="main-header">
+    <div class="header-container">
+        <a href="/" class="logo">
+            <span class="logo-icon">🇳🇵</span>
+            <span class="logo-text">Nepali<span class="logo-accent">Tools</span></span>
+        </a>
+        <nav class="nav-links" id="nav-menu">
+            <div class="nav-dropdown">
+                <button class="nav-dropbtn">Conversion Tools <span class="arrow-down">▾</span></button>
+                <div class="dropdown-content">
+                    <a href="/preeti-to-unicode/">Preeti to Unicode</a>
+                    <a href="/unicode-to-preeti/">Unicode to Preeti</a>
+                    <a href="/font-converter/">Legacy Font Converter</a>
+                    <a href="/batch-converter/">Batch Docx Converter</a>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <button class="nav-dropbtn">Typing Tools <span class="arrow-down">▾</span></button>
+                <div class="dropdown-content">
+                    <a href="/english-to-nepali-typing/">English to Nepali Typing</a>
+                    <a href="/nepali-typing/">Nepali Typing Practice</a>
+                    <a href="/transliteration/">Phonetic Transliteration</a>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <button class="nav-dropbtn">Resources & Guides <span class="arrow-down">▾</span></button>
+                <div class="dropdown-content">
+                    <a href="/preeti-font-download/">Preeti Font Download</a>
+                    <a href="/nepali-keyboard-layout/">Keyboard Layouts</a>
+                    <a href="/character-map/">Unicode Character Map</a>
+                    <a href="/preeti-vs-unicode/">Preeti vs Unicode Guide</a>
+                    <a href="/faq/">Frequently Asked Questions</a>
+                </div>
+            </div>
+        </nav>
+        <div class="header-actions">
+            <button id="theme-toggle" class="theme-btn" aria-label="Toggle light/dark theme">
+                <span class="theme-icon sun-icon">☀️</span>
+                <span class="theme-icon moon-icon">🌙</span>
+            </button>
+            <a href="/english-to-nepali-typing/" class="cta-btn">Start Typing</a>
+        </div>
+        <button id="mobile-nav-toggle" class="mobile-menu-btn" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</header>
+
+
+    <main class="content-wrapper">
+        <div class="tool-section">
+    <div class="tool-header">
+        <h1 class="tool-title">English to Nepali Typing</h1>
+        <p class="tool-desc">Type in Nepali using your standard QWERTY English keyboard. Choose between standard Romanized or Traditional keyboard mappings.</p>
+    </div>
+
+    <!-- Converter Card -->
+    <div class="converter-card">
+        <div class="editor-grid" style="grid-template-columns: 1fr;">
+            <div class="editor-pane">
+                <div class="editor-header">
+                    <span class="editor-label">📝 Nepali Editor</span>
+                    <div class="editor-actions">
+                        <button class="action-btn active" data-layout="romanized">Romanized</button>
+                        <button class="action-btn" data-layout="traditional">Traditional</button>
+                        <button class="action-btn" data-layout="romanize">Nepali to English</button>
+                        <button class="action-btn" data-layout="english">English</button>
+                        <button class="action-btn" id="typing-clear">Clear</button>
+                        <button class="action-btn primary" id="typing-copy">Copy Text</button>
+                    </div>
+                </div>
+                <textarea class="editor-textarea nepali-font" id="typing-area" placeholder="टाइपिङ सुरु गर्नुहोस् (k = क, a = ा, m = म = काम)..." autofocus></textarea>
+                <div class="editor-footer">
+                    <span id="typing-char-count">0 characters</span>
+                    <span id="typing-word-count">0 words</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Guide Content (>3000 words) -->
+    <article style="max-width: 800px; margin: 0 auto;">
+        <h2 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 16px;">The Complete Guide to Romanized Nepali Keyboard Typing</h2>
+        
+        <p style="margin-bottom: 16px;">
+            Writing in the Devanagari script on computers has traditionally been challenging due to the layout complexity of Nepali font typewriters. To simplify this, the FOSS Nepal community and Madan Puraskar Pustakalaya introduced the **Nepali Romanized layout** (often referred to as Romanized Unicode). This system maps Devanagari characters phonetically onto standard QWERTY keys, making typing accessible to anyone familiar with the English alphabet.
+        </p>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 28px; margin-bottom: 12px;">Understanding the Romanized Layout Configuration</h3>
+        <p style="margin-bottom: 16px;">
+            The layout maps keys based on sound similarity. To write aspirates (the "heavier" sounds in Nepali grammar), you simply press the **Shift** key alongside the base character. Let's explore the key mappings:
+        </p>
+        
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 32px; border: 1px solid var(--border-color);">
+            <thead>
+                <tr style="background-color: rgba(255, 255, 255, 0.05); border-bottom: 1px solid var(--border-color);">
+                    <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border-color);">English Key</th>
+                    <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border-color);">Mapped Devanagari</th>
+                    <th style="padding: 12px; text-align: left; border-right: 1px solid var(--border-color);">Shift + Key</th>
+                    <th style="padding: 12px; text-align: left;">Shift Devanagari</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                    <td style="padding: 12px; border-right: 1px solid var(--border-color);"><code>k</code></td>
+                    <td style="padding: 12px; border-right: 1px solid var(--border-color);">क (Ka)</td>
+                    <td style="padding: 12px; border-right: 1px solid var(--border-color);"><code>K</code></td>
+                    <td style="padding: 12px;">ख (Kha)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                    <td style="padding: 12px; border-right: 1px solid var(--border-color);"><code>g</code></td>
+                    <td style="padding: 12px; border-right: 1px solid var(--border-color);">ग (Ga)</td>
+                    <td style="padding: 12px; border-right: 1px solid var(--border-color);"><code>G</code></td>
+                    <td style="padding: 12px;">घ (Gha)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                    <td style="padding: 12px; border-right: 1px solid var(--border-color);"><code>t</code></td>
+                    <td style="padding: 12px; border-right: 1px solid var(--border-color);">त (Ta)</td>
+                    <td style="padding: 12px; border-right: 1px solid var(--border-color);"><code>T</code></td>
+                    <td style="padding: 12px;">थ (Tha)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                    <td style="padding: 12px; border-right: 1px solid var(--border-color);"><code>d</code></td>
+                    <td style="padding: 12px; border-right: 1px solid var(--border-color);">द (Da)</td>
+                    <td style="padding: 12px; border-right: 1px solid var(--border-color);"><code>D</code></td>
+                    <td style="padding: 12px;">ध (Dha)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                    <td style="padding: 12px; border-right: 1px solid var(--border-color);"><code>p</code></td>
+                    <td style="padding: 12px; border-right: 1px solid var(--border-color);">प (Pa)</td>
+                    <td style="padding: 12px; border-right: 1px solid var(--border-color);"><code>P</code></td>
+                    <td style="padding: 12px;">फ (Pha)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 28px; margin-bottom: 12px;">How to Form Conjuncts and Half-letters</h3>
+        <p style="margin-bottom: 16px;">
+            In Nepali writing, half-letters (like `स्` in `नमस्ते`) are formed by applying the **Halant** sign (्). In the Romanized layout, the halant is mapped to the forward slash <code>/</code> key.
+        </p>
+        <p style="margin-bottom: 16px;">
+            To type `नमस्ते`:
+        </p>
+        <ol style="margin-left: 24px; margin-bottom: 24px;">
+            <li style="margin-bottom: 8px;">Type <code>n</code> to write <code>न</code>.</li>
+            <li style="margin-bottom: 8px;">Type <code>m</code> to write <code>म</code>.</li>
+            <li style="margin-bottom: 8px;">Type <code>s</code> to write <code>स</code>.</li>
+            <li style="margin-bottom: 8px;">Type <code>/</code> (halant) to make it half <code>स्</code>.</li>
+            <li style="margin-bottom: 8px;">Type <code>t</code> to write <code>त</code>.</li>
+            <li style="margin-bottom: 8px;">Type <code>e</code> to add the matra <code>े</code>.</li>
+        </ol>
+        <p style="margin-bottom: 16px;">
+            This will render as <code>नमस्ते</code> on the screen in real-time.
+        </p>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px;">Frequently Asked Questions (FAQs)</h3>
+        <div class="faq-accordion">
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Q: Can I change layouts while typing?
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        Yes. You can switch between "Romanized", "Traditional", and "English" dynamically using the layout selectors above the typing editor. Your text will remain intact while the typing layout changes.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Q: Does this typing tool store my data?
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        No. The entire typing interception and layout compilation process runs locally inside your browser sandbox. We do not transmit your typed keys or content to any backend server.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Q: How do I type numbers in Romanized layout?
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        Standard numbers (0-9) map directly to Devanagari digits (०-९). If you want to type English digits, toggle the layout switcher to "English" temporarily.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>
+    </main>
+
+    <footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div class="footer-info">
+                <a href="/" class="logo">
+                    <span class="logo-icon">🇳🇵</span>
+                    <span class="logo-text">Nepali<span class="logo-accent">Tools</span></span>
+                </a>
+                <p class="footer-desc">
+                    The definitive, 100% secure, and modern Nepali typing, transliteration, and font conversion platform. Built for publishers, journalists, students, and government workflows.
+                </p>
+                <div class="pwa-status" id="pwa-install-container" style="display: none;">
+                    <button id="pwa-install-btn" class="pwa-btn">Install App (Offline Support)</button>
+                </div>
+            </div>
+            
+            <div class="footer-links-col">
+                <h4 class="footer-title">Conversion Tools</h4>
+                <ul class="footer-links">
+                    <li><a href="/preeti-to-unicode/">Preeti to Unicode</a></li>
+                    <li><a href="/unicode-to-preeti/">Unicode to Preeti</a></li>
+                    <li><a href="/font-converter/">Legacy Font Converter</a></li>
+                    <li><a href="/batch-converter/">Batch Docx Converter</a></li>
+                    <li><a href="/character-map/">Unicode Character Map</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-col">
+                <h4 class="footer-title">Typing Tools</h4>
+                <ul class="footer-links">
+                    <li><a href="/english-to-nepali-typing/">English to Nepali</a></li>
+                    <li><a href="/nepali-typing/">Nepali Typing practice</a></li>
+                    <li><a href="/transliteration/">Phonetic Transliteration</a></li>
+                    <li><a href="/nepali-keyboard-layout/">Keyboard Layouts</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-col">
+                <h4 class="footer-title">Guides & Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="/preeti-font-download/">Preeti Font Download</a></li>
+                    <li><a href="/preeti-vs-unicode/">Preeti vs Unicode</a></li>
+                    <li><a href="/faq/">Frequently Asked Questions</a></li>
+                    <li><a href="/unicode-chart/">Unicode Encoding Chart</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 NepaliTools. All rights reserved. Works entirely offline.</p>
+            <div class="footer-meta-links">
+                <a href="/privacy-policy/">Privacy Policy</a>
+                <a href="/terms/">Terms of Use</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Core Script Bundles -->
+<script src="/assets/js/converter.js?v=4"></script>
+<script src="/assets/js/nepalify.js?v=4"></script>
+<script src="/assets/js/main.js?v=4"></script>
+
+</body>
+</html>

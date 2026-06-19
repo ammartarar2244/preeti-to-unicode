@@ -1,0 +1,43 @@
+<!--
+TITLE: Phonetic Nepali Transliteration Online
+META_DESCRIPTION: Transliterate English Latin characters to Nepali Unicode Devanagari phonetically. Clean, instant, and secure text mapping.
+SCHEMA:
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Nepali Transliteration Tool",
+  "operatingSystem": "All",
+  "applicationCategory": "UtilitiesApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0"
+  }
+}
+-->
+<div class="tool-section">
+    <div class="tool-header">
+        <h1 class="tool-title">Phonetic Transliteration</h1>
+        <p class="tool-desc">Type phonetically in Latin characters to generate standard Nepali Devanagari Unicode characters instantly.</p>
+    </div>
+
+    <!-- Converter Card -->
+    <div class="converter-card">
+        <div class="editor-grid" style="grid-template-columns: 1fr;">
+            <div class="editor-pane">
+                <div class="editor-header">
+                    <span class="editor-label">📝 Phonetic Input</span>
+                    <div class="editor-actions">
+                        <button class="action-btn active" data-layout="romanized">Phonetic Romanized</button>
+                        <button class="action-btn" id="typing-clear">Clear</button>
+                        <button class="action-btn primary" id="typing-copy">Copy Text</button>
+                    </div>
+                </div>
+                <textarea class="editor-textarea nepali-font" id="typing-area" placeholder="टाइपिङ सुरु गर्नुहोस् (k = क, a = ा, m = म = काम)..." autofocus></textarea>
+                <div class="editor-footer">
+                    <span id="typing-char-count">0 characters</span>
+                    <span id="typing-word-count">0 words</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

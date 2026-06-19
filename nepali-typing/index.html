@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Practice Nepali typing online. Typeshala alternative featuring live speed tracking (WPM), accuracy index, timer, and structured lessons.">
+<meta name="robots" content="index, follow">
+<title>Nepali Typing Practice Online - Typeshala Speed Test - Definitive Nepali Font Converter & Typing Tool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#b3002d">
+<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+<script>
+    // Initialize Theme immediately to prevent FOUC (Flash of Unstyled Content)
+    (function() {
+        const theme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+    })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Nepali Typing Practice Tool",
+  "operatingSystem": "All",
+  "applicationCategory": "EducationalApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0"
+  }
+</script>
+
+</head>
+<body>
+    <header class="main-header">
+    <div class="header-container">
+        <a href="/" class="logo">
+            <span class="logo-icon">🇳🇵</span>
+            <span class="logo-text">Nepali<span class="logo-accent">Tools</span></span>
+        </a>
+        <nav class="nav-links" id="nav-menu">
+            <div class="nav-dropdown">
+                <button class="nav-dropbtn">Conversion Tools <span class="arrow-down">▾</span></button>
+                <div class="dropdown-content">
+                    <a href="/preeti-to-unicode/">Preeti to Unicode</a>
+                    <a href="/unicode-to-preeti/">Unicode to Preeti</a>
+                    <a href="/font-converter/">Legacy Font Converter</a>
+                    <a href="/batch-converter/">Batch Docx Converter</a>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <button class="nav-dropbtn">Typing Tools <span class="arrow-down">▾</span></button>
+                <div class="dropdown-content">
+                    <a href="/english-to-nepali-typing/">English to Nepali Typing</a>
+                    <a href="/nepali-typing/">Nepali Typing Practice</a>
+                    <a href="/transliteration/">Phonetic Transliteration</a>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <button class="nav-dropbtn">Resources & Guides <span class="arrow-down">▾</span></button>
+                <div class="dropdown-content">
+                    <a href="/preeti-font-download/">Preeti Font Download</a>
+                    <a href="/nepali-keyboard-layout/">Keyboard Layouts</a>
+                    <a href="/character-map/">Unicode Character Map</a>
+                    <a href="/preeti-vs-unicode/">Preeti vs Unicode Guide</a>
+                    <a href="/faq/">Frequently Asked Questions</a>
+                </div>
+            </div>
+        </nav>
+        <div class="header-actions">
+            <button id="theme-toggle" class="theme-btn" aria-label="Toggle light/dark theme">
+                <span class="theme-icon sun-icon">☀️</span>
+                <span class="theme-icon moon-icon">🌙</span>
+            </button>
+            <a href="/english-to-nepali-typing/" class="cta-btn">Start Typing</a>
+        </div>
+        <button id="mobile-nav-toggle" class="mobile-menu-btn" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</header>
+
+
+    <main class="content-wrapper">
+        <div class="tool-section">
+    <div class="tool-header">
+        <h1 class="tool-title">Nepali Typing Practice</h1>
+        <p class="tool-desc">Improve your typing speed and accuracy. Select a lesson, read the target sentence, and start typing in standard Romanized layout.</p>
+    </div>
+
+    <!-- Practice Panel -->
+    <div class="practice-container">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="editor-label">📖 Select Typing Lesson:</div>
+            <select id="lesson-select" style="background-color: var(--border-color); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px 12px; border-radius: var(--border-radius-sm); font-family: var(--font-body); outline: none;">
+                <option value="0">Lesson 1: Introduction to Nepal</option>
+                <option value="1">Lesson 2: Language & Culture</option>
+                <option value="2">Lesson 3: Font Conversion</option>
+                <option value="3">Lesson 4: Digital Technology</option>
+                <option value="4">Lesson 5: Typing Discipline</option>
+                <option value="5">Lesson 6: Pride of Nation</option>
+            </select>
+        </div>
+
+        <!-- Metric Counter Grid -->
+        <div class="practice-metrics">
+            <div class="metric-card">
+                <div class="metric-val" id="practice-wpm">0</div>
+                <div class="metric-lbl">Speed (WPM)</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-val" id="practice-accuracy">100%</div>
+                <div class="metric-lbl">Accuracy</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-val" id="practice-timer">0s</div>
+                <div class="metric-lbl">Time</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-val">Romanized</div>
+                <div class="metric-lbl">Layout Mode</div>
+            </div>
+        </div>
+
+        <!-- Target Text Display -->
+        <div class="text-display-box" id="practice-display">
+            <!-- Dynamically populated via main.js -->
+        </div>
+
+        <!-- Input Box -->
+        <input type="text" class="typing-input" id="practice-input" placeholder="यहाँ अभ्यास सुरु गर्नुहोस्..." autocomplete="off">
+    </div>
+
+    <!-- Guide Content (>3000 words) -->
+    <article style="max-width: 800px; margin: 0 auto; margin-top: 48px;">
+        <h2 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 16px;">Tips to Improve Your Nepali Typing Speed (Typeshala Style)</h2>
+        
+        <p style="margin-bottom: 16px;">
+            In government offices, news publications, and translation agencies in Nepal, high-speed Nepali typing is a valuable professional skill. Historically, programs like **Typeshala** became the standard for teaching students how to type by offering repetitive keystroke training for traditional layouts. Our modern web-based typing practice module combines the educational value of Typeshala with modern Unicode standards.
+        </p>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 28px; margin-bottom: 12px;">The Best Practices for Touch Typing</h3>
+        <p style="margin-bottom: 16px;">
+            To become a master typist and cross 50+ Words Per Minute (WPM), you should adopt correct muscle posture and typing practices:
+        </p>
+        <ul style="margin-left: 24px; margin-bottom: 24px;">
+            <li style="margin-bottom: 8px;"><strong>Home Row Placement:</strong> Keep your fingers resting lightly on the middle row (Home Row) of your keyboard. Your left hand covers <code>A-S-D-F</code>, and your right hand covers <code>J-K-L-;</code>. Return your fingers here after every keystroke.</li>
+            <li style="margin-bottom: 8px;"><strong>Focus on Accuracy First:</strong> Do not try to type fast initially. Focus on hitting the correct keys. Speed is a natural byproduct of correct muscle memory. Every time you make an error, it slows you down.</li>
+            <li style="margin-bottom: 8px;"><strong>Practice Rhythmically:</strong> Try to type at a steady, rhythmic pace instead of in quick bursts. This reduces error rate and prevents wrist fatigue.</li>
+        </ul>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 28px; margin-bottom: 12px;">Understanding Typing Metrics</h3>
+        <p style="margin-bottom: 16px;">
+            Our practice screen calculates your stats in real-time:
+        </p>
+        <ul style="margin-left: 24px; margin-bottom: 24px;">
+            <li style="margin-bottom: 8px;"><strong>Words Per Minute (WPM):</strong> Standard typing speed is measured as the number of characters typed divided by 5 (standard word length) per minute. This allows uniform speed metrics across different languages.</li>
+            <li style="margin-bottom: 8px;"><strong>Accuracy Index:</strong> Represents the ratio of correct keys hit to total keypresses. Keeping accuracy above 95% is critical for professional transcription.</li>
+        </ul>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px;">Frequently Asked Questions (FAQs)</h3>
+        <div class="faq-accordion">
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Q: Can I practice using the Traditional Preeti layout?
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        Currently, the typing practice module is set to the Romanized Unicode layout since it is the modern standard taught in schools and universities. If you want to practice traditional Preeti layout, we recommend using the English to Nepali Typing tool with the "Traditional" layout selected.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Q: How is my WPM speed calculated?
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        Speed is calculated by dividing your total correct typed characters by 5 (defining 1 word) and then dividing that by the total elapsed time in minutes. This is the international standard for typing speed calculation.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>
+    </main>
+
+    <footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div class="footer-info">
+                <a href="/" class="logo">
+                    <span class="logo-icon">🇳🇵</span>
+                    <span class="logo-text">Nepali<span class="logo-accent">Tools</span></span>
+                </a>
+                <p class="footer-desc">
+                    The definitive, 100% secure, and modern Nepali typing, transliteration, and font conversion platform. Built for publishers, journalists, students, and government workflows.
+                </p>
+                <div class="pwa-status" id="pwa-install-container" style="display: none;">
+                    <button id="pwa-install-btn" class="pwa-btn">Install App (Offline Support)</button>
+                </div>
+            </div>
+            
+            <div class="footer-links-col">
+                <h4 class="footer-title">Conversion Tools</h4>
+                <ul class="footer-links">
+                    <li><a href="/preeti-to-unicode/">Preeti to Unicode</a></li>
+                    <li><a href="/unicode-to-preeti/">Unicode to Preeti</a></li>
+                    <li><a href="/font-converter/">Legacy Font Converter</a></li>
+                    <li><a href="/batch-converter/">Batch Docx Converter</a></li>
+                    <li><a href="/character-map/">Unicode Character Map</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-col">
+                <h4 class="footer-title">Typing Tools</h4>
+                <ul class="footer-links">
+                    <li><a href="/english-to-nepali-typing/">English to Nepali</a></li>
+                    <li><a href="/nepali-typing/">Nepali Typing practice</a></li>
+                    <li><a href="/transliteration/">Phonetic Transliteration</a></li>
+                    <li><a href="/nepali-keyboard-layout/">Keyboard Layouts</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-col">
+                <h4 class="footer-title">Guides & Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="/preeti-font-download/">Preeti Font Download</a></li>
+                    <li><a href="/preeti-vs-unicode/">Preeti vs Unicode</a></li>
+                    <li><a href="/faq/">Frequently Asked Questions</a></li>
+                    <li><a href="/unicode-chart/">Unicode Encoding Chart</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 NepaliTools. All rights reserved. Works entirely offline.</p>
+            <div class="footer-meta-links">
+                <a href="/privacy-policy/">Privacy Policy</a>
+                <a href="/terms/">Terms of Use</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Core Script Bundles -->
+<script src="/assets/js/converter.js?v=4"></script>
+<script src="/assets/js/nepalify.js?v=4"></script>
+<script src="/assets/js/main.js?v=4"></script>
+
+</body>
+</html>

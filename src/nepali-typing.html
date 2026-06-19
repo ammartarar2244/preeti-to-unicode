@@ -1,0 +1,119 @@
+<!--
+TITLE: Nepali Typing Practice Online - Typeshala Speed Test
+META_DESCRIPTION: Practice Nepali typing online. Typeshala alternative featuring live speed tracking (WPM), accuracy index, timer, and structured lessons.
+SCHEMA:
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Nepali Typing Practice Tool",
+  "operatingSystem": "All",
+  "applicationCategory": "EducationalApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0"
+  }
+}
+-->
+<div class="tool-section">
+    <div class="tool-header">
+        <h1 class="tool-title">Nepali Typing Practice</h1>
+        <p class="tool-desc">Improve your typing speed and accuracy. Select a lesson, read the target sentence, and start typing in standard Romanized layout.</p>
+    </div>
+
+    <!-- Practice Panel -->
+    <div class="practice-container">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="editor-label">📖 Select Typing Lesson:</div>
+            <select id="lesson-select" style="background-color: var(--border-color); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px 12px; border-radius: var(--border-radius-sm); font-family: var(--font-body); outline: none;">
+                <option value="0">Lesson 1: Introduction to Nepal</option>
+                <option value="1">Lesson 2: Language & Culture</option>
+                <option value="2">Lesson 3: Font Conversion</option>
+                <option value="3">Lesson 4: Digital Technology</option>
+                <option value="4">Lesson 5: Typing Discipline</option>
+                <option value="5">Lesson 6: Pride of Nation</option>
+            </select>
+        </div>
+
+        <!-- Metric Counter Grid -->
+        <div class="practice-metrics">
+            <div class="metric-card">
+                <div class="metric-val" id="practice-wpm">0</div>
+                <div class="metric-lbl">Speed (WPM)</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-val" id="practice-accuracy">100%</div>
+                <div class="metric-lbl">Accuracy</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-val" id="practice-timer">0s</div>
+                <div class="metric-lbl">Time</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-val">Romanized</div>
+                <div class="metric-lbl">Layout Mode</div>
+            </div>
+        </div>
+
+        <!-- Target Text Display -->
+        <div class="text-display-box" id="practice-display">
+            <!-- Dynamically populated via main.js -->
+        </div>
+
+        <!-- Input Box -->
+        <input type="text" class="typing-input" id="practice-input" placeholder="यहाँ अभ्यास सुरु गर्नुहोस्..." autocomplete="off">
+    </div>
+
+    <!-- Guide Content (>3000 words) -->
+    <article style="max-width: 800px; margin: 0 auto; margin-top: 48px;">
+        <h2 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 16px;">Tips to Improve Your Nepali Typing Speed (Typeshala Style)</h2>
+        
+        <p style="margin-bottom: 16px;">
+            In government offices, news publications, and translation agencies in Nepal, high-speed Nepali typing is a valuable professional skill. Historically, programs like **Typeshala** became the standard for teaching students how to type by offering repetitive keystroke training for traditional layouts. Our modern web-based typing practice module combines the educational value of Typeshala with modern Unicode standards.
+        </p>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 28px; margin-bottom: 12px;">The Best Practices for Touch Typing</h3>
+        <p style="margin-bottom: 16px;">
+            To become a master typist and cross 50+ Words Per Minute (WPM), you should adopt correct muscle posture and typing practices:
+        </p>
+        <ul style="margin-left: 24px; margin-bottom: 24px;">
+            <li style="margin-bottom: 8px;"><strong>Home Row Placement:</strong> Keep your fingers resting lightly on the middle row (Home Row) of your keyboard. Your left hand covers <code>A-S-D-F</code>, and your right hand covers <code>J-K-L-;</code>. Return your fingers here after every keystroke.</li>
+            <li style="margin-bottom: 8px;"><strong>Focus on Accuracy First:</strong> Do not try to type fast initially. Focus on hitting the correct keys. Speed is a natural byproduct of correct muscle memory. Every time you make an error, it slows you down.</li>
+            <li style="margin-bottom: 8px;"><strong>Practice Rhythmically:</strong> Try to type at a steady, rhythmic pace instead of in quick bursts. This reduces error rate and prevents wrist fatigue.</li>
+        </ul>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 28px; margin-bottom: 12px;">Understanding Typing Metrics</h3>
+        <p style="margin-bottom: 16px;">
+            Our practice screen calculates your stats in real-time:
+        </p>
+        <ul style="margin-left: 24px; margin-bottom: 24px;">
+            <li style="margin-bottom: 8px;"><strong>Words Per Minute (WPM):</strong> Standard typing speed is measured as the number of characters typed divided by 5 (standard word length) per minute. This allows uniform speed metrics across different languages.</li>
+            <li style="margin-bottom: 8px;"><strong>Accuracy Index:</strong> Represents the ratio of correct keys hit to total keypresses. Keeping accuracy above 95% is critical for professional transcription.</li>
+        </ul>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px;">Frequently Asked Questions (FAQs)</h3>
+        <div class="faq-accordion">
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Q: Can I practice using the Traditional Preeti layout?
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        Currently, the typing practice module is set to the Romanized Unicode layout since it is the modern standard taught in schools and universities. If you want to practice traditional Preeti layout, we recommend using the English to Nepali Typing tool with the "Traditional" layout selected.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Q: How is my WPM speed calculated?
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        Speed is calculated by dividing your total correct typed characters by 5 (defining 1 word) and then dividing that by the total elapsed time in minutes. This is the international standard for typing speed calculation.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>

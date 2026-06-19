@@ -1,0 +1,409 @@
+/**
+ * Main Controller & Interface Bindings
+ * Coordinates themes, menu toggles, PWA service worker, conversion screens, and typing modules.
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    // -------------------------------------------------------------
+    // 1. Theme Management (Light / Dark Mode Toggle)
+    // -------------------------------------------------------------
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            showToast(`Switched to ${newTheme.toUpperCase()} mode!`);
+        });
+    }
+
+    // -------------------------------------------------------------
+    // 2. Mobile Responsive Menu Toggle
+    // -------------------------------------------------------------
+    const mobileToggle = document.getElementById('mobile-nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    if (mobileToggle && navMenu) {
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileToggle.classList.toggle('open');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                mobileToggle.classList.remove('open');
+            }
+        });
+    }
+
+    // -------------------------------------------------------------
+    // 3. Accordion / FAQ Handler
+    // -------------------------------------------------------------
+    const faqHeaders = document.querySelectorAll('.accordion-header');
+    faqHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const item = header.parentElement;
+            const body = item.querySelector('.accordion-body');
+            const isActive = item.classList.contains('active');
+
+            // Close all items
+            document.querySelectorAll('.accordion-item').forEach(accItem => {
+                accItem.classList.remove('active');
+                accItem.querySelector('.accordion-body').style.maxHeight = null;
+            });
+
+            if (!isActive) {
+                item.classList.add('active');
+                body.style.maxHeight = body.scrollHeight + 'px';
+            }
+        });
+    });
+
+    // -------------------------------------------------------------
+    // 4. Toast Notification Manager
+    // -------------------------------------------------------------
+    function showToast(message) {
+        let toast = document.getElementById('toast-notification');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'toast-notification';
+            toast.className = 'toast-msg';
+            document.body.appendChild(toast);
+        }
+        
+        toast.textContent = message;
+        toast.classList.add('show');
+        
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+    // Bind globally
+    window.showToast = showToast;
+
+    // -------------------------------------------------------------
+    // 5. Preeti to Unicode Page Bindings
+    // -------------------------------------------------------------
+    const preetiInput = document.getElementById('preeti-input');
+    const unicodeOutput = document.getElementById('unicode-output');
+    if (preetiInput && unicodeOutput) {
+        // Live typing conversion
+        preetiInput.addEventListener('input', () => {
+            const legacyVal = preetiInput.value;
+            const converted = NepaliConverter.preetiToUnicode(legacyVal);
+            unicodeOutput.value = converted;
+            updateStats(preetiInput, 'preeti-count');
+            updateStats(unicodeOutput, 'unicode-count');
+        });
+
+        // Copy button
+        bindCopyAction('preeti-copy', unicodeOutput, 'Unicode text copied!');
+        // Clear button
+        bindClearAction('preeti-clear', [preetiInput, unicodeOutput], ['preeti-count', 'unicode-count']);
+    }
+
+    // -------------------------------------------------------------
+    // 6. Unicode to Preeti Page Bindings
+    // -------------------------------------------------------------
+    const unicodeInput = document.getElementById('unicode-input');
+    const preetiOutput = document.getElementById('preeti-output');
+    if (unicodeInput && preetiOutput) {
+        // Live typing conversion
+        unicodeInput.addEventListener('input', () => {
+            const unicodeVal = unicodeInput.value;
+            const converted = NepaliConverter.unicodeToPreeti(unicodeVal);
+            preetiOutput.value = converted;
+            updateStats(unicodeInput, 'unicode-inp-count');
+            updateStats(preetiOutput, 'preeti-out-count');
+        });
+
+        // Copy button
+        bindCopyAction('unicode-copy', preetiOutput, 'Preeti text copied!');
+        // Clear button
+        bindClearAction('unicode-clear', [unicodeInput, preetiOutput], ['unicode-inp-count', 'preeti-out-count']);
+    }
+
+    // -------------------------------------------------------------
+    // 7. English to Nepali Typing & Key Interception Bindings
+    // -------------------------------------------------------------
+    const typingArea = document.getElementById('typing-area');
+    const layoutSelectors = document.querySelectorAll('[data-layout]');
+    if (typingArea) {
+        let currentInterception = null;
+        
+        const setKeyboardLayout = (layout) => {
+            if (currentInterception) {
+                currentInterception.disable();
+            }
+            
+            // Layout switcher
+            currentInterception = Nepalify.intercept(typingArea, layout);
+            
+            // Set styles of buttons
+            layoutSelectors.forEach(btn => {
+                if (btn.getAttribute('data-layout') === layout) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Set placeholder contextually
+            if (layout === 'traditional') {
+                typingArea.placeholder = "पारम्परिक प्रीति लेआउटमा टाइप गर्नुहोस् (जैसे: s = क, t = त)...";
+                typingArea.className = "editor-textarea nepali-font";
+            } else if (layout === 'romanized') {
+                typingArea.placeholder = "रोमनाइज्ड नेपालीमा टाइप गर्नुहोस् (जैसे: k = क, a = ा, m = म = काम)...";
+                typingArea.className = "editor-textarea nepali-font";
+            } else if (layout === 'romanize') {
+                typingArea.placeholder = "यहाँ नेपाली युनिकोड पेस्ट गर्नुहोस् वा टाइप गर्नुहोस् (Devanagari to Roman English)...";
+                typingArea.className = "editor-textarea";
+            } else {
+                typingArea.placeholder = "Type phonetically or standard English here...";
+                typingArea.className = "editor-textarea";
+            }
+
+            showToast(`Switched layout to ${layout.toUpperCase()}`);
+        };
+
+        // Attach listeners to selectors
+        layoutSelectors.forEach(btn => {
+            btn.addEventListener('click', () => {
+                setKeyboardLayout(btn.getAttribute('data-layout'));
+            });
+        });
+
+        // Initialize with Romanized keyboard interceptor
+        setKeyboardLayout('romanized');
+        
+        // Character counter
+        typingArea.addEventListener('input', () => {
+            updateStats(typingArea, 'typing-char-count');
+            
+            // Word counter
+            const text = typingArea.value.trim();
+            const words = text === "" ? 0 : text.split(/\s+/).length;
+            const wordCounter = document.getElementById('typing-word-count');
+            if (wordCounter) {
+                wordCounter.textContent = `${words} words`;
+            }
+        });
+
+        // Copy & Clear
+        bindCopyAction('typing-copy', typingArea, 'Typed text copied!');
+        bindClearAction('typing-clear', [typingArea], ['typing-char-count']);
+    }
+
+
+
+    // -------------------------------------------------------------
+    // 8. Nepali Typing Practice Module (Typeshala Mode)
+    // -------------------------------------------------------------
+    const practiceDisplay = document.getElementById('practice-display');
+    const practiceInput = document.getElementById('practice-input');
+    if (practiceDisplay && practiceInput) {
+        // Typing practice lessons (Unicode Nepali sentences)
+        const lessons = [
+            "नेपाल एउटा सुन्दर र शान्त देश हो।",
+            "हामी नेपाली हौँ र हामीलाई हाम्रो भाषा मन पर्छ।",
+            "प्रीति फन्टबाट युनिकोडमा रूपान्तरण गर्न निकै सजिलो छ।",
+            "सञ्चार प्रविधिले गर्दा संसार एउटा सानो गाउँ जस्तो भएको छ।",
+            "विद्यार्थीहरूले दैनिक रूपमा नेपाली टाइपिङ अभ्यास गर्नुपर्दछ।",
+            "मलाई मेरो मातृभूमि नेपाल र नेपाली संस्कृतिको गर्व छ।"
+        ];
+
+        let lessonIndex = 0;
+        let originalText = lessons[lessonIndex];
+        let startTime = null;
+        let totalKeysPressed = 0;
+        let errors = 0;
+        let timerInterval = null;
+
+        // Initialize Romanized keyboard layout interception on the practice textbox
+        Nepalify.intercept(practiceInput, 'romanized');
+
+        const resetPractice = () => {
+            originalText = lessons[lessonIndex];
+            practiceInput.value = "";
+            startTime = null;
+            totalKeysPressed = 0;
+            errors = 0;
+            if (timerInterval) clearInterval(timerInterval);
+            
+            document.getElementById('practice-wpm').textContent = "0";
+            document.getElementById('practice-accuracy').textContent = "100%";
+            document.getElementById('practice-timer').textContent = "0s";
+            
+            renderDisplay();
+        };
+
+        const renderDisplay = () => {
+            const inputVal = practiceInput.value;
+            let displayHTML = "";
+            
+            for (let i = 0; i < originalText.length; i++) {
+                const char = originalText[i];
+                if (i < inputVal.length) {
+                    if (inputVal[i] === char) {
+                        displayHTML += `<span class="correct">${char}</span>`;
+                    } else {
+                        displayHTML += `<span class="incorrect">${char}</span>`;
+                    }
+                } else if (i === inputVal.length) {
+                    displayHTML += `<span class="current">${char}</span>`;
+                } else {
+                    displayHTML += `<span>${char}</span>`;
+                }
+            }
+            
+            practiceDisplay.innerHTML = displayHTML;
+        };
+
+        practiceInput.addEventListener('input', () => {
+            if (!startTime) {
+                startTime = new Date();
+                timerInterval = setInterval(updateStats, 1000);
+            }
+
+            totalKeysPressed++;
+            const inputVal = practiceInput.value;
+
+            // Check errors
+            errors = 0;
+            for (let i = 0; i < inputVal.length; i++) {
+                if (inputVal[i] !== originalText[i]) {
+                    errors++;
+                }
+            }
+
+            renderDisplay();
+
+            // Check if lesson is complete
+            if (inputVal === originalText) {
+                clearInterval(timerInterval);
+                showToast("Lesson Complete! Excellent job!");
+                // Next lesson
+                lessonIndex = (lessonIndex + 1) % lessons.length;
+                setTimeout(resetPractice, 1500);
+            }
+        });
+
+        const updateStats = () => {
+            if (!startTime) return;
+            
+            const timeElapsed = (new Date() - startTime) / 1000; // seconds
+            const inputLength = practiceInput.value.length;
+            
+            // Standard Word calculation (5 characters = 1 word)
+            const wpm = timeElapsed > 0 ? Math.round((inputLength / 5) / (timeElapsed / 60)) : 0;
+            
+            // Accuracy calculation
+            const accuracy = totalKeysPressed > 0 ? Math.round(((totalKeysPressed - errors) / totalKeysPressed) * 100) : 100;
+
+            document.getElementById('practice-wpm').textContent = wpm;
+            document.getElementById('practice-accuracy').textContent = `${Math.max(0, accuracy)}%`;
+            document.getElementById('practice-timer').textContent = `${Math.round(timeElapsed)}s`;
+        };
+
+        // Reset lessons selector
+        const lessonSelect = document.getElementById('lesson-select');
+        if (lessonSelect) {
+            lessonSelect.addEventListener('change', (e) => {
+                lessonIndex = parseInt(e.target.value);
+                resetPractice();
+            });
+        }
+
+        // Initialize Practice screen
+        resetPractice();
+    }
+
+    // -------------------------------------------------------------
+    // Helper Functions for Buttons and Inputs
+    // -------------------------------------------------------------
+    function updateStats(textarea, statId) {
+        const statEl = document.getElementById(statId);
+        if (statEl) {
+            const count = textarea.value.length;
+            statEl.textContent = `${count} characters`;
+        }
+    }
+
+    function bindCopyAction(btnId, targetTextarea, toastMsg) {
+        const btn = document.getElementById(btnId);
+        if (btn) {
+            btn.addEventListener('click', () => {
+                if (targetTextarea.value === "") {
+                    showToast("Nothing to copy!");
+                    return;
+                }
+                targetTextarea.select();
+                navigator.clipboard.writeText(targetTextarea.value)
+                    .then(() => showToast(toastMsg))
+                    .catch(() => showToast("Failed to copy!"));
+            });
+        }
+    }
+
+    function bindClearAction(btnId, textareas, statIds) {
+        const btn = document.getElementById(btnId);
+        if (btn) {
+            btn.addEventListener('click', () => {
+                textareas.forEach((t, i) => {
+                    t.value = "";
+                    t.dispatchEvent(new Event('input', { bubbles: true }));
+                    const statId = statIds[i];
+                    if (statId) {
+                        const statEl = document.getElementById(statId);
+                        if (statEl) {
+                            statEl.textContent = "0 characters";
+                        }
+                    }
+                });
+                showToast("Cleared!");
+            });
+        }
+    }
+
+    // -------------------------------------------------------------
+    // 9. PWA Install Banner Hooks
+    // -------------------------------------------------------------
+    let deferredPrompt;
+    const pwaInstallContainer = document.getElementById('pwa-install-container');
+    const pwaInstallBtn = document.getElementById('pwa-install-btn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        // Prevent Chrome 67 and earlier from automatically showing the prompt
+        e.preventDefault();
+        // Stash the event so it can be triggered later.
+        deferredPrompt = e;
+        // Update UI notify the user they can install the PWA
+        if (pwaInstallContainer) {
+            pwaInstallContainer.style.display = 'block';
+        }
+    });
+
+    if (pwaInstallBtn) {
+        pwaInstallBtn.addEventListener('click', () => {
+            if (!deferredPrompt) return;
+            // Show the prompt
+            deferredPrompt.prompt();
+            // Wait for the user to respond to the prompt
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
+                    if (pwaInstallContainer) pwaInstallContainer.style.display = 'none';
+                }
+                deferredPrompt = null;
+            });
+        });
+    }
+
+    window.addEventListener('appinstalled', () => {
+        console.log('PWA was installed');
+        if (pwaInstallContainer) pwaInstallContainer.style.display = 'none';
+        showToast("App installed successfully! Enjoy offline support.");
+    });
+});

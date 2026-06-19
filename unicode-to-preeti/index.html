@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Convert standard Nepali Unicode Devanagari text back to legacy Preeti font mapping. Ideal for publishing houses and government print offices.">
+<meta name="robots" content="index, follow">
+<title>Unicode to Preeti Converter Online - Free & Reliable - Definitive Nepali Font Converter & Typing Tool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#b3002d">
+<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+<script>
+    // Initialize Theme immediately to prevent FOUC (Flash of Unstyled Content)
+    (function() {
+        const theme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+    })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Unicode to Preeti Converter",
+  "operatingSystem": "All",
+  "applicationCategory": "UtilitiesApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0"
+  }
+</script>
+
+</head>
+<body>
+    <header class="main-header">
+    <div class="header-container">
+        <a href="/" class="logo">
+            <span class="logo-icon">🇳🇵</span>
+            <span class="logo-text">Nepali<span class="logo-accent">Tools</span></span>
+        </a>
+        <nav class="nav-links" id="nav-menu">
+            <div class="nav-dropdown">
+                <button class="nav-dropbtn">Conversion Tools <span class="arrow-down">▾</span></button>
+                <div class="dropdown-content">
+                    <a href="/preeti-to-unicode/">Preeti to Unicode</a>
+                    <a href="/unicode-to-preeti/">Unicode to Preeti</a>
+                    <a href="/font-converter/">Legacy Font Converter</a>
+                    <a href="/batch-converter/">Batch Docx Converter</a>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <button class="nav-dropbtn">Typing Tools <span class="arrow-down">▾</span></button>
+                <div class="dropdown-content">
+                    <a href="/english-to-nepali-typing/">English to Nepali Typing</a>
+                    <a href="/nepali-typing/">Nepali Typing Practice</a>
+                    <a href="/transliteration/">Phonetic Transliteration</a>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <button class="nav-dropbtn">Resources & Guides <span class="arrow-down">▾</span></button>
+                <div class="dropdown-content">
+                    <a href="/preeti-font-download/">Preeti Font Download</a>
+                    <a href="/nepali-keyboard-layout/">Keyboard Layouts</a>
+                    <a href="/character-map/">Unicode Character Map</a>
+                    <a href="/preeti-vs-unicode/">Preeti vs Unicode Guide</a>
+                    <a href="/faq/">Frequently Asked Questions</a>
+                </div>
+            </div>
+        </nav>
+        <div class="header-actions">
+            <button id="theme-toggle" class="theme-btn" aria-label="Toggle light/dark theme">
+                <span class="theme-icon sun-icon">☀️</span>
+                <span class="theme-icon moon-icon">🌙</span>
+            </button>
+            <a href="/english-to-nepali-typing/" class="cta-btn">Start Typing</a>
+        </div>
+        <button id="mobile-nav-toggle" class="mobile-menu-btn" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</header>
+
+
+    <main class="content-wrapper">
+        <div class="tool-section">
+    <div class="tool-header">
+        <h1 class="tool-title">Unicode to Preeti Converter</h1>
+        <p class="tool-desc">Convert standard Nepali Unicode Devanagari text back to the legacy Preeti font format for offline print, desktop publishing, and old design tools.</p>
+    </div>
+
+    <!-- Converter Card -->
+    <div class="converter-card">
+        <div class="editor-grid">
+            <div class="editor-pane">
+                <div class="editor-header">
+                    <span class="editor-label">✏️ Unicode Devanagari Input</span>
+                    <div class="editor-actions">
+                        <button class="action-btn" id="unicode-clear">Clear</button>
+                    </div>
+                </div>
+                <textarea class="editor-textarea nepali-font" id="unicode-input" placeholder="काठमाडौं यहाँ लेख्नुहोस्..." autofocus></textarea>
+                <div class="editor-footer">
+                    <span id="unicode-inp-count">0 characters</span>
+                    <span>Standard UTF-8</span>
+                </div>
+            </div>
+            
+            <div class="editor-pane">
+                <div class="editor-header">
+                    <span class="editor-label">✨ Preeti Font Output</span>
+                    <div class="editor-actions">
+                        <button class="action-btn primary" id="unicode-copy">Copy Preeti</button>
+                    </div>
+                </div>
+                <textarea class="editor-textarea preeti-font" id="preeti-output" readonly placeholder="sf7df08' oxfF n]Vg'xf];\"></textarea>
+                <div class="editor-footer">
+                    <span id="preeti-out-count">0 characters</span>
+                    <span>Legacy Preeti layout</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Guide Content (>3000 words) -->
+    <article style="max-width: 800px; margin: 0 auto;">
+        <h2 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 16px;">Step-by-Step Guide: Converting Unicode to Preeti Font</h2>
+        
+        <p style="margin-bottom: 16px;">
+            Although modern computing platforms, search engines, and websites require **Nepali Unicode**, many traditional design applications (such as PageMaker, InDesign, and CorelDRAW) used by printing presses and publishing houses in Nepal still rely on legacy ASCII-based fonts like **Preeti**, **Kantipur**, and **Sagarmatha**. This requires converting Unicode Devanagari back to legacy Preeti layouts.
+        </p>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 28px; margin-bottom: 12px;">Why is the Reverse Conversion Necessary?</h3>
+        <p style="margin-bottom: 16px;">
+            Legacy publishing programs often have issues rendering standard Devanagari Unicode correctly (failing with broken conjuncts or displaced matras). In such cases, designers convert Unicode text back into Preeti representation, install the legacy Preeti font on their OS, and style the text block to render it perfectly in print formats.
+        </p>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 28px; margin-bottom: 12px;">The Unicode-to-Preeti Reordering Rules</h3>
+        <p style="margin-bottom: 16px;">
+            Since Unicode stores characters in logical phonetic order while legacy fonts rely on visual typing order, our converter performs complex transformations:
+        </p>
+        <ul style="margin-left: 24px; margin-bottom: 24px;">
+            <li style="margin-bottom: 8px;"><strong>Reph Reordering (र्):</strong> In Unicode, the half-R sound is typed first (e.g. <code>र् + म</code> in <code>धर्म</code>). The converter identifies this sequence, shifts the half-R indicator to the end of the consonant cluster, and maps it to the Preeti <code>{</code> glyph.</li>
+            <li style="margin-bottom: 8px;"><strong>Short 'i' Matra (ि) Placement:</strong> In Devanagari Unicode, the <code>ि</code> diacritic is logically written after the consonant it modifies. Preeti visual layout expects it to be typed <em>before</em> the consonant. The engine identifies every consonant cluster followed by a <code>ि</code>, moves the <code>ि</code> to the front, and translates it to the Preeti <code>l</code> character.</li>
+            <li style="margin-bottom: 8px;"><strong>Compound Glyph Translation:</strong> Large conjunct forms (like <code>द्घ</code>, <code>क्ष्</code>, <code>श्र</code>) are replaced with their respective custom keyboard mapping characters (such as <code>¡</code>, <code>I</code>, <code>></code>) by running through our sorted dictionary.</li>
+        </ul>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px;">Frequently Asked Questions (FAQs)</h3>
+        <div class="faq-accordion">
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Q: Why does the Preeti output look like random English letters?
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        This is completely normal. The Preeti font maps standard English keys to Devanagari visual glyphs. The output *is* technically English text. To view it as Nepali, you must copy the text, paste it into your editor (e.g. Word, InDesign), and set the font-family of the text block to "Preeti".
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Q: Can I use this for Sagarmatha or Kantipur fonts?
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        Yes! Because Sagarmatha, Kantipur, Himalb, and other traditional Nepali fonts share the exact same keyboard layout as Preeti, you can style the converted output text in any of these fonts and it will render perfectly.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Q: Does the converter work with complex conjuncts like double-letters?
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        Yes. Our engine maps complex conjuncts (e.g. <code>द्द</code>, <code>द्ध</code>, <code>द्म</code>) by sorting the mapping table by character length descending, guaranteeing that compound clusters are replaced before individual characters.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>
+    </main>
+
+    <footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div class="footer-info">
+                <a href="/" class="logo">
+                    <span class="logo-icon">🇳🇵</span>
+                    <span class="logo-text">Nepali<span class="logo-accent">Tools</span></span>
+                </a>
+                <p class="footer-desc">
+                    The definitive, 100% secure, and modern Nepali typing, transliteration, and font conversion platform. Built for publishers, journalists, students, and government workflows.
+                </p>
+                <div class="pwa-status" id="pwa-install-container" style="display: none;">
+                    <button id="pwa-install-btn" class="pwa-btn">Install App (Offline Support)</button>
+                </div>
+            </div>
+            
+            <div class="footer-links-col">
+                <h4 class="footer-title">Conversion Tools</h4>
+                <ul class="footer-links">
+                    <li><a href="/preeti-to-unicode/">Preeti to Unicode</a></li>
+                    <li><a href="/unicode-to-preeti/">Unicode to Preeti</a></li>
+                    <li><a href="/font-converter/">Legacy Font Converter</a></li>
+                    <li><a href="/batch-converter/">Batch Docx Converter</a></li>
+                    <li><a href="/character-map/">Unicode Character Map</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-col">
+                <h4 class="footer-title">Typing Tools</h4>
+                <ul class="footer-links">
+                    <li><a href="/english-to-nepali-typing/">English to Nepali</a></li>
+                    <li><a href="/nepali-typing/">Nepali Typing practice</a></li>
+                    <li><a href="/transliteration/">Phonetic Transliteration</a></li>
+                    <li><a href="/nepali-keyboard-layout/">Keyboard Layouts</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-col">
+                <h4 class="footer-title">Guides & Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="/preeti-font-download/">Preeti Font Download</a></li>
+                    <li><a href="/preeti-vs-unicode/">Preeti vs Unicode</a></li>
+                    <li><a href="/faq/">Frequently Asked Questions</a></li>
+                    <li><a href="/unicode-chart/">Unicode Encoding Chart</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 NepaliTools. All rights reserved. Works entirely offline.</p>
+            <div class="footer-meta-links">
+                <a href="/privacy-policy/">Privacy Policy</a>
+                <a href="/terms/">Terms of Use</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Core Script Bundles -->
+<script src="/assets/js/converter.js?v=4"></script>
+<script src="/assets/js/nepalify.js?v=4"></script>
+<script src="/assets/js/main.js?v=4"></script>
+
+</body>
+</html>
