@@ -99,11 +99,11 @@ SCHEMA:
 
                 <!-- Sub-header bar for Romanized transliteration controls -->
                 <div class="typing-sub-header" id="typing-sub-header" style="display: none;">
-                    <span class="typing-badge">बोल्नुहोस् वा रोमनमा टाइप गर्नुहोस् — नेपालीमा लेखिन्छ</span>
+                    <span class="typing-badge">रोमनमा टाइप गर्नुहोस् — नेपालीमा पाउनुहोस्</span>
                     <div class="typing-header-controls">
                         <span class="typing-status-indicator">
                             <span class="status-dot" id="status-dot"></span>
-                            <span id="typing-status-text">तयार</span>
+                            <span id="typing-status-text">Online</span>
                         </span>
                         <div class="typing-lang-toggle">
                             <button class="lang-toggle-btn active" id="lang-toggle-ne">नेपाली</button>
@@ -112,37 +112,16 @@ SCHEMA:
                     </div>
                 </div>
 
-                <div class="typing-area-wrapper">
-                    <textarea class="editor-textarea nepali-font" id="typing-area" placeholder="माइक थिचेर बोल्नुहोस् — वा रोमनमा टाइप गर्नुहोस् (kasto chha → कस्तो छ)..." autofocus></textarea>
-                    <button class="mic-float-btn" id="mic-toggle-btn" title="Toggle Voice Typing (Ctrl+M)">
-                        <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg>
-                    </button>
-                </div>
+                <textarea class="editor-textarea nepali-font" id="typing-area" placeholder="टाइपिङ सुरु गर्नुहोस् (k = क, a = ा, m = म = काम)..."></textarea>
                 
                 <!-- Autocomplete suggestions bar -->
                 <div id="typing-suggestions" class="typing-suggestions" style="display: none;"></div>
-
-                <!-- Punctuation Shortcuts Bar -->
-                <div class="punctuation-bar" id="punctuation-bar" style="display: none;">
-                    <button class="punc-btn" data-val="।">।</button>
-                    <button class="punc-btn" data-val=",">,</button>
-                    <button class="punc-btn" data-val="?">?</button>
-                    <button class="punc-btn" data-val="!">!</button>
-                    <button class="punc-btn" data-val="॥">॥</button>
-                    <button class="punc-btn" data-val="\n">⏎</button>
-                </div>
 
                 <!-- Operations Toolbar (Copy / Clear / stats) -->
                 <div class="typing-op-toolbar">
                     <div class="op-btn-group">
                         <button class="op-btn primary" id="typing-copy">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy
-                        </button>
-                        <button class="op-btn secondary" id="voice-undo">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"></path><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path></svg> Undo voice
-                        </button>
-                        <button class="op-btn secondary" id="transfer-to-preeti">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg> To Preeti
                         </button>
                         <button class="op-btn secondary" id="typing-clear">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg> Clear
@@ -155,10 +134,9 @@ SCHEMA:
 
                 <!-- Keyboard Shortcuts Guide -->
                 <div class="typing-shortcuts-guide" id="typing-shortcuts-guide" style="display: none;">
-                    <span class="shortcut-item"><kbd>Ctrl</kbd> + <kbd>M</kbd> माइक खोल्ने / बन्द गर्ने</span>
-                    <span class="shortcut-item">बोल्नुहोस् «पूर्ण विराम» → <strong>।</strong></span>
-                    <span class="shortcut-item">बोल्नुहोस् «नयाँ लाइन» → <strong>नयाँ हरफ</strong></span>
-                    <span class="shortcut-item">रोमनमा टाइप + <kbd>Space</kbd> → <strong>नेपाली</strong></span>
+                    <span class="shortcut-item"><kbd>Space</kbd> नेपालीमा रूपान्तरण</span>
+                    <span class="shortcut-item"><kbd>↑</kbd><kbd>↓</kbd> / <kbd>Tab</kbd> सुझाव छान्नुहोस्</span>
+                    <span class="shortcut-item"><kbd>Esc</kbd> English नै राख्नुहोस्</span>
                     <span class="shortcut-item"><kbd>Ctrl</kbd> + <kbd>G</kbd> नेपाली / English</span>
                 </div>
 
