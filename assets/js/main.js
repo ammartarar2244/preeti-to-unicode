@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileToggle = document.getElementById('mobile-nav-toggle');
     const sidebar = document.getElementById('app-sidebar');
     const overlay = document.getElementById('sidebar-overlay');
+    const sidebarClose = document.getElementById('sidebar-close');
     
     if (mobileToggle && sidebar && overlay) {
         const toggleSidebar = () => {
@@ -40,6 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         mobileToggle.addEventListener('click', toggleSidebar);
         overlay.addEventListener('click', closeSidebar);
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', closeSidebar);
+        }
 
         // Close sidebar on Esc key press
         document.addEventListener('keydown', (e) => {

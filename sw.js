@@ -1,12 +1,12 @@
-const CACHE_NAME = 'nepali-tools-v7';
+const CACHE_NAME = 'nepali-tools-v8';
 const ASSETS = [
   '/',
   '/index.html',
   '/assets/css/main.css',
   '/assets/css/components.css',
-  '/assets/js/converter.js?v=7',
-  '/assets/js/nepalify.js?v=7',
-  '/assets/js/main.js?v=7',
+  '/assets/js/converter.js?v=8',
+  '/assets/js/nepalify.js?v=8',
+  '/assets/js/main.js?v=8',
   '/manifest.json',
   '/preeti-to-unicode/',
   '/unicode-to-preeti/',

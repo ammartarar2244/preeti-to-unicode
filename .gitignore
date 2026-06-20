@@ -4,6 +4,9 @@ chrome_dom.log
 chrome_dom_utf8.log
 chrome_error.log
 test_input.html
+test_e2e.html
+test_main.html
+test_sync.html
 
 # Operating system files
 Thumbs.db

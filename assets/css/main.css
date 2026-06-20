@@ -255,6 +255,18 @@ html[data-theme="light"] .moon-icon { display: block; }
     transition: var(--transition-fast);
 }
 
+.mobile-menu-btn.open span:nth-child(1) {
+    transform: translateY(8.5px) rotate(45deg);
+}
+
+.mobile-menu-btn.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-btn.open span:nth-child(3) {
+    transform: translateY(-8.5px) rotate(-45deg);
+}
+
 /* Footer Styling */
 .main-footer {
     background-color: var(--surface-color);
@@ -357,7 +369,7 @@ html[data-theme="light"] .moon-icon { display: block; }
 }
 
 /* ==========================================================================
-   App Layout & Sidebar Styling
+   App Layout & Sidebar Drawer Styling (Desktop & Mobile)
    ========================================================================== */
 
 .app-layout {
@@ -368,11 +380,10 @@ html[data-theme="light"] .moon-icon { display: block; }
 
 .app-main {
     flex: 1;
-    margin-left: 280px;
+    margin-left: 0; /* Content takes full width on both desktop and mobile */
     display: flex;
     flex-direction: column;
     min-width: 0;
-    transition: margin-left var(--transition-smooth);
 }
 
 .app-sidebar {
@@ -386,8 +397,13 @@ html[data-theme="light"] .moon-icon { display: block; }
     z-index: 1100;
     display: flex;
     flex-direction: column;
-    box-shadow: var(--shadow-sm);
+    transform: translateX(-100%); /* Hidden by default on both desktop and mobile */
     transition: transform var(--transition-smooth);
+}
+
+.app-sidebar.active {
+    transform: translateX(0);
+    box-shadow: var(--shadow-lg);
 }
 
 /* Sidebar Logo Header */
@@ -396,6 +412,27 @@ html[data-theme="light"] .moon-icon { display: block; }
     border-bottom: 1px solid var(--border-color);
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar-close-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+    border-radius: var(--border-radius-sm);
+}
+
+.sidebar-close-btn:hover {
+    color: var(--text-color);
+    background-color: var(--border-color);
 }
 
 /* Sidebar Navigation */
@@ -519,70 +556,25 @@ html[data-theme="light"] .moon-icon { display: block; }
 }
 
 /* ==========================================================================
-   Header & Content Adjustments
+   Header & Content Layout Overrides
    ========================================================================== */
 
-/* Logo on header is hidden on desktop by default */
-.header-logo {
-    display: none;
+/* Align toggle and logo inside header */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
-@media (min-width: 1025px) {
-    .main-header {
-        position: sticky;
-        top: 0;
-        left: 0;
-        transform: none;
-        width: 100%;
-        max-width: none;
-        background-color: rgba(15, 15, 17, 0.75);
-        backdrop-filter: var(--glass-blur);
-        border: none;
-        border-bottom: 1px solid var(--border-color);
-        border-radius: 0;
-        box-shadow: none;
-    }
-    
-    .header-container {
-        padding: 0 40px;
-    }
-    
-    .content-wrapper {
-        padding: 40px 40px 60px;
-        margin: 0;
-        max-width: 100%;
-    }
-    
-    .mobile-menu-btn {
-        display: none !important;
-    }
+/* Make hamburger toggle always visible */
+.mobile-menu-btn {
+    display: flex !important;
 }
 
-/* ==========================================================================
-   Responsive Adaptations & Footers
-   ========================================================================== */
-
+/* Responsive Adaptations for Footers & Nav Hide on Mobile */
 @media (max-width: 1024px) {
-    .app-main {
-        margin-left: 0;
-    }
-    
-    .app-sidebar {
-        transform: translateX(-100%);
-        box-shadow: none;
-    }
-    
-    .app-sidebar.active {
-        transform: translateX(0);
-        box-shadow: var(--shadow-lg);
-    }
-    
-    .header-logo {
-        display: flex;
-    }
-    
-    .mobile-menu-btn {
-        display: flex !important;
+    .nav-links {
+        display: none; /* Hide top dropdown links on mobile (handled by sidebar navigation drawer) */
     }
     
     .content-wrapper {
