@@ -159,16 +159,48 @@ document.addEventListener('DOMContentLoaded', () => {
     // -------------------------------------------------------------
     const typingArea = document.getElementById('typing-area');
     const layoutSelectors = document.querySelectorAll('[data-layout]');
+    
     if (typingArea) {
-        let currentInterception = null;
+        const suggestionsContainer = document.getElementById('typing-suggestions');
+        const statusBadge = document.getElementById('typing-status');
+        const specialCharsSection = document.getElementById('special-chars-section');
         
+        let currentInterception = null;
+        let activeLayout = 'romanized';
+        let suggestions = [];
+        let activeSuggestionIndex = 0;
+        let abortController = null;
+        let lastFetchedWord = "";
+
+        // Status badge online/offline detection
+        const updateOnlineStatus = () => {
+            if (!statusBadge) return;
+            if (navigator.onLine) {
+                statusBadge.textContent = "Online";
+                statusBadge.classList.remove('offline');
+            } else {
+                statusBadge.textContent = "Offline";
+                statusBadge.classList.add('offline');
+            }
+        };
+
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+        updateOnlineStatus();
+
         const setKeyboardLayout = (layout) => {
             if (currentInterception) {
                 currentInterception.disable();
             }
             
-            // Layout switcher
-            currentInterception = Nepalify.intercept(typingArea, layout);
+            activeLayout = layout;
+            
+            // If the layout is romanized, we use our custom live suggestions logic instead of keypress interceptor
+            if (layout !== 'romanized') {
+                currentInterception = Nepalify.intercept(typingArea, layout);
+            } else {
+                currentInterception = null;
+            }
             
             // Set styles of buttons
             layoutSelectors.forEach(btn => {
@@ -179,19 +211,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Set placeholder contextually
+            // Set placeholder contextually & update visibility of auxiliary panels
             if (layout === 'traditional') {
                 typingArea.placeholder = "पारम्परिक प्रीति लेआउटमा टाइप गर्नुहोस् (जैसे: s = क, t = त)...";
                 typingArea.className = "editor-textarea nepali-font";
+                if (statusBadge) statusBadge.style.display = 'none';
+                if (suggestionsContainer) {
+                    suggestionsContainer.style.display = 'none';
+                    suggestionsContainer.innerHTML = "";
+                }
+                if (specialCharsSection) specialCharsSection.style.display = 'block';
             } else if (layout === 'romanized') {
                 typingArea.placeholder = "अंग्रेजीमा टाइप गर्नुहोस् (जैसे: namaste = नमस्ते, mero naam = मेरो नाम)...";
                 typingArea.className = "editor-textarea nepali-font";
+                if (statusBadge) statusBadge.style.display = 'inline-block';
+                if (specialCharsSection) specialCharsSection.style.display = 'block';
+                // Trigger an initial check if there is text in the box
+                setTimeout(handleInputOrCursor, 50);
             } else if (layout === 'romanize') {
                 typingArea.placeholder = "यहाँ नेपाली युनिकोड पेस्ट गर्नुहोस् वा टाइप गर्नुहोस् (Devanagari to Roman English)...";
                 typingArea.className = "editor-textarea";
+                if (statusBadge) statusBadge.style.display = 'none';
+                if (suggestionsContainer) {
+                    suggestionsContainer.style.display = 'none';
+                    suggestionsContainer.innerHTML = "";
+                }
+                if (specialCharsSection) specialCharsSection.style.display = 'none';
             } else {
                 typingArea.placeholder = "Type standard English here...";
                 typingArea.className = "editor-textarea";
+                if (statusBadge) statusBadge.style.display = 'none';
+                if (suggestionsContainer) {
+                    suggestionsContainer.style.display = 'none';
+                    suggestionsContainer.innerHTML = "";
+                }
+                if (specialCharsSection) specialCharsSection.style.display = 'none';
             }
 
             const layoutNames = {
@@ -210,14 +264,268 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Initialize with Romanized keyboard interceptor
+        // -------------------------------------------------------------
+        // Suggestions Autocomplete Logic
+        // -------------------------------------------------------------
+        function getActiveWordInfo() {
+            const value = typingArea.value;
+            const selStart = typingArea.selectionStart;
+            const selEnd = typingArea.selectionEnd;
+            
+            if (selStart !== selEnd) return null;
+            
+            const textBefore = value.substring(0, selStart);
+            const match = textBefore.match(/[a-zA-Z]+$/);
+            if (!match) return null;
+            
+            const word = match[0];
+            const startPos = selStart - word.length;
+            
+            return {
+                word: word,
+                start: startPos,
+                end: selStart
+            };
+        }
+
+        function fetchSuggestions(word, callback) {
+            if (abortController) {
+                abortController.abort();
+            }
+            
+            if (!navigator.onLine) {
+                const localVal = Nepalify.transliterateWord(word);
+                callback([localVal]);
+                return;
+            }
+            
+            abortController = new AbortController();
+            const signal = abortController.signal;
+            const url = `https://inputtools.google.com/request?itc=ne-t-i0-und&num=6&cp=0&cs=1&ie=utf-8&oe=utf-8&app=nepalitools&text=${encodeURIComponent(word)}`;
+            
+            fetch(url, { signal })
+                .then(response => response.json())
+                .then(data => {
+                    try {
+                        if (data && data[1] && data[1][0] && data[1][0][2]) {
+                            let results = data[1][0][2];
+                            results = [...new Set(results)];
+                            callback(results);
+                        } else {
+                            callback([Nepalify.transliterateWord(word)]);
+                        }
+                    } catch (e) {
+                        callback([Nepalify.transliterateWord(word)]);
+                    }
+                })
+                .catch(err => {
+                    if (err.name !== 'AbortError') {
+                        callback([Nepalify.transliterateWord(word)]);
+                    }
+                });
+        }
+
+        function renderSuggestions(word, list) {
+            if (!suggestionsContainer) return;
+            
+            suggestions = list;
+            activeSuggestionIndex = 0;
+            
+            if (list.length === 0) {
+                suggestionsContainer.style.display = 'none';
+                suggestionsContainer.innerHTML = "";
+                return;
+            }
+            
+            suggestionsContainer.innerHTML = "";
+            list.forEach((sug, index) => {
+                const chip = document.createElement('div');
+                chip.className = 'suggestion-chip';
+                if (index === 0) {
+                    chip.classList.add('active');
+                }
+                
+                const numSpan = document.createElement('span');
+                numSpan.className = 'chip-index';
+                numSpan.textContent = index + 1;
+                
+                chip.appendChild(numSpan);
+                chip.appendChild(document.createTextNode(sug));
+                
+                chip.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    commitSuggestion(word, sug, true);
+                    typingArea.focus();
+                });
+                
+                suggestionsContainer.appendChild(chip);
+            });
+            
+            suggestionsContainer.style.display = 'flex';
+        }
+
+        function commitSuggestion(englishWord, nepaliWord, appendSpace = true) {
+            const info = getActiveWordInfo();
+            if (!info) return;
+            
+            const start = info.start;
+            const end = info.end;
+            const val = typingArea.value;
+            
+            const before = val.substring(0, start);
+            const after = val.substring(end);
+            
+            const inserted = nepaliWord + (appendSpace ? " " : "");
+            typingArea.value = before + inserted + after;
+            
+            const newCursorPos = start + inserted.length;
+            typingArea.setSelectionRange(newCursorPos, newCursorPos);
+            
+            if (suggestionsContainer) {
+                suggestionsContainer.style.display = 'none';
+                suggestionsContainer.innerHTML = "";
+            }
+            suggestions = [];
+            lastFetchedWord = "";
+            
+            typingArea.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+
+        function updateHighlightedSuggestion() {
+            if (!suggestionsContainer) return;
+            const chips = suggestionsContainer.querySelectorAll('.suggestion-chip');
+            chips.forEach((chip, idx) => {
+                if (idx === activeSuggestionIndex) {
+                    chip.classList.add('active');
+                    chip.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+                } else {
+                    chip.classList.remove('active');
+                }
+            });
+        }
+
+        const handleInputOrCursor = () => {
+            if (activeLayout !== 'romanized') return;
+            
+            const info = getActiveWordInfo();
+            if (!info) {
+                if (suggestionsContainer) {
+                    suggestionsContainer.style.display = 'none';
+                    suggestionsContainer.innerHTML = "";
+                }
+                suggestions = [];
+                lastFetchedWord = "";
+                return;
+            }
+            
+            const currentWord = info.word;
+            if (currentWord === lastFetchedWord) return;
+            
+            lastFetchedWord = currentWord;
+            fetchSuggestions(currentWord, (list) => {
+                renderSuggestions(currentWord, list);
+            });
+        };
+
+        // Textarea typing/movement bindings
+        typingArea.addEventListener('input', handleInputOrCursor);
+        typingArea.addEventListener('keyup', (e) => {
+            if (e.key.startsWith('Arrow') || e.key === 'Home' || e.key === 'End') {
+                handleInputOrCursor();
+            }
+        });
+        typingArea.addEventListener('click', handleInputOrCursor);
+
+        // Key interception for autocomplete controls
+        typingArea.addEventListener('keydown', (e) => {
+            if (activeLayout !== 'romanized') return;
+            
+            const suggestionsVisible = suggestionsContainer && suggestionsContainer.style.display !== 'none' && suggestions.length > 0;
+            
+            if (!suggestionsVisible) {
+                // If suggestions are loading or we hit space/enter, we can fall back to local rule-based mapping instantly
+                if (e.key === ' ' || e.key === 'Enter') {
+                    const info = getActiveWordInfo();
+                    if (info) {
+                        e.preventDefault();
+                        const localVal = Nepalify.transliterateWord(info.word);
+                        commitSuggestion(info.word, localVal, e.key === ' ');
+                        if (e.key === 'Enter') {
+                            const pos = typingArea.selectionStart;
+                            typingArea.value = typingArea.value.substring(0, pos) + "\n" + typingArea.value.substring(pos);
+                            typingArea.setSelectionRange(pos + 1, pos + 1);
+                            typingArea.dispatchEvent(new Event('input', { bubbles: true }));
+                        }
+                    }
+                }
+                return;
+            }
+            
+            // Handle active suggestions navigation/selection
+            if (e.key === ' ') {
+                e.preventDefault();
+                const selectedVal = suggestions[activeSuggestionIndex];
+                commitSuggestion(lastFetchedWord, selectedVal, true);
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                const selectedVal = suggestions[activeSuggestionIndex];
+                commitSuggestion(lastFetchedWord, selectedVal, false);
+                // Append a newline
+                const pos = typingArea.selectionStart;
+                typingArea.value = typingArea.value.substring(0, pos) + "\n" + typingArea.value.substring(pos);
+                typingArea.setSelectionRange(pos + 1, pos + 1);
+                typingArea.dispatchEvent(new Event('input', { bubbles: true }));
+            } else if (e.key === 'Escape') {
+                e.preventDefault();
+                suggestionsContainer.style.display = 'none';
+                suggestions = [];
+                lastFetchedWord = "";
+            } else if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'Tab') {
+                e.preventDefault();
+                activeSuggestionIndex = (activeSuggestionIndex + 1) % suggestions.length;
+                updateHighlightedSuggestion();
+            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                e.preventDefault();
+                activeSuggestionIndex = (activeSuggestionIndex - 1 + suggestions.length) % suggestions.length;
+                updateHighlightedSuggestion();
+            } else if (e.key >= '1' && e.key <= '6') {
+                const index = parseInt(e.key) - 1;
+                if (index < suggestions.length) {
+                    e.preventDefault();
+                    commitSuggestion(lastFetchedWord, suggestions[index], true);
+                }
+            }
+        });
+
+        // -------------------------------------------------------------
+        // Special Characters Grid Click to Insert
+        // -------------------------------------------------------------
+        const specialChars = document.querySelectorAll('.special-chars-grid span');
+        specialChars.forEach(span => {
+            span.addEventListener('click', () => {
+                const char = span.getAttribute('data-char');
+                if (!char) return;
+                
+                const start = typingArea.selectionStart;
+                const end = typingArea.selectionEnd;
+                const val = typingArea.value;
+                
+                typingArea.value = val.substring(0, start) + char + val.substring(end);
+                const newPos = start + char.length;
+                typingArea.setSelectionRange(newPos, newPos);
+                
+                typingArea.focus();
+                typingArea.dispatchEvent(new Event('input', { bubbles: true }));
+            });
+        });
+
+        // Initialize default layout
         setKeyboardLayout('romanized');
         
-        // Character counter
+        // Character & Word Counter
         typingArea.addEventListener('input', () => {
             updateStats(typingArea, 'typing-char-count');
             
-            // Word counter
             const text = typingArea.value.trim();
             const words = text === "" ? 0 : text.split(/\s+/).length;
             const wordCounter = document.getElementById('typing-word-count');

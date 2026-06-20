@@ -94,7 +94,7 @@ SCHEMA:
         <div class="editor-grid" id="pane-typing" style="display: none;">
             <div class="editor-pane" style="grid-column: span 2;">
                 <div class="editor-header">
-                    <span class="editor-label">📝 Nepali Typing Field</span>
+                    <span class="editor-label">📝 Nepali Typing Field <span class="typing-status" id="typing-status" title="Google Transliteration suggestions" style="display: none;">Online</span></span>
                     <div class="editor-actions">
                         <button class="action-btn active" data-layout="romanized">English to Nepali</button>
                         <button class="action-btn" data-layout="traditional">Traditional</button>
@@ -105,9 +105,31 @@ SCHEMA:
                     </div>
                 </div>
                 <textarea class="editor-textarea nepali-font" id="typing-area" placeholder="टाइपिङ सुरु गर्नुहोस् (k = क, a = ा, m = म = काम)..."></textarea>
+                
+                <!-- Autocomplete suggestions bar -->
+                <div id="typing-suggestions" class="typing-suggestions" style="display: none;"></div>
+
                 <div class="editor-footer">
                     <span id="typing-char-count">0 characters</span>
                     <span id="typing-word-count">0 words</span>
+                </div>
+
+                <!-- Special Characters Grid Section -->
+                <div class="special-chars-section" id="special-chars-section" style="display: none; margin-top: 24px;">
+                    <p class="special-chars-title">Special Characters — Click to insert</p>
+                    <div class="special-chars-grid">
+                        <span data-char="क">क</span><span data-char="ख">ख</span><span data-char="ग">ग</span><span data-char="घ">घ</span><span data-char="ङ">ङ</span>
+                        <span data-char="च">च</span><span data-char="छ">छ</span><span data-char="ज">ज</span><span data-char="झ">झ</span><span data-char="ञ">ञ</span>
+                        <span data-char="ट">ट</span><span data-char="ठ">ठ</span><span data-char="ड">ड</span><span data-char="ढ">ढ</span><span data-char="ण">ण</span>
+                        <span data-char="त">त</span><span data-char="थ">थ</span><span data-char="द">द</span><span data-char="ध">ध</span><span data-char="न">न</span>
+                        <span data-char="प">प</span><span data-char="फ">फ</span><span data-char="ब">ब</span><span data-char="भ">भ</span><span data-char="म">म</span>
+                        <span data-char="य">य</span><span data-char="र">र</span><span data-char="ल">ल</span><span data-char="व">व</span><span data-char="श">श</span>
+                        <span data-char="ष">ष</span><span data-char="स">स</span><span data-char="ह">ह</span><span data-char="क्ष">क्ष</span><span data-char="त्र">त्र</span>
+                        <span data-char="ज्ञ">ज्ञ</span><span data-char="्">्</span><span data-char="ा">ा</span><span data-char="ि">ि</span><span data-char="ी">ी</span>
+                        <span data-char="ु">ु</span><span data-char="ू">ू</span><span data-char="े">े</span><span data-char="ै">ै</span><span data-char="ो">ो</span>
+                        <span data-char="ौ">ौ</span><span data-char="ं">ं</span><span data-char="ँ">ँ</span><span data-char="ः">ः</span><span data-char="ृ">ृ</span>
+                        <span data-char="्र">्र</span><span data-char="र्">र्</span><span data-char="।">।</span><span data-char="॥">॥</span><span data-char="ॐ">ॐ</span>
+                    </div>
                 </div>
             </div>
         </div>
