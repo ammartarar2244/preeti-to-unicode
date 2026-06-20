@@ -119,6 +119,13 @@ body {
     color: var(--primary);
 }
 
+.logo-icon-img {
+    height: 28px;
+    width: 28px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
 .nav-links {
     display: flex;
     gap: 16px;
