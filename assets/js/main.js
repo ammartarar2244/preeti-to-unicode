@@ -152,6 +152,18 @@ document.addEventListener('DOMContentLoaded', () => {
         bindCopyAction('unicode-copy', preetiOutput, 'Preeti text copied!');
         // Clear button
         bindClearAction('unicode-clear', [unicodeInput, preetiOutput], ['unicode-inp-count', 'preeti-out-count']);
+
+        // Check for transferred text from sessionStorage
+        try {
+            const transferText = sessionStorage.getItem('nepalitools_transfer_text');
+            if (transferText) {
+                unicodeInput.value = transferText;
+                unicodeInput.dispatchEvent(new Event('input', { bubbles: true }));
+                sessionStorage.removeItem('nepalitools_transfer_text');
+            }
+        } catch (e) {
+            console.error("Failed to read/clear sessionStorage:", e);
+        }
     }
 
     // -------------------------------------------------------------
@@ -772,6 +784,297 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Initialize Practice screen
         resetPractice();
+    }
+
+    // -------------------------------------------------------------
+    // 8. Nepali Voice Typing Page Bindings
+    // -------------------------------------------------------------
+    const voiceArea = document.getElementById('voice-typing-area');
+    if (voiceArea) {
+        const micToggleBtn = document.getElementById('mic-toggle-btn');
+        const punctuationBar = document.getElementById('punctuation-bar');
+        const voiceUndoBtn = document.getElementById('voice-undo');
+        const transferToPreetiBtn = document.getElementById('transfer-to-preeti');
+        const statusDot = document.getElementById('status-dot');
+        const statusText = document.getElementById('typing-status-text');
+        const statsDisplay = document.getElementById('typing-stats-display');
+
+        let isListening = false;
+        let recognition = null;
+        let voiceHistory = [];
+        let silenceTimer = null;
+
+        const updateStatsDisplay = () => {
+            if (!statsDisplay) return;
+            const text = voiceArea.value;
+            const charCount = text.length;
+            const wordCount = text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
+            statsDisplay.textContent = `${wordCount} शब्द • ${charCount} अक्षर`;
+        };
+
+        const updateStatusBadge = (listening) => {
+            if (!statusDot || !statusText) return;
+            if (listening) {
+                statusText.textContent = "सुन्दैछ...";
+                statusDot.style.backgroundColor = "#c62828";
+                statusDot.classList.add('listening');
+            } else {
+                statusText.textContent = "तयार";
+                statusDot.style.backgroundColor = "#2e7d32";
+                statusDot.classList.remove('listening');
+            }
+        };
+
+        const startListening = () => {
+            if (recognition && !isListening) {
+                isListening = true;
+                try {
+                    recognition.start();
+                } catch (e) {
+                    console.error("Error starting speech recognition:", e);
+                }
+            }
+        };
+
+        const stopListening = () => {
+            if (recognition && isListening) {
+                isListening = false;
+                try {
+                    recognition.stop();
+                } catch (e) {
+                    console.error("Error stopping speech recognition:", e);
+                }
+                if (micToggleBtn) {
+                    micToggleBtn.classList.remove('listening');
+                }
+                resetSilenceTimer();
+                updateStatusBadge(false);
+            }
+        };
+
+        const toggleVoiceTyping = () => {
+            if (!recognition) {
+                showToast("Voice typing is not supported in this browser.");
+                return;
+            }
+            if (isListening) {
+                stopListening();
+            } else {
+                startListening();
+            }
+        };
+
+        const resetSilenceTimer = () => {
+            if (silenceTimer) {
+                clearTimeout(silenceTimer);
+                silenceTimer = null;
+            }
+        };
+
+        const startSilenceTimer = () => {
+            resetSilenceTimer();
+            silenceTimer = setTimeout(() => {
+                showToast("Voice typing stopped after 1 minute of silence.");
+                stopListening();
+            }, 60000); // 1 minute of silence
+        };
+
+        // Initialize Speech Recognition
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.lang = 'ne-NP';
+
+            recognition.onstart = () => {
+                isListening = true;
+                if (micToggleBtn) {
+                    micToggleBtn.classList.add('listening');
+                }
+                updateStatusBadge(true);
+                startSilenceTimer();
+            };
+
+            recognition.onend = () => {
+                if (isListening) {
+                    try {
+                        recognition.start();
+                    } catch (e) {
+                        console.error("Failed to restart speech recognition:", e);
+                    }
+                } else {
+                    if (micToggleBtn) {
+                        micToggleBtn.classList.remove('listening');
+                    }
+                    resetSilenceTimer();
+                    updateStatusBadge(false);
+                }
+            };
+
+            recognition.onerror = (event) => {
+                console.error("Speech recognition error:", event.error);
+                if (event.error === 'not-allowed') {
+                    showToast("Microphone permission denied.");
+                    stopListening();
+                }
+            };
+
+            recognition.onresult = (event) => {
+                resetSilenceTimer();
+                startSilenceTimer();
+
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        let text = event.results[i][0].transcript;
+                        text = replaceVoiceCommands(text);
+                        if (text.trim()) {
+                            insertVoiceText(text);
+                            voiceHistory.push(text);
+                        }
+                    }
+                }
+            };
+        } else {
+            if (micToggleBtn) {
+                micToggleBtn.title = "Voice Typing not supported in this browser";
+            }
+        }
+
+        const replaceVoiceCommands = (text) => {
+            let newText = text;
+            newText = newText.replace(/पूर्ण विराम/g, '।');
+            newText = newText.replace(/नयाँ लाइन/g, '\n');
+            newText = newText.replace(/प्रश्न चिन्ह/g, '?');
+            newText = newText.replace(/अल्प विराम/g, ',');
+            newText = newText.replace(/उद्गार चिन्ह/g, '!');
+            return newText;
+        };
+
+        const insertVoiceText = (text) => {
+            const startPos = voiceArea.selectionStart;
+            const endPos = voiceArea.selectionEnd;
+            const oldValue = voiceArea.value;
+
+            let prefix = "";
+            if (startPos > 0 && !oldValue.substring(startPos - 1, startPos).match(/[\s\n।?,!॥]/) && !text.match(/^[\s\n।?,!॥]/)) {
+                prefix = " ";
+            }
+
+            const textToInsert = prefix + text;
+            voiceArea.value = oldValue.substring(0, startPos) + textToInsert + oldValue.substring(endPos);
+
+            const newCursorPos = startPos + textToInsert.length;
+            voiceArea.selectionStart = newCursorPos;
+            voiceArea.selectionEnd = newCursorPos;
+
+            voiceArea.dispatchEvent(new Event('input', { bubbles: true }));
+        };
+
+        const undoVoice = () => {
+            if (voiceHistory.length === 0) {
+                showToast("Nothing to undo!");
+                return;
+            }
+
+            const lastText = voiceHistory.pop();
+            const currentValue = voiceArea.value;
+
+            const idx = currentValue.lastIndexOf(lastText);
+            if (idx !== -1) {
+                voiceArea.value = currentValue.substring(0, idx) + currentValue.substring(idx + lastText.length);
+                voiceArea.selectionStart = idx;
+                voiceArea.selectionEnd = idx;
+                voiceArea.dispatchEvent(new Event('input', { bubbles: true }));
+                showToast("Last voice input undone.");
+            } else {
+                showToast("Could not find the last spoken text to undo.");
+            }
+        };
+
+        // Autosave / restore support
+        try {
+            const savedText = localStorage.getItem('nepalitools_voice_typed_text');
+            if (savedText) {
+                voiceArea.value = savedText;
+                updateStatsDisplay();
+            }
+        } catch (e) {
+            console.error("Autosave restore failed:", e);
+        }
+
+        voiceArea.addEventListener('input', () => {
+            updateStatsDisplay();
+            try {
+                localStorage.setItem('nepalitools_voice_typed_text', voiceArea.value);
+            } catch (e) {
+                console.error("Autosave store failed:", e);
+            }
+        });
+
+        // Bind buttons
+        if (micToggleBtn) {
+            micToggleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleVoiceTyping();
+            });
+        }
+
+        if (punctuationBar) {
+            punctuationBar.addEventListener('click', (e) => {
+                const btn = e.target.closest('.punc-btn');
+                if (btn) {
+                    e.preventDefault();
+                    let val = btn.getAttribute('data-val');
+                    if (val === '\\n') {
+                        val = '\n';
+                    }
+                    insertVoiceText(val);
+                    voiceArea.focus();
+                }
+            });
+        }
+
+        if (voiceUndoBtn) {
+            voiceUndoBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                undoVoice();
+                voiceArea.focus();
+            });
+        }
+
+        if (transferToPreetiBtn) {
+            transferToPreetiBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const text = voiceArea.value;
+                if (!text.trim()) {
+                    showToast("No text to convert!");
+                    return;
+                }
+                sessionStorage.setItem('nepalitools_transfer_text', text);
+                window.location.href = '/unicode-to-preeti/';
+            });
+        }
+
+        // Copy & Clear
+        bindCopyAction('typing-copy', voiceArea, 'Voice typed text copied!');
+        
+        const clearBtn = document.getElementById('typing-clear');
+        if (clearBtn) {
+            clearBtn.addEventListener('click', () => {
+                voiceArea.value = "";
+                voiceArea.dispatchEvent(new Event('input', { bubbles: true }));
+                showToast("Cleared!");
+            });
+        }
+
+        // Global key shortcut (only active when this page is loaded)
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'm') {
+                e.preventDefault();
+                toggleVoiceTyping();
+            }
+        });
     }
 
     // -------------------------------------------------------------

@@ -1,0 +1,145 @@
+<!--
+TITLE: Nepali Voice Typing (नेपाली भ्वाइस टाइपिङ) - Speech to Text Online
+META_DESCRIPTION: Speak in Nepali and convert speech to standard Devanagari Unicode text instantly. Free online Nepali voice recognition tool. Copy text or convert to Preeti font.
+SCHEMA:
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Nepali Voice Typing Tool",
+  "operatingSystem": "All",
+  "applicationCategory": "UtilitiesApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0"
+  }
+}
+-->
+<div class="tool-section">
+    <div class="tool-header">
+        <h1 class="tool-title">Nepali Voice Typing (नेपाली भ्वाइस टाइपिङ)</h1>
+        <p class="tool-desc">Speak in Nepali and watch your words appear instantly as standard Nepali Unicode text. No keyboard layout to learn — talk naturally and type 3x faster.</p>
+    </div>
+
+    <!-- Converter Card -->
+    <div class="converter-card">
+        <div class="editor-grid" style="grid-template-columns: 1fr;">
+            <div class="editor-pane">
+                <div class="editor-header">
+                    <span class="editor-label">🎙️ Nepali Voice Input Field</span>
+                    <div class="typing-header-controls" style="margin-left: auto;">
+                        <span class="typing-status-indicator">
+                            <span class="status-dot" id="status-dot" style="background-color: #2e7d32;"></span>
+                            <span id="typing-status-text">तयार</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="typing-area-wrapper">
+                    <textarea class="editor-textarea nepali-font" id="voice-typing-area" placeholder="माइक थिचेर बोल्नुहोस् — तपाइँको आवाज नेपाली युनिकोडमा परिवर्तन हुनेछ..." autofocus></textarea>
+                    <button class="mic-float-btn" id="mic-toggle-btn" title="Toggle Voice Typing (Ctrl+M)">
+                        <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg>
+                    </button>
+                </div>
+
+                <!-- Punctuation Shortcuts Bar -->
+                <div class="punctuation-bar" id="punctuation-bar">
+                    <button class="punc-btn" data-val="।">।</button>
+                    <button class="punc-btn" data-val=",">,</button>
+                    <button class="punc-btn" data-val="?">?</button>
+                    <button class="punc-btn" data-val="!">!</button>
+                    <button class="punc-btn" data-val="॥">॥</button>
+                    <button class="punc-btn" data-val="\n">⏎</button>
+                </div>
+
+                <!-- Operations Toolbar (Copy / Clear / stats) -->
+                <div class="typing-op-toolbar">
+                    <div class="op-btn-group">
+                        <button class="op-btn primary" id="typing-copy">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy
+                        </button>
+                        <button class="op-btn secondary" id="voice-undo">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"></path><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path></svg> Undo voice
+                        </button>
+                        <button class="op-btn secondary" id="transfer-to-preeti">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg> To Preeti
+                        </button>
+                        <button class="op-btn secondary" id="typing-clear">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg> Clear
+                        </button>
+                    </div>
+                    <div class="typing-stats" id="typing-stats-display">
+                        0 शब्द • 0 अक्षर
+                    </div>
+                </div>
+
+                <!-- Keyboard Shortcuts Guide -->
+                <div class="typing-shortcuts-guide" id="typing-shortcuts-guide" style="display: flex;">
+                    <span class="shortcut-item"><kbd>Ctrl</kbd> + <kbd>M</kbd> माइक खोल्ने / बन्द गर्ने</span>
+                    <span class="shortcut-item">बोल्नुहोस् «पूर्ण विराम» → <strong>।</strong></span>
+                    <span class="shortcut-item">बोल्नुहोस् «नयाँ लाइन» → <strong>नयाँ हरफ</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <article style="max-width: 800px; margin: 0 auto;">
+        <h2 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 16px;">Nepali Voice Typing (नेपाली भ्वाइस टाइपिङ) — Speech to Text</h2>
+        
+        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-top: 24px; margin-bottom: 12px;">Free Nepali Voice Typing tool</h3>
+        <p style="margin-bottom: 16px;">
+            Speak in Nepali and watch your words appear instantly as नेपाली युनिकोड text. There is no faster way to write in Nepali — no keyboard layout to learn, no romanized spelling to remember. Just tap the microphone, talk naturally, and this Nepali speech-to-text tool types for you, up to three times faster than typing by hand.
+        </p>
+        <p style="margin-bottom: 16px;">
+            The tool uses your browser's built-in speech recognition with a high-quality Nepali (ne-NP) language model, so it understands natural Nepali speech including common accents. The recognized text is standard Nepali Unicode (Devanagari), ready to paste into Facebook, TikTok, YouTube, email, Word, Excel or any official document. You can also send it straight to our Unicode to Preeti converter with one click — perfect for designers who need Preeti font output.
+        </p>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-top: 28px; margin-bottom: 12px;">How to use Nepali voice typing?</h3>
+        <ol style="margin-left: 24px; margin-bottom: 24px; line-height: 1.8;">
+            <li style="margin-bottom: 8px;">Tap the round microphone button in the corner of the typing box and allow microphone access when your browser asks.</li>
+            <li style="margin-bottom: 8px;">Speak clearly in Nepali — your words appear instantly, word by word, as you talk. The tool keeps listening while you speak, and switches the mic off automatically after 1 minute of silence.</li>
+            <li style="margin-bottom: 8px;">Say «पूर्ण विराम» to insert the Nepali full stop (।), «नयाँ लाइन» to start a new line, or «प्रश्न चिन्ह» for a question mark.</li>
+            <li style="margin-bottom: 8px;">Made a mistake? Tap <strong>Undo voice</strong> to remove the last spoken phrase, or click anywhere in the text and speak — new words are inserted right at your cursor.</li>
+            <li style="margin-bottom: 8px;">When you are done, tap <strong>Copy</strong>, or <strong>To Preeti</strong> to convert your speech into Preeti font instantly.</li>
+        </ol>
+        <p style="margin-bottom: 16px;">
+            Your text is saved automatically in your browser, so nothing is lost even if the page reloads. No audio or text is ever stored on our servers.
+        </p>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px;">Frequently Asked Questions (FAQs)</h3>
+        <div class="faq-accordion">
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Q: Does this typing tool store my data or audio?
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        Not at all. We take privacy seriously. Your keystrokes, voice audio, and text are processed locally inside your browser sandbox. We never send what you type or say to any external server.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Q: What voice commands are supported?
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        You can say "पूर्ण विराम" to insert a full stop (।), "नयाँ लाइन" to create a new paragraph, "प्रश्न चिन्ह" to add a question mark (?), "अल्प विराम" for a comma (,), and "उद्गार चिन्ह" for an exclamation mark (!).
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Q: Can I edit the text manually?
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        Absolutely. You can edit, backspace, copy, and paste text inside the box just like any standard text editor.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>

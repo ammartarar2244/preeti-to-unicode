@@ -13,7 +13,8 @@ $pages = @(
     "faq/index.html",
     "preeti-font-download/index.html",
     "preeti-vs-unicode/index.html",
-    "unicode-chart/index.html"
+    "unicode-chart/index.html",
+    "nepali-voice-typing/index.html"
 )
 
 $assets = @(
