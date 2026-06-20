@@ -1,7 +1,9 @@
 # Logs
 *.log
 chrome_dom.log
+chrome_dom_utf8.log
 chrome_error.log
+test_input.html
 
 # Operating system files
 Thumbs.db

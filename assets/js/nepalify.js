@@ -398,80 +398,104 @@ class Nepalify {
 
             bindingsObj.keypress = keypressHandler;
         } else if (layoutName === 'romanized') {
-            // Phonetic Romanized Transliteration
+            // Phonetic English to Nepali Transliteration (Input-based)
             element._translitState = {
                 buffer: "",
                 lastLen: 0
             };
+            element._lastValue = element.value;
 
-            const keypressHandler = (e) => {
-                if (e.ctrlKey || e.altKey || e.metaKey) return;
-
-                const keyChar = e.key;
-
-                // Intercept alphabetical English letters (a-z, A-Z)
-                if (/^[a-zA-Z]$/.test(keyChar)) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    const state = element._translitState;
-                    state.buffer += keyChar;
-
-                    const start = element.selectionStart;
-                    const end = element.selectionEnd;
-                    const val = element.value;
-
-                    const replacement = Nepalify.transliterateWord(state.buffer);
-
-                    const wordStart = start - state.lastLen;
-                    element.value = val.substring(0, wordStart) + replacement + val.substring(end);
-
-                    const newPos = wordStart + replacement.length;
-                    element.setSelectionRange(newPos, newPos);
-                    state.lastLen = replacement.length;
-
-                    element.dispatchEvent(new Event('input', { bubbles: true }));
-                } else {
-                    // Commit word on spaces/punctuation
-                    const state = element._translitState;
-                    state.buffer = "";
-                    state.lastLen = 0;
+            const inputHandler = (e) => {
+                const inputType = e.inputType;
+                const start = element.selectionStart;
+                const val = element.value;
+                const lastVal = element._lastValue || "";
+                
+                let data = e.data;
+                
+                // If e.data is null/undefined but value length increased by 1, extract the inserted character
+                if (!data && val.length > lastVal.length) {
+                    const diffLen = val.length - lastVal.length;
+                    if (diffLen === 1) {
+                        data = val.charAt(start - 1);
+                    }
                 }
-            };
 
-            const keydownHandler = (e) => {
-                if (e.ctrlKey || e.altKey || e.metaKey) return;
+                // Check for deletion/backspace
+                const isDeletion = (inputType === 'deleteContentBackward') || 
+                                   (!data && val.length < lastVal.length);
 
-                const state = element._translitState;
+                // Reset buffer on complex operations or non-backspace deletes
+                const isComplexDelete = inputType && (inputType.startsWith('delete') && inputType !== 'deleteContentBackward');
+                const isUndoRedo = inputType === 'historyUndo' || inputType === 'historyRedo';
+                
+                if (isComplexDelete || isUndoRedo) {
+                    const state = element._translitState;
+                    if (state) {
+                        state.buffer = "";
+                        state.lastLen = 0;
+                    }
+                    element._lastValue = val;
+                    return;
+                }
 
-                if (e.key === 'Backspace') {
-                    if (state.buffer.length > 0) {
-                        e.preventDefault();
-
+                // Handle backspace delete
+                if (isDeletion) {
+                    const state = element._translitState;
+                    if (state && state.buffer.length > 0) {
                         state.buffer = state.buffer.slice(0, -1);
-
-                        const start = element.selectionStart;
-                        const end = element.selectionEnd;
-                        const val = element.value;
-
+                        
                         const replacement = Nepalify.transliterateWord(state.buffer);
+                        const wordStart = Math.max(0, start - state.lastLen + 1);
 
-                        const wordStart = start - state.lastLen;
-                        element.value = val.substring(0, wordStart) + replacement + val.substring(end);
-
+                        element.removeEventListener('input', inputHandler);
+                        element.value = val.substring(0, wordStart) + replacement + val.substring(start);
+                        
                         const newPos = wordStart + replacement.length;
                         element.setSelectionRange(newPos, newPos);
                         state.lastLen = replacement.length;
-
-                        element.dispatchEvent(new Event('input', { bubbles: true }));
+                        element.addEventListener('input', inputHandler);
+                    } else if (state) {
+                        state.buffer = "";
+                        state.lastLen = 0;
                     }
-                } else if (e.key === ' ' || e.key === 'Enter' || /^[^\w]$/.test(e.key)) {
-                    state.buffer = "";
-                    state.lastLen = 0;
-                } else if (e.key.startsWith('Arrow') || e.key === 'Home' || e.key === 'End' || e.key === 'Tab') {
-                    state.buffer = "";
-                    state.lastLen = 0;
+                    element._lastValue = element.value;
+                    return;
                 }
+
+                // Ignore paste
+                if (inputType === 'insertFromPaste') {
+                    element._lastValue = val;
+                    return;
+                }
+
+                // Handle character insertion
+                if (data && /^[a-zA-Z]$/.test(data)) {
+                    const state = element._translitState;
+                    if (!state) return;
+                    
+                    state.buffer += data;
+
+                    const replacement = Nepalify.transliterateWord(state.buffer);
+                    const wordStart = start - (state.lastLen + 1);
+                    
+                    element.removeEventListener('input', inputHandler);
+                    element.value = val.substring(0, Math.max(0, wordStart)) + replacement + val.substring(start);
+                    
+                    const newPos = Math.max(0, wordStart) + replacement.length;
+                    element.setSelectionRange(newPos, newPos);
+                    state.lastLen = replacement.length;
+                    element.addEventListener('input', inputHandler);
+                } else {
+                    // Commit word on spaces/punctuation
+                    const state = element._translitState;
+                    if (state) {
+                        state.buffer = "";
+                        state.lastLen = 0;
+                    }
+                }
+                
+                element._lastValue = element.value;
             };
 
             const resetHandler = () => {
@@ -479,6 +503,7 @@ class Nepalify {
                     element._translitState.buffer = "";
                     element._translitState.lastLen = 0;
                 }
+                element._lastValue = element.value;
             };
 
             const pasteHandler = (e) => {
@@ -505,10 +530,10 @@ class Nepalify {
                     element._translitState.buffer = "";
                     element._translitState.lastLen = 0;
                 }
+                element._lastValue = element.value;
             };
 
-            bindingsObj.keypress = keypressHandler;
-            bindingsObj.keydown = keydownHandler;
+            bindingsObj.input = inputHandler;
             bindingsObj.click = resetHandler;
             bindingsObj.focus = resetHandler;
             bindingsObj.paste = pasteHandler;
@@ -556,6 +581,7 @@ class Nepalify {
                     
                     Nepalify.activeBindings.delete(element);
                     delete element._translitState;
+                    delete element._lastValue;
                 }
             }
         };
