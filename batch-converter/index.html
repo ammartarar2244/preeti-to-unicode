@@ -36,41 +36,65 @@
 
 </head>
 <body>
-    <header class="main-header">
-    <div class="header-container">
+    <div class="app-layout">
+        <aside class="app-sidebar" id="app-sidebar">
+    <div class="sidebar-header">
         <a href="/" class="logo">
             <span class="logo-icon">🇳🇵</span>
             <span class="logo-text">Nepali<span class="logo-accent">Tools</span></span>
         </a>
-        <nav class="nav-links" id="nav-menu">
-            <div class="nav-dropdown">
-                <button class="nav-dropbtn">Conversion Tools <span class="arrow-down">▾</span></button>
-                <div class="dropdown-content">
-                    <a href="/preeti-to-unicode/">Preeti to Unicode</a>
-                    <a href="/unicode-to-preeti/">Unicode to Preeti</a>
-                    <a href="/font-converter/">Legacy Font Converter</a>
-                    <a href="/batch-converter/">Batch Docx Converter</a>
-                </div>
-            </div>
-            <div class="nav-dropdown">
-                <button class="nav-dropbtn">Typing Tools <span class="arrow-down">▾</span></button>
-                <div class="dropdown-content">
-                    <a href="/english-to-nepali-typing/">English to Nepali Typing</a>
-                    <a href="/nepali-typing/">Nepali Typing Practice</a>
-                    <a href="/transliteration/">Phonetic Transliteration</a>
-                </div>
-            </div>
-            <div class="nav-dropdown">
-                <button class="nav-dropbtn">Resources & Guides <span class="arrow-down">▾</span></button>
-                <div class="dropdown-content">
-                    <a href="/preeti-font-download/">Preeti Font Download</a>
-                    <a href="/nepali-keyboard-layout/">Keyboard Layouts</a>
-                    <a href="/character-map/">Unicode Character Map</a>
-                    <a href="/preeti-vs-unicode/">Preeti vs Unicode Guide</a>
-                    <a href="/faq/">Frequently Asked Questions</a>
-                </div>
-            </div>
-        </nav>
+    </div>
+    
+    <nav class="sidebar-nav">
+        <div class="nav-group">
+            <h4 class="nav-group-title">🔄 Conversion Tools</h4>
+            <ul class="nav-list">
+                <li><a href="/preeti-to-unicode/" class="nav-link">Preeti to Unicode</a></li>
+                <li><a href="/unicode-to-preeti/" class="nav-link">Unicode to Preeti</a></li>
+                <li><a href="/font-converter/" class="nav-link">Legacy Font Converter</a></li>
+                <li><a href="/batch-converter/" class="nav-link">Batch Docx Converter</a></li>
+            </ul>
+        </div>
+        
+        <div class="nav-group">
+            <h4 class="nav-group-title">⌨️ Typing Tools</h4>
+            <ul class="nav-list">
+                <li><a href="/english-to-nepali-typing/" class="nav-link">English to Nepali</a></li>
+                <li><a href="/nepali-typing/" class="nav-link">Nepali Typing Practice</a></li>
+                <li><a href="/transliteration/" class="nav-link">Phonetic Transliteration</a></li>
+            </ul>
+        </div>
+        
+        <div class="nav-group">
+            <h4 class="nav-group-title">📚 Resources & Guides</h4>
+            <ul class="nav-list">
+                <li><a href="/preeti-font-download/" class="nav-link">Preeti Font Download</a></li>
+                <li><a href="/nepali-keyboard-layout/" class="nav-link">Keyboard Layouts</a></li>
+                <li><a href="/character-map/" class="nav-link">Unicode Character Map</a></li>
+                <li><a href="/preeti-vs-unicode/" class="nav-link">Preeti vs Unicode</a></li>
+                <li><a href="/unicode-chart/" class="nav-link">Unicode Encoding Chart</a></li>
+                <li><a href="/faq/" class="nav-link">Frequently Asked Questions</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="sidebar-footer">
+        <div class="sidebar-footer-install" id="sidebar-install-container" style="display: none;">
+            <button id="sidebar-install-btn" class="install-banner-btn">📥 Install App</button>
+        </div>
+        <p class="sidebar-footer-text">Works 100% Offline</p>
+    </div>
+</aside>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+        <div class="app-main">
+            <header class="main-header">
+    <div class="header-container">
+        <a href="/" class="logo header-logo">
+            <span class="logo-icon">🇳🇵</span>
+            <span class="logo-text">Nepali<span class="logo-accent">Tools</span></span>
+        </a>
+        
         <div class="header-actions">
             <button id="theme-toggle" class="theme-btn" aria-label="Toggle light/dark theme">
                 <span class="theme-icon sun-icon">☀️</span>
@@ -78,6 +102,7 @@
             </button>
             <a href="/english-to-nepali-typing/" class="cta-btn">Start Typing</a>
         </div>
+        
         <button id="mobile-nav-toggle" class="mobile-menu-btn" aria-label="Toggle menu">
             <span></span>
             <span></span>
@@ -86,9 +111,8 @@
     </div>
 </header>
 
-
-    <main class="content-wrapper">
-        <div class="tool-section">
+            <main class="content-wrapper">
+                <div class="tool-section">
     <div class="tool-header">
         <h1 class="tool-title">Batch Text File Converter</h1>
         <p class="tool-desc">Convert entire text files (.txt) from legacy Preeti font to modern Unicode Devanagari in batch. Processed entirely in your browser.</p>
@@ -167,9 +191,8 @@
         });
     </script>
 </div>
-    </main>
-
-    <footer class="main-footer">
+            </main>
+            <footer class="main-footer">
     <div class="footer-container">
         <div class="footer-grid">
             <div class="footer-info">
@@ -228,9 +251,11 @@
 </footer>
 
 <!-- Core Script Bundles -->
-<script src="/assets/js/converter.js?v=6"></script>
-<script src="/assets/js/nepalify.js?v=6"></script>
-<script src="/assets/js/main.js?v=6"></script>
+<script src="/assets/js/converter.js?v=7"></script>
+<script src="/assets/js/nepalify.js?v=7"></script>
+<script src="/assets/js/main.js?v=7"></script>
 
+        </div>
+    </div>
 </body>
 </html>

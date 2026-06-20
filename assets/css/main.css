@@ -356,14 +356,245 @@ html[data-theme="light"] .moon-icon { display: block; }
     border-style: solid;
 }
 
-/* Responsive Styles */
-@media (max-width: 900px) {
-    .nav-links {
-        display: none; /* JS will handle mobile layout toggle */
+/* ==========================================================================
+   App Layout & Sidebar Styling
+   ========================================================================== */
+
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.app-main {
+    flex: 1;
+    margin-left: 280px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    transition: margin-left var(--transition-smooth);
+}
+
+.app-sidebar {
+    width: 280px;
+    background-color: var(--surface-color);
+    border-right: 1px solid var(--border-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1100;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-smooth);
+}
+
+/* Sidebar Logo Header */
+.sidebar-header {
+    padding: 24px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px 16px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 4px;
+}
+
+.nav-group {
+    margin-bottom: 24px;
+}
+
+.nav-group-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.075em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    padding-left: 8px;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.nav-link {
+    display: block;
+    padding: 10px 12px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.925rem;
+    font-weight: 500;
+    border-radius: var(--border-radius-sm);
+    transition: var(--transition-fast);
+    border-left: 3px solid transparent;
+}
+
+.nav-link:hover {
+    color: var(--text-color);
+    background-color: var(--surface-hover);
+    border-left-color: var(--primary-glow);
+}
+
+.nav-link.active {
+    color: #fff;
+    background-color: var(--primary-glow);
+    border-left-color: var(--primary);
+    font-weight: 600;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    padding: 20px 24px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sidebar-footer-text {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+/* PWA Install Button inside Sidebar */
+.install-banner-btn {
+    width: 100%;
+    background-color: var(--primary);
+    color: #fff;
+    border: 1px solid var(--primary);
+    padding: 8px 16px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: var(--transition-fast);
+}
+
+.install-banner-btn:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+}
+
+/* Sidebar Mobile Overlay */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1050;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-smooth);
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ==========================================================================
+   Header & Content Adjustments
+   ========================================================================== */
+
+/* Logo on header is hidden on desktop by default */
+.header-logo {
+    display: none;
+}
+
+@media (min-width: 1025px) {
+    .main-header {
+        position: sticky;
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 100%;
+        max-width: none;
+        background-color: rgba(15, 15, 17, 0.75);
+        backdrop-filter: var(--glass-blur);
+        border: none;
+        border-bottom: 1px solid var(--border-color);
+        border-radius: 0;
+        box-shadow: none;
+    }
+    
+    .header-container {
+        padding: 0 40px;
+    }
+    
+    .content-wrapper {
+        padding: 40px 40px 60px;
+        margin: 0;
+        max-width: 100%;
     }
     
     .mobile-menu-btn {
+        display: none !important;
+    }
+}
+
+/* ==========================================================================
+   Responsive Adaptations & Footers
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .app-main {
+        margin-left: 0;
+    }
+    
+    .app-sidebar {
+        transform: translateX(-100%);
+        box-shadow: none;
+    }
+    
+    .app-sidebar.active {
+        transform: translateX(0);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .header-logo {
         display: flex;
+    }
+    
+    .mobile-menu-btn {
+        display: flex !important;
+    }
+    
+    .content-wrapper {
+        padding: 100px 16px 40px;
+    }
+    
+    .main-header {
+        position: fixed;
+        top: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 24px);
     }
     
     .footer-grid {

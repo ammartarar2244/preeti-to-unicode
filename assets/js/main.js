@@ -19,21 +19,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // -------------------------------------------------------------
-    // 2. Mobile Responsive Menu Toggle
+    // 2. Mobile Responsive Sidebar Toggle & Active Link Highlighting
     // -------------------------------------------------------------
     const mobileToggle = document.getElementById('mobile-nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
-    if (mobileToggle && navMenu) {
-        mobileToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+    const sidebar = document.getElementById('app-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    
+    if (mobileToggle && sidebar && overlay) {
+        const toggleSidebar = () => {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
             mobileToggle.classList.toggle('open');
+        };
+
+        const closeSidebar = () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            mobileToggle.classList.remove('open');
+        };
+
+        mobileToggle.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', closeSidebar);
+
+        // Close sidebar on Esc key press
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+                closeSidebar();
+            }
         });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!mobileToggle.contains(e.target) && !navMenu.contains(e.target)) {
-                navMenu.classList.remove('active');
-                mobileToggle.classList.remove('open');
+    }
+
+    // Active Link Highlighting
+    const navLinks = document.querySelectorAll('.nav-link');
+    if (navLinks.length > 0) {
+        const currentPath = window.location.pathname;
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (currentPath === href || (href !== '/' && currentPath.startsWith(href))) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
             }
         });
     }
@@ -379,37 +404,44 @@ document.addEventListener('DOMContentLoaded', () => {
     let deferredPrompt;
     const pwaInstallContainer = document.getElementById('pwa-install-container');
     const pwaInstallBtn = document.getElementById('pwa-install-btn');
+    const sidebarInstallContainer = document.getElementById('sidebar-install-container');
+    const sidebarInstallBtn = document.getElementById('sidebar-install-btn');
 
     window.addEventListener('beforeinstallprompt', (e) => {
-        // Prevent Chrome 67 and earlier from automatically showing the prompt
         e.preventDefault();
-        // Stash the event so it can be triggered later.
         deferredPrompt = e;
-        // Update UI notify the user they can install the PWA
         if (pwaInstallContainer) {
             pwaInstallContainer.style.display = 'block';
         }
+        if (sidebarInstallContainer) {
+            sidebarInstallContainer.style.display = 'block';
+        }
     });
 
-    if (pwaInstallBtn) {
-        pwaInstallBtn.addEventListener('click', () => {
-            if (!deferredPrompt) return;
-            // Show the prompt
-            deferredPrompt.prompt();
-            // Wait for the user to respond to the prompt
-            deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                    console.log('User accepted the install prompt');
-                    if (pwaInstallContainer) pwaInstallContainer.style.display = 'none';
-                }
-                deferredPrompt = null;
-            });
+    const triggerInstall = () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the install prompt');
+                if (pwaInstallContainer) pwaInstallContainer.style.display = 'none';
+                if (sidebarInstallContainer) sidebarInstallContainer.style.display = 'none';
+            }
+            deferredPrompt = null;
         });
+    };
+
+    if (pwaInstallBtn) {
+        pwaInstallBtn.addEventListener('click', triggerInstall);
+    }
+    if (sidebarInstallBtn) {
+        sidebarInstallBtn.addEventListener('click', triggerInstall);
     }
 
     window.addEventListener('appinstalled', () => {
         console.log('PWA was installed');
         if (pwaInstallContainer) pwaInstallContainer.style.display = 'none';
+        if (sidebarInstallContainer) sidebarInstallContainer.style.display = 'none';
         showToast("App installed successfully! Enjoy offline support.");
     });
 });

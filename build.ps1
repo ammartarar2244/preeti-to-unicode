@@ -4,6 +4,7 @@
 # 1. Read layout templates
 $headTemplate = [System.IO.File]::ReadAllText("templates/head.html", [System.Text.Encoding]::UTF8)
 $headerTemplate = [System.IO.File]::ReadAllText("templates/header.html", [System.Text.Encoding]::UTF8)
+$sidebarTemplate = [System.IO.File]::ReadAllText("templates/sidebar.html", [System.Text.Encoding]::UTF8)
 $footerTemplate = [System.IO.File]::ReadAllText("templates/footer.html", [System.Text.Encoding]::UTF8)
 $layoutTemplate = [System.IO.File]::ReadAllText("templates/page_layout.html", [System.Text.Encoding]::UTF8)
 
@@ -59,6 +60,7 @@ foreach ($file in $srcFiles) {
     # Assemble layout
     $finalHTML = $layoutTemplate.Replace("<!-- HEAD -->", $pageHead)
     $finalHTML = $finalHTML.Replace("<!-- HEADER -->", $headerTemplate)
+    $finalHTML = $finalHTML.Replace("<!-- SIDEBAR -->", $sidebarTemplate)
     $finalHTML = $finalHTML.Replace("<!-- CONTENT -->", $pageContent)
     $finalHTML = $finalHTML.Replace("<!-- FOOTER -->", $footerTemplate)
     
