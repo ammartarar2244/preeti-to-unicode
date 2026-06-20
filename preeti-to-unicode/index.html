@@ -183,17 +183,16 @@
         </div>
     </div>
 
-    <!-- Guide Content (>3000 words) -->
     <article style="max-width: 800px; margin: 0 auto;">
         <h2 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 16px;">The Definitive Guide to Converting Preeti Font to Unicode</h2>
         
         <p style="margin-bottom: 16px;">
-            For many years, desktop publishing in Nepal relied on standard English layouts overlaid with customized font glyphs. **Preeti** was the pioneer of these layouts, creating a standard that allowed Nepali characters to be printed on standard printers. However, in the age of the Internet, databases, and smart devices, Preeti font fails because it does not represent actual Devanagari characters in the computer's memory. Instead, it is just English text styled to look like Nepali.
+            Back in the early days of desktop publishing in Nepal, printing in Devanagari was a real challenge. Since computers only understood English layouts, developers created custom visual fonts. **Preeti** was the pioneer among these layouts, mapping Nepali character shapes onto standard English keystrokes. It was a brilliant workaround for physical printing at the time. But fast forward to the internet age: these legacy fonts present huge issues because they don't actually save Devanagari letters in the computer's memory—they just style standard English text to look like Nepali.
         </p>
 
         <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 28px; margin-bottom: 12px;">Preeti vs Unicode: What is the Difference?</h3>
         <p style="margin-bottom: 16px;">
-            The differences between legacy fonts and modern Unicode are fundamental to text processing:
+            To see why shifting from legacy fonts to modern Unicode is so important for digital documents and websites, let's look at how they compare side-by-side:
         </p>
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 32px; border: 1px solid var(--border-color);">
             <thead>
@@ -206,30 +205,30 @@
             <tbody>
                 <tr style="border-bottom: 1px solid var(--border-color);">
                     <td style="padding: 12px; border-right: 1px solid var(--border-color);"><strong>Encoding</strong></td>
-                    <td style="padding: 12px; border-right: 1px solid var(--border-color);">ASCII (English character values)</td>
+                    <td style="padding: 12px; border-right: 1px solid var(--border-color);">ASCII (Standard English character values)</td>
                     <td style="padding: 12px;">UTF-8 (Unique Devanagari code points)</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--border-color);">
                     <td style="padding: 12px; border-right: 1px solid var(--border-color);"><strong>Searchable</strong></td>
-                    <td style="padding: 12px; border-right: 1px solid var(--border-color);">No. Searching "नेपाल" won't find "g]kfn".</td>
-                    <td style="padding: 12px;">Yes. Fully indexed by search crawlers.</td>
+                    <td style="padding: 12px; border-right: 1px solid var(--border-color);">No. Searching for "नेपाल" won't find "g]kfn".</td>
+                    <td style="padding: 12px;">Yes. Search engines can index and find it instantly.</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--border-color);">
                     <td style="padding: 12px; border-right: 1px solid var(--border-color);"><strong>Rendering</strong></td>
-                    <td style="padding: 12px; border-right: 1px solid var(--border-color);">Requires Preeti font installed.</td>
-                    <td style="padding: 12px;">Renders natively on all mobile and web systems.</td>
+                    <td style="padding: 12px; border-right: 1px solid var(--border-color);">Requires the Preeti font file installed on your system.</td>
+                    <td style="padding: 12px;">Renders natively on all mobile and web systems out-of-the-box.</td>
                 </tr>
             </tbody>
         </table>
 
         <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 28px; margin-bottom: 12px;">How Our Conversion Engine Operates</h3>
         <p style="margin-bottom: 16px;">
-            The conversion engine parses the visual layouts and translates them to logical Devanagari structures. It works in three distinct phases:
+            Our converter takes care of the heavy lifting behind the scenes to map character positions into standard Devanagari. It does this in three key steps:
         </p>
         <ol style="margin-left: 24px; margin-bottom: 24px;">
-            <li style="margin-bottom: 8px;"><strong>Glyph mapping:</strong> The text is run through a replacements table matching individual Preeti key characters (like <code>s</code>) to Devanagari characters (like <code>क</code>).</li>
-            <li style="margin-bottom: 8px;"><strong>Short vowel correction:</strong> In Preeti font, the short 'i' matra (ि) is typed <em>before</em> the letter it modifies. The algorithm scans the text for <code>l</code>, detects the character following it, and swaps them to place the <code>ि</code> after the consonant as Unicode requires.</li>
-            <li style="margin-bottom: 8px;"><strong>Conjunct clusters & halanta processing:</strong> The engine matches complex conjunct markers (like <code>र्</code>) and moves them past matras to match proper grammatical order.</li>
+            <li style="margin-bottom: 8px;"><strong>Glyph mapping:</strong> The converter runs your text through a mapping table to match individual legacy letters (like the Preeti key <code>s</code>) to their Unicode equivalents (like <code>क</code>).</li>
+            <li style="margin-bottom: 8px;"><strong>Short vowel correction:</strong> In Preeti, you type the short 'i' matra (ि) *before* the letter it modifies. Our algorithm scans the text, detects the <code>l</code> character, and swaps it with the following consonant cluster so the <code>ि</code> ends up in the correct grammatical position.</li>
+            <li style="margin-bottom: 8px;"><strong>Conjunct clusters & halanta processing:</strong> The engine identifies complex half-letter marks (like the reph stroke <code>र्</code>) and adjusts their order so they align perfectly with Devanagari grammar rules.</li>
         </ol>
 
         <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px;">Frequently Asked Questions (FAQs)</h3>
@@ -241,7 +240,7 @@
                 </button>
                 <div class="accordion-body">
                     <div class="accordion-content">
-                        This happens when the original text contains symbols that are not part of the standard Preeti font character set, or represent invalid typings. Try cleaning up the legacy input text and re-converting.
+                        This usually happens when your original text contains characters or symbols that aren't supported by the standard Preeti layout, or if there were typos in the legacy text. Try double-checking your original text for unusual symbols, clean them up, and try converting again!
                     </div>
                 </div>
             </div>
@@ -252,7 +251,7 @@
                 </button>
                 <div class="accordion-body">
                     <div class="accordion-content">
-                        Yes! Our website is fully PWA-enabled. Once you have loaded the page online, you can bookmark it and use it entirely offline without internet access.
+                        You absolutely can! We've built this site as a Progressive Web App (PWA). Once you visit the site online, it gets saved in your browser's cache, letting you bookmark it and do all your conversion and typing work 100% offline without any internet connection.
                     </div>
                 </div>
             </div>
@@ -263,7 +262,7 @@
                 </button>
                 <div class="accordion-body">
                     <div class="accordion-content">
-                        Yes! Kantipur, Sagarmatha, and PCS Nepali fonts share the exact same ASCII layout structure as the Preeti font. You can paste any text written in these fonts here and it will convert perfectly.
+                        Yes, it does! Fonts like Kantipur, Sagarmatha, PCS Nepali, and Himalb share the exact same keyboard layout mapping as Preeti. So, you can paste text from any of those legacy ASCII fonts right here, and they will convert perfectly.
                     </div>
                 </div>
             </div>

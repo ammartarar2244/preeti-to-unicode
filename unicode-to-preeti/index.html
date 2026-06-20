@@ -183,17 +183,16 @@
         </div>
     </div>
 
-    <!-- Guide Content (>3000 words) -->
     <article style="max-width: 800px; margin: 0 auto;">
         <h2 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 16px;">Step-by-Step Guide: Converting Unicode to Preeti Font</h2>
         
         <p style="margin-bottom: 16px;">
-            Although modern computing platforms, search engines, and websites require **Nepali Unicode**, many traditional design applications (such as PageMaker, InDesign, and CorelDRAW) used by printing presses and publishing houses in Nepal still rely on legacy ASCII-based fonts like **Preeti**, **Kantipur**, and **Sagarmatha**. This requires converting Unicode Devanagari back to legacy Preeti layouts.
+            Even though today's digital platforms, websites, and search engines require standard **Nepali Unicode**, the printing and publishing world in Nepal operates a bit differently. Many traditional design tools—like Adobe InDesign, PageMaker, or CorelDRAW—used by printing presses still rely on legacy ASCII-based fonts such as **Preeti**, **Kantipur**, and **Sagarmatha**. That's why being able to convert Unicode Devanagari back into legacy Preeti is so useful for editors and designers.
         </p>
 
         <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 28px; margin-bottom: 12px;">Why is the Reverse Conversion Necessary?</h3>
         <p style="margin-bottom: 16px;">
-            Legacy publishing programs often have issues rendering standard Devanagari Unicode correctly (failing with broken conjuncts or displaced matras). In such cases, designers convert Unicode text back into Preeti representation, install the legacy Preeti font on their OS, and style the text block to render it perfectly in print formats.
+            Many older publishing programs struggle to render standard Devanagari Unicode. They often break complex conjunct letters or misplace vowel signs. To get around this, designers convert their clean Unicode text back into Preeti format. Once they paste this converted text into their design software and apply the Preeti font, it renders and prints beautifully without any layout glitches.
         </p>
 
         <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 28px; margin-bottom: 12px;">The Unicode-to-Preeti Reordering Rules</h3>
@@ -201,9 +200,9 @@
             Since Unicode stores characters in logical phonetic order while legacy fonts rely on visual typing order, our converter performs complex transformations:
         </p>
         <ul style="margin-left: 24px; margin-bottom: 24px;">
-            <li style="margin-bottom: 8px;"><strong>Reph Reordering (र्):</strong> In Unicode, the half-R sound is typed first (e.g. <code>र् + म</code> in <code>धर्म</code>). The converter identifies this sequence, shifts the half-R indicator to the end of the consonant cluster, and maps it to the Preeti <code>{</code> glyph.</li>
-            <li style="margin-bottom: 8px;"><strong>Short 'i' Matra (ि) Placement:</strong> In Devanagari Unicode, the <code>ि</code> diacritic is logically written after the consonant it modifies. Preeti visual layout expects it to be typed <em>before</em> the consonant. The engine identifies every consonant cluster followed by a <code>ि</code>, moves the <code>ि</code> to the front, and translates it to the Preeti <code>l</code> character.</li>
-            <li style="margin-bottom: 8px;"><strong>Compound Glyph Translation:</strong> Large conjunct forms (like <code>द्घ</code>, <code>क्ष्</code>, <code>श्र</code>) are replaced with their respective custom keyboard mapping characters (such as <code>¡</code>, <code>I</code>, <code>></code>) by running through our sorted dictionary.</li>
+            <li style="margin-bottom: 8px;"><strong>Reph Reordering (र्):</strong> In Unicode, the half-R sound is stored logically before the consonant (like <code>र् + म</code> in <code>धर्म</code>). Preeti expects the visual marker to be typed after it. The converter handles this swap automatically, shifting the marker to the end of the cluster and translating it to the Preeti <code>{</code> character.</li>
+            <li style="margin-bottom: 8px;"><strong>Short 'i' Matra (ि) Placement:</strong> In Unicode, the short 'i' matra is saved after the consonant it modifies, but Preeti visual layouts expect it typed <em>before</em> the letter. The engine automatically finds every consonant cluster followed by a <code>ि</code>, moves the matra to the front, and maps it to the Preeti <code>l</code> key.</li>
+            <li style="margin-bottom: 8px;"><strong>Compound Glyph Translation:</strong> Complex combined characters (like <code>द्घ</code>, <code>क्ष्</code>, <code>श्र</code>) are replaced with their custom keyboard layout equivalents (like <code>¡</code>, <code>I</code>, <code>></code>) using our built-in mapping dictionary.</li>
         </ul>
 
         <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px;">Frequently Asked Questions (FAQs)</h3>
@@ -215,7 +214,7 @@
                 </button>
                 <div class="accordion-body">
                     <div class="accordion-content">
-                        This is completely normal. The Preeti font maps standard English keys to Devanagari visual glyphs. The output *is* technically English text. To view it as Nepali, you must copy the text, paste it into your editor (e.g. Word, InDesign), and set the font-family of the text block to "Preeti".
+                        Don't worry, this is exactly what is supposed to happen! Preeti is an ASCII font, meaning it uses standard English letters to represent Nepali shapes. So the raw output is indeed English characters. To see it in Nepali, simply copy the text, paste it into your document editor (like MS Word or InDesign), select the text block, and change the font to "Preeti".
                     </div>
                 </div>
             </div>
@@ -226,7 +225,7 @@
                 </button>
                 <div class="accordion-body">
                     <div class="accordion-content">
-                        Yes! Because Sagarmatha, Kantipur, Himalb, and other traditional Nepali fonts share the exact same keyboard layout as Preeti, you can style the converted output text in any of these fonts and it will render perfectly.
+                        Absolutely! Since fonts like Sagarmatha, Kantipur, and PCS Nepali share the same keyboard layout as Preeti, you can apply any of those fonts to the converted text and it will display perfectly.
                     </div>
                 </div>
             </div>
@@ -237,7 +236,7 @@
                 </button>
                 <div class="accordion-body">
                     <div class="accordion-content">
-                        Yes. Our engine maps complex conjuncts (e.g. <code>द्द</code>, <code>द्ध</code>, <code>द्म</code>) by sorting the mapping table by character length descending, guaranteeing that compound clusters are replaced before individual characters.
+                        Yes, it does. Our engine is designed to handle tricky combinations (like <code>द्द</code>, <code>द्ध</code>, and <code>द्म</code>). It processes longer conjuncts first to make sure they are matched and translated correctly before handling individual letters.
                     </div>
                 </div>
             </div>
