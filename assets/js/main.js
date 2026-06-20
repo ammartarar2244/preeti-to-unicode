@@ -162,11 +162,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (typingArea) {
         const suggestionsContainer = document.getElementById('typing-suggestions');
-        const statusBadge = document.getElementById('typing-status');
         const specialCharsSection = document.getElementById('special-chars-section');
         
         let currentInterception = null;
         let activeLayout = 'romanized';
+        let translitMode = 'ne'; // 'ne' for Nepali, 'en' for English ABC
         let suggestions = [];
         let activeSuggestionIndex = 0;
         let abortController = null;
@@ -174,19 +174,74 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Status badge online/offline detection
         const updateOnlineStatus = () => {
-            if (!statusBadge) return;
+            const statusDot = document.getElementById('status-dot');
+            const statusText = document.getElementById('typing-status-text');
+            if (!statusDot && !statusText) return;
+
             if (navigator.onLine) {
-                statusBadge.textContent = "Online";
-                statusBadge.classList.remove('offline');
+                if (statusDot) {
+                    statusDot.classList.remove('offline');
+                    statusDot.style.backgroundColor = '#2e7d32';
+                }
+                if (statusText) statusText.textContent = "Online";
             } else {
-                statusBadge.textContent = "Offline";
-                statusBadge.classList.add('offline');
+                if (statusDot) {
+                    statusDot.classList.add('offline');
+                    statusDot.style.backgroundColor = '#c62828';
+                }
+                if (statusText) statusText.textContent = "Offline";
             }
         };
 
         window.addEventListener('online', updateOnlineStatus);
         window.addEventListener('offline', updateOnlineStatus);
         updateOnlineStatus();
+
+        // Language Switch Toggle Methods (नेपाली / ABC)
+        const setTranslitMode = (mode) => {
+            translitMode = mode;
+            const btnNe = document.getElementById('lang-toggle-ne');
+            const btnEn = document.getElementById('lang-toggle-en');
+
+            if (mode === 'ne') {
+                if (btnNe) btnNe.classList.add('active');
+                if (btnEn) btnEn.classList.remove('active');
+                typingArea.placeholder = "टाइपिङ सुरु गर्नुहोस् (k = क, a = ा, m = म = काम)...";
+                showToast("Switched input mode to Nepali (नेपाली)");
+                handleInputOrCursor();
+            } else {
+                if (btnNe) btnNe.classList.remove('active');
+                if (btnEn) btnEn.classList.add('active');
+                typingArea.placeholder = "Type in English (transliteration off)...";
+                if (suggestionsContainer) {
+                    suggestionsContainer.style.display = 'none';
+                    suggestionsContainer.innerHTML = "";
+                }
+                suggestions = [];
+                lastFetchedWord = "";
+                showToast("Switched input mode to English (ABC)");
+            }
+        };
+
+        const toggleTranslitMode = () => {
+            const newMode = translitMode === 'ne' ? 'en' : 'ne';
+            setTranslitMode(newMode);
+        };
+
+        const btnNe = document.getElementById('lang-toggle-ne');
+        const btnEn = document.getElementById('lang-toggle-en');
+        if (btnNe) {
+            btnNe.addEventListener('click', (e) => {
+                e.preventDefault();
+                setTranslitMode('ne');
+            });
+        }
+        if (btnEn) {
+            btnEn.addEventListener('click', (e) => {
+                e.preventDefault();
+                setTranslitMode('en');
+            });
+        }
 
         const setKeyboardLayout = (layout) => {
             if (currentInterception) {
@@ -211,41 +266,51 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
+            const subHeader = document.getElementById('typing-sub-header');
+            const shortcutsGuide = document.getElementById('typing-shortcuts-guide');
+
             // Set placeholder contextually & update visibility of auxiliary panels
             if (layout === 'traditional') {
                 typingArea.placeholder = "पारम्परिक प्रीति लेआउटमा टाइप गर्नुहोस् (जैसे: s = क, t = त)...";
                 typingArea.className = "editor-textarea nepali-font";
-                if (statusBadge) statusBadge.style.display = 'none';
+                if (subHeader) subHeader.style.display = 'none';
                 if (suggestionsContainer) {
                     suggestionsContainer.style.display = 'none';
                     suggestionsContainer.innerHTML = "";
                 }
                 if (specialCharsSection) specialCharsSection.style.display = 'block';
+                if (shortcutsGuide) shortcutsGuide.style.display = 'none';
             } else if (layout === 'romanized') {
-                typingArea.placeholder = "अंग्रेजीमा टाइप गर्नुहोस् (जैसे: namaste = नमस्ते, mero naam = मेरो नाम)...";
+                if (translitMode === 'ne') {
+                    typingArea.placeholder = "अंग्रेजीमा टाइप गर्नुहोस् (जैसे: namaste = नमस्ते, mero naam = मेरो नाम)...";
+                } else {
+                    typingArea.placeholder = "Type in English (transliteration off)...";
+                }
                 typingArea.className = "editor-textarea nepali-font";
-                if (statusBadge) statusBadge.style.display = 'inline-block';
+                if (subHeader) subHeader.style.display = 'flex';
                 if (specialCharsSection) specialCharsSection.style.display = 'block';
-                // Trigger an initial check if there is text in the box
+                if (shortcutsGuide) shortcutsGuide.style.display = 'flex';
                 setTimeout(handleInputOrCursor, 50);
             } else if (layout === 'romanize') {
                 typingArea.placeholder = "यहाँ नेपाली युनिकोड पेस्ट गर्नुहोस् वा टाइप गर्नुहोस् (Devanagari to Roman English)...";
                 typingArea.className = "editor-textarea";
-                if (statusBadge) statusBadge.style.display = 'none';
+                if (subHeader) subHeader.style.display = 'none';
                 if (suggestionsContainer) {
                     suggestionsContainer.style.display = 'none';
                     suggestionsContainer.innerHTML = "";
                 }
                 if (specialCharsSection) specialCharsSection.style.display = 'none';
+                if (shortcutsGuide) shortcutsGuide.style.display = 'none';
             } else {
                 typingArea.placeholder = "Type standard English here...";
                 typingArea.className = "editor-textarea";
-                if (statusBadge) statusBadge.style.display = 'none';
+                if (subHeader) subHeader.style.display = 'none';
                 if (suggestionsContainer) {
                     suggestionsContainer.style.display = 'none';
                     suggestionsContainer.innerHTML = "";
                 }
                 if (specialCharsSection) specialCharsSection.style.display = 'none';
+                if (shortcutsGuide) shortcutsGuide.style.display = 'none';
             }
 
             const layoutNames = {
@@ -255,6 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'english': 'English'
             };
             showToast(`Switched layout to ${layoutNames[layout] || layout}`);
+            updateStatsDisplay();
         };
 
         // Attach listeners to selectors
@@ -405,7 +471,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const handleInputOrCursor = () => {
-            if (activeLayout !== 'romanized') return;
+            if (activeLayout !== 'romanized' || translitMode !== 'ne') return;
             
             const info = getActiveWordInfo();
             if (!info) {
@@ -438,7 +504,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Key interception for autocomplete controls
         typingArea.addEventListener('keydown', (e) => {
+            // Global toggle Ctrl+G
+            if (e.ctrlKey && e.key.toLowerCase() === 'g') {
+                e.preventDefault();
+                toggleTranslitMode();
+                return;
+            }
+
             if (activeLayout !== 'romanized') return;
+            if (translitMode !== 'ne') return;
             
             const suggestionsVisible = suggestionsContainer && suggestionsContainer.style.display !== 'none' && suggestions.length > 0;
             
@@ -519,24 +593,61 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        // Dynamic Stats Display Formatting
+        const updateStatsDisplay = () => {
+            const statsDisplay = document.getElementById('typing-stats-display');
+            const value = typingArea.value;
+            const charCount = value.length;
+            const textTrimmed = value.trim();
+            const wordCount = textTrimmed === "" ? 0 : textTrimmed.split(/\s+/).length;
+
+            if (statsDisplay) {
+                const isNepaliLayout = (activeLayout === 'romanized' || activeLayout === 'traditional');
+                if (isNepaliLayout) {
+                    const neDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
+                    const toNeNum = (num) => num.toString().split('').map(d => neDigits[d] || d).join('');
+                    statsDisplay.textContent = `${toNeNum(wordCount)} शब्द • ${toNeNum(charCount)} अक्षर`;
+                } else {
+                    statsDisplay.textContent = `${wordCount} words • ${charCount} characters`;
+                }
+            }
+
+            // Older selectors compatibility
+            const oldCharCount = document.getElementById('typing-char-count');
+            if (oldCharCount) oldCharCount.textContent = `${charCount} characters`;
+            const oldWordCount = document.getElementById('typing-word-count');
+            if (oldWordCount) oldWordCount.textContent = `${wordCount} words`;
+        };
+
         // Initialize default layout
         setKeyboardLayout('romanized');
+
+        // Autosave Restore
+        try {
+            const savedText = localStorage.getItem('nepalitools_typed_text');
+            if (savedText) {
+                typingArea.value = savedText;
+                setTimeout(() => {
+                    typingArea.dispatchEvent(new Event('input', { bubbles: true }));
+                }, 100);
+            }
+        } catch (e) {
+            console.error("Autosave restore failed:", e);
+        }
         
-        // Character & Word Counter
+        // Character & Word Counter + Storage Save
         typingArea.addEventListener('input', () => {
-            updateStats(typingArea, 'typing-char-count');
-            
-            const text = typingArea.value.trim();
-            const words = text === "" ? 0 : text.split(/\s+/).length;
-            const wordCounter = document.getElementById('typing-word-count');
-            if (wordCounter) {
-                wordCounter.textContent = `${words} words`;
+            updateStatsDisplay();
+            try {
+                localStorage.setItem('nepalitools_typed_text', typingArea.value);
+            } catch (e) {
+                console.error("Autosave store failed:", e);
             }
         });
 
         // Copy & Clear
         bindCopyAction('typing-copy', typingArea, 'Typed text copied!');
-        bindClearAction('typing-clear', [typingArea], ['typing-char-count']);
+        bindClearAction('typing-clear', [typingArea], []);
     }
 
 

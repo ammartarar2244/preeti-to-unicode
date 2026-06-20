@@ -94,29 +94,61 @@ SCHEMA:
         <div class="editor-grid" id="pane-typing" style="display: none;">
             <div class="editor-pane" style="grid-column: span 2;">
                 <div class="editor-header">
-                    <span class="editor-label">📝 Nepali Typing Field <span class="typing-status" id="typing-status" title="Google Transliteration suggestions" style="display: none;">Online</span></span>
+                    <span class="editor-label">📝 Nepali Typing Field</span>
                     <div class="editor-actions">
                         <button class="action-btn active" data-layout="romanized">English to Nepali</button>
                         <button class="action-btn" data-layout="traditional">Traditional</button>
                         <button class="action-btn" data-layout="romanize">Nepali to English</button>
                         <button class="action-btn" data-layout="english">English</button>
-                        <button class="action-btn" id="typing-clear">Clear</button>
-                        <button class="action-btn primary" id="typing-copy">Copy</button>
                     </div>
                 </div>
+
+                <!-- Sub-header bar for Romanized transliteration controls -->
+                <div class="typing-sub-header" id="typing-sub-header" style="display: none;">
+                    <span class="typing-badge">रोमनमा टाइप गर्नुहोस् — नेपालीमा पाउनुहोस्</span>
+                    <div class="typing-header-controls">
+                        <span class="typing-status-indicator">
+                            <span class="status-dot" id="status-dot"></span>
+                            <span id="typing-status-text">Online</span>
+                        </span>
+                        <div class="typing-lang-toggle">
+                            <button class="lang-toggle-btn active" id="lang-toggle-ne">नेपाली</button>
+                            <button class="lang-toggle-btn" id="lang-toggle-en">ABC</button>
+                        </div>
+                    </div>
+                </div>
+
                 <textarea class="editor-textarea nepali-font" id="typing-area" placeholder="टाइपिङ सुरु गर्नुहोस् (k = क, a = ा, m = म = काम)..."></textarea>
                 
                 <!-- Autocomplete suggestions bar -->
                 <div id="typing-suggestions" class="typing-suggestions" style="display: none;"></div>
 
-                <div class="editor-footer">
-                    <span id="typing-char-count">0 characters</span>
-                    <span id="typing-word-count">0 words</span>
+                <!-- Operations Toolbar (Copy / Clear / stats) -->
+                <div class="typing-op-toolbar">
+                    <div class="op-btn-group">
+                        <button class="op-btn primary" id="typing-copy">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy
+                        </button>
+                        <button class="op-btn secondary" id="typing-clear">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg> Clear
+                        </button>
+                    </div>
+                    <div class="typing-stats" id="typing-stats-display">
+                        0 शब्द • 0 अक्षर
+                    </div>
+                </div>
+
+                <!-- Keyboard Shortcuts Guide -->
+                <div class="typing-shortcuts-guide" id="typing-shortcuts-guide" style="display: none;">
+                    <span class="shortcut-item"><kbd>Space</kbd> नेपालीमा रूपान्तरण</span>
+                    <span class="shortcut-item"><kbd>↑</kbd><kbd>↓</kbd> / <kbd>Tab</kbd> सुझाव छान्नुहोस्</span>
+                    <span class="shortcut-item"><kbd>Esc</kbd> English नै राख्नुहोस्</span>
+                    <span class="shortcut-item"><kbd>Ctrl</kbd> + <kbd>G</kbd> नेपाली / English</span>
                 </div>
 
                 <!-- Special Characters Grid Section -->
                 <div class="special-chars-section" id="special-chars-section" style="display: none; margin-top: 24px;">
-                    <p class="special-chars-title">Special Characters — Click to insert</p>
+                    <p class="special-chars-title">स्पेसिअल अक्षरहरू — क्लिक गरेर थप्नुहोस्</p>
                     <div class="special-chars-grid">
                         <span data-char="क">क</span><span data-char="ख">ख</span><span data-char="ग">ग</span><span data-char="घ">घ</span><span data-char="ङ">ङ</span>
                         <span data-char="च">च</span><span data-char="छ">छ</span><span data-char="ज">ज</span><span data-char="झ">झ</span><span data-char="ञ">ञ</span>
