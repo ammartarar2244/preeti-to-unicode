@@ -1078,8 +1078,535 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // -------------------------------------------------------------
+    // 10. Nepali Docs — Rich Document Editor
+    // -------------------------------------------------------------
+    const docsEditor = document.getElementById('docs-editor');
+    if (docsEditor) {
+        const docsTitle = document.getElementById('docs-title');
+        const saveStatus = document.getElementById('docs-save-status');
+        const toolbar = document.getElementById('docs-toolbar');
+
+        // Formatting toolbar buttons
+        if (toolbar) {
+            toolbar.addEventListener('click', (e) => {
+                const btn = e.target.closest('.docs-tool-btn');
+                if (!btn || btn.id === 'docs-insert-date') return;
+                e.preventDefault();
+
+                const cmd = btn.getAttribute('data-cmd');
+                if (!cmd) return;
+
+                const val = btn.getAttribute('data-val') || null;
+                docsEditor.focus();
+                document.execCommand(cmd, false, val);
+            });
+        }
+
+        // Color pickers
+        const textColorBtn = document.getElementById('docs-text-color-btn');
+        const textColorInput = document.getElementById('docs-text-color-input');
+        const textColorIndicator = document.getElementById('docs-text-color-indicator');
+        if (textColorBtn && textColorInput) {
+            textColorBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                textColorInput.click();
+            });
+            textColorInput.addEventListener('input', () => {
+                docsEditor.focus();
+                document.execCommand('foreColor', false, textColorInput.value);
+                if (textColorIndicator) {
+                    textColorIndicator.style.backgroundColor = textColorInput.value;
+                }
+            });
+        }
+
+        const highlightBtn = document.getElementById('docs-highlight-btn');
+        const highlightInput = document.getElementById('docs-highlight-input');
+        const highlightIndicator = document.getElementById('docs-highlight-indicator');
+        if (highlightBtn && highlightInput) {
+            highlightBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                highlightInput.click();
+            });
+            highlightInput.addEventListener('input', () => {
+                docsEditor.focus();
+                document.execCommand('hiliteColor', false, highlightInput.value);
+                if (highlightIndicator) {
+                    highlightIndicator.style.backgroundColor = highlightInput.value;
+                }
+            });
+        }
+
+        // Insert Nepali Date (Bikram Sambat)
+        const insertDateBtn = document.getElementById('docs-insert-date');
+        if (insertDateBtn) {
+            insertDateBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const bsDate = getNepaliDateString();
+                docsEditor.focus();
+                document.execCommand('insertText', false, bsDate);
+            });
+        }
+
+        // Bikram Sambat Date Converter
+        function getNepaliDateString() {
+            const bsMonths = ['बैशाख', 'जेठ', 'असार', 'श्रावण', 'भदौ', 'असोज', 'कार्तिक', 'मंसिर', 'पुष', 'माघ', 'फागुन', 'चैत्र'];
+            const nepDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
+            const daysInMonth = [
+                [31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31], // 2080
+                [31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 30], // 2081
+                [31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30], // 2082
+                [31, 31, 31, 32, 31, 31, 30, 29, 30, 29, 30, 30], // 2083
+                [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30], // 2084
+            ];
+            const bsStartYear = 2080;
+            const adRefDate = new Date(2023, 3, 14); // April 14, 2023 = 2080/01/01
+
+            const today = new Date();
+            let daysDiff = Math.floor((today - adRefDate) / 86400000);
+
+            let bsYear = bsStartYear;
+            let bsMonth = 0;
+            let bsDay = 1;
+
+            if (daysDiff >= 0) {
+                let yearIdx = 0;
+                while (yearIdx < daysInMonth.length) {
+                    let daysInYear = 0;
+                    for (let m = 0; m < 12; m++) daysInYear += daysInMonth[yearIdx][m];
+                    if (daysDiff < daysInYear) break;
+                    daysDiff -= daysInYear;
+                    bsYear++;
+                    yearIdx++;
+                }
+                if (yearIdx < daysInMonth.length) {
+                    for (let m = 0; m < 12; m++) {
+                        if (daysDiff < daysInMonth[yearIdx][m]) {
+                            bsMonth = m;
+                            bsDay = daysDiff + 1;
+                            break;
+                        }
+                        daysDiff -= daysInMonth[yearIdx][m];
+                    }
+                }
+            }
+
+            const toNep = (n) => String(n).split('').map(d => nepDigits[parseInt(d)]).join('');
+            return `${toNep(bsYear)} ${bsMonths[bsMonth]} ${toNep(bsDay)}`;
+        }
+
+        // --- Transliteration for contenteditable ---
+        let docsTypingLang = 'ne'; // 'ne' = Roman-to-Nepali, 'en' = English
+        let docsRomanBuffer = '';
+        let docsLastNepaliLen = 0;
+
+        docsEditor.addEventListener('keydown', (e) => {
+            if (docsTypingLang !== 'ne') return;
+
+            // Esc key: keep current word in English
+            if (e.key === 'Escape' && docsRomanBuffer) {
+                e.preventDefault();
+                const sel = window.getSelection();
+                if (!sel.rangeCount) return;
+
+                // Delete the current Nepali preview and insert the raw roman buffer
+                const range = sel.getRangeAt(0);
+                // Move back to delete the preview
+                for (let i = 0; i < docsLastNepaliLen; i++) {
+                    document.execCommand('delete', false, null);
+                }
+                document.execCommand('insertText', false, docsRomanBuffer);
+                docsRomanBuffer = '';
+                docsLastNepaliLen = 0;
+                return;
+            }
+        });
+
+        docsEditor.addEventListener('beforeinput', (e) => {
+            if (docsTypingLang !== 'ne') return;
+
+            const data = e.data;
+            const inputType = e.inputType;
+
+            // Handle Space / Enter / punctuation: commit word
+            if (inputType === 'insertText' && data && /^[\s\n,.?!;:()\[\]{}"'।॥\-]$/.test(data)) {
+                docsRomanBuffer = '';
+                docsLastNepaliLen = 0;
+                return; // let the character be inserted normally
+            }
+
+            // Handle character insertion
+            if (inputType === 'insertText' && data && /^[a-zA-Z]$/.test(data)) {
+                e.preventDefault();
+
+                docsRomanBuffer += data;
+                const replacement = Nepalify.transliterateWord(docsRomanBuffer);
+
+                // Delete previous Nepali preview
+                for (let i = 0; i < docsLastNepaliLen; i++) {
+                    document.execCommand('delete', false, null);
+                }
+                document.execCommand('insertText', false, replacement);
+                docsLastNepaliLen = replacement.length;
+                return;
+            }
+
+            // Handle delete/backspace: reset buffer
+            if (inputType === 'deleteContentBackward' || inputType === 'deleteContentForward') {
+                if (docsRomanBuffer.length > 0) {
+                    e.preventDefault();
+                    // Delete current Nepali preview
+                    for (let i = 0; i < docsLastNepaliLen; i++) {
+                        document.execCommand('delete', false, null);
+                    }
+                    docsRomanBuffer = docsRomanBuffer.slice(0, -1);
+                    if (docsRomanBuffer) {
+                        const replacement = Nepalify.transliterateWord(docsRomanBuffer);
+                        document.execCommand('insertText', false, replacement);
+                        docsLastNepaliLen = replacement.length;
+                    } else {
+                        docsLastNepaliLen = 0;
+                    }
+                    return;
+                }
+            }
+
+            // For paste or other input types, just reset buffer
+            if (inputType === 'insertFromPaste') {
+                docsRomanBuffer = '';
+                docsLastNepaliLen = 0;
+            }
+        });
+
+        // Handle paste - transliterate pasted text
+        docsEditor.addEventListener('paste', (e) => {
+            if (docsTypingLang !== 'ne') return;
+            e.preventDefault();
+            const clipboardData = e.clipboardData || window.clipboardData;
+            const pastedText = clipboardData.getData('text/plain');
+            const transliterated = Nepalify.transliterateRomanToUnicode(pastedText);
+            document.execCommand('insertText', false, transliterated);
+            docsRomanBuffer = '';
+            docsLastNepaliLen = 0;
+        });
+
+        // Ctrl+G toggle typing language
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('docs-editor')) return;
+
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'g') {
+                e.preventDefault();
+                docsTypingLang = docsTypingLang === 'ne' ? 'en' : 'ne';
+                docsRomanBuffer = '';
+                docsLastNepaliLen = 0;
+
+                // Update language buttons if they exist (as typing language toggle)
+                const neLangBtn = document.getElementById('docs-lang-ne');
+                const enLangBtn = document.getElementById('docs-lang-en');
+                if (neLangBtn && enLangBtn) {
+                    if (docsTypingLang === 'ne') {
+                        neLangBtn.classList.add('active');
+                        enLangBtn.classList.remove('active');
+                    } else {
+                        enLangBtn.classList.add('active');
+                        neLangBtn.classList.remove('active');
+                    }
+                }
+                showToast(docsTypingLang === 'ne' ? 'Typing: Nepali (Roman)' : 'Typing: English');
+            }
+        });
+
+        // --- Voice Typing for Docs ---
+        let docsVoiceLang = 'ne-NP'; // voice recognition language
+        let docsRecognition = null;
+        let docsIsListening = false;
+        let docsSilenceTimer = null;
+
+        const docsMicBtn = document.getElementById('docs-mic-btn');
+        const docsLangEn = document.getElementById('docs-lang-en');
+        const docsLangNe = document.getElementById('docs-lang-ne');
+
+        // Language toggle buttons affect voice typing language
+        if (docsLangEn) {
+            docsLangEn.addEventListener('click', () => {
+                docsVoiceLang = 'en-US';
+                docsTypingLang = 'en';
+                docsRomanBuffer = '';
+                docsLastNepaliLen = 0;
+                docsLangEn.classList.add('active');
+                if (docsLangNe) docsLangNe.classList.remove('active');
+                if (docsRecognition && docsIsListening) {
+                    docsRecognition.lang = 'en-US';
+                    try { docsRecognition.stop(); } catch (err) {}
+                }
+                showToast('Language: English');
+            });
+        }
+        if (docsLangNe) {
+            docsLangNe.addEventListener('click', () => {
+                docsVoiceLang = 'ne-NP';
+                docsTypingLang = 'ne';
+                docsRomanBuffer = '';
+                docsLastNepaliLen = 0;
+                docsLangNe.classList.add('active');
+                if (docsLangEn) docsLangEn.classList.remove('active');
+                if (docsRecognition && docsIsListening) {
+                    docsRecognition.lang = 'ne-NP';
+                    try { docsRecognition.stop(); } catch (err) {}
+                }
+                showToast('Language: नेपाली');
+            });
+        }
+
+        const resetDocsSilenceTimer = () => {
+            if (docsSilenceTimer) { clearTimeout(docsSilenceTimer); docsSilenceTimer = null; }
+        };
+        const startDocsSilenceTimer = () => {
+            resetDocsSilenceTimer();
+            docsSilenceTimer = setTimeout(() => {
+                showToast('Voice typing stopped after 1 minute of silence.');
+                stopDocsListening();
+            }, 60000);
+        };
+
+        const startDocsListening = () => {
+            if (docsRecognition && !docsIsListening) {
+                docsRecognition.lang = docsVoiceLang;
+                docsIsListening = true;
+                try { docsRecognition.start(); } catch (err) { console.error(err); }
+            }
+        };
+        const stopDocsListening = () => {
+            if (docsRecognition && docsIsListening) {
+                docsIsListening = false;
+                try { docsRecognition.stop(); } catch (err) { console.error(err); }
+                if (docsMicBtn) docsMicBtn.classList.remove('listening');
+                resetDocsSilenceTimer();
+            }
+        };
+        const toggleDocsVoice = () => {
+            if (!docsRecognition) {
+                showToast('Voice typing not supported in this browser.');
+                return;
+            }
+            if (docsIsListening) stopDocsListening();
+            else startDocsListening();
+        };
+
+        const docsReplaceVoiceCommands = (text) => {
+            let t = text;
+            t = t.replace(/पूर्ण विराम/g, '।');
+            t = t.replace(/नयाँ लाइन/g, '\n');
+            t = t.replace(/प्रश्न चिन्ह/g, '?');
+            t = t.replace(/अल्प विराम/g, ',');
+            t = t.replace(/उद्गार चिन्ह/g, '!');
+            return t;
+        };
+
+        const insertDocsVoiceText = (text) => {
+            docsEditor.focus();
+            // Restore selection to end of content if no selection
+            const sel = window.getSelection();
+            if (!sel.rangeCount || !docsEditor.contains(sel.anchorNode)) {
+                const range = document.createRange();
+                range.selectNodeContents(docsEditor);
+                range.collapse(false);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+            document.execCommand('insertText', false, text);
+        };
+
+        // Initialize Speech Recognition for Docs
+        const SpeechRecAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SpeechRecAPI) {
+            docsRecognition = new SpeechRecAPI();
+            docsRecognition.continuous = true;
+            docsRecognition.interimResults = true;
+            docsRecognition.lang = docsVoiceLang;
+
+            docsRecognition.onstart = () => {
+                docsIsListening = true;
+                if (docsMicBtn) docsMicBtn.classList.add('listening');
+                startDocsSilenceTimer();
+            };
+            docsRecognition.onend = () => {
+                if (docsIsListening) {
+                    try { docsRecognition.start(); } catch (err) {}
+                } else {
+                    if (docsMicBtn) docsMicBtn.classList.remove('listening');
+                    resetDocsSilenceTimer();
+                }
+            };
+            docsRecognition.onerror = (event) => {
+                if (event.error === 'not-allowed') {
+                    showToast('Microphone permission denied.');
+                    stopDocsListening();
+                }
+            };
+            docsRecognition.onresult = (event) => {
+                resetDocsSilenceTimer();
+                startDocsSilenceTimer();
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        let text = event.results[i][0].transcript;
+                        text = docsReplaceVoiceCommands(text);
+                        if (text.trim()) {
+                            // Add space before if needed
+                            const lastChar = docsEditor.textContent.slice(-1);
+                            const prefix = (lastChar && !/[\s\n।?,!॥]/.test(lastChar) && !/^[\s\n।?,!॥]/.test(text)) ? ' ' : '';
+                            insertDocsVoiceText(prefix + text);
+                        }
+                    }
+                }
+            };
+        }
+
+        if (docsMicBtn) {
+            docsMicBtn.addEventListener('click', (e) => { e.preventDefault(); toggleDocsVoice(); });
+        }
+
+        // Ctrl+M to toggle voice
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('docs-editor')) return;
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'm') {
+                e.preventDefault();
+                toggleDocsVoice();
+            }
+        });
+
+        // --- Autosave ---
+        let docsSaveTimer = null;
+        const saveDocsContent = () => {
+            try {
+                localStorage.setItem('nepalitools_docs_content', docsEditor.innerHTML);
+                if (docsTitle) localStorage.setItem('nepalitools_docs_title', docsTitle.value);
+                if (saveStatus) {
+                    saveStatus.textContent = '✓ Saved';
+                    saveStatus.style.opacity = '1';
+                    setTimeout(() => { if (saveStatus) saveStatus.style.opacity = '0.6'; }, 2000);
+                }
+            } catch (err) {
+                console.error('Docs autosave failed:', err);
+            }
+        };
+
+        const scheduleDocsSave = () => {
+            if (saveStatus) {
+                saveStatus.textContent = 'Saving...';
+                saveStatus.style.opacity = '1';
+            }
+            if (docsSaveTimer) clearTimeout(docsSaveTimer);
+            docsSaveTimer = setTimeout(saveDocsContent, 1500);
+        };
+
+        docsEditor.addEventListener('input', scheduleDocsSave);
+        if (docsTitle) docsTitle.addEventListener('input', scheduleDocsSave);
+
+        // Restore on load
+        try {
+            const savedContent = localStorage.getItem('nepalitools_docs_content');
+            const savedTitle = localStorage.getItem('nepalitools_docs_title');
+            if (savedContent) docsEditor.innerHTML = savedContent;
+            if (savedTitle && docsTitle) docsTitle.value = savedTitle;
+        } catch (err) {
+            console.error('Docs restore failed:', err);
+        }
+
+        // --- Action Buttons ---
+        // New Document
+        const newDocBtn = document.getElementById('docs-new');
+        if (newDocBtn) {
+            newDocBtn.addEventListener('click', () => {
+                if (docsEditor.textContent.trim() && !confirm('Clear the current document and start a new one?')) return;
+                docsEditor.innerHTML = '';
+                if (docsTitle) docsTitle.value = '';
+                saveDocsContent();
+                showToast('New document created.');
+            });
+        }
+
+        // Copy
+        const copyDocBtn = document.getElementById('docs-copy');
+        if (copyDocBtn) {
+            copyDocBtn.addEventListener('click', () => {
+                const text = docsEditor.innerText || docsEditor.textContent;
+                if (!text.trim()) { showToast('Nothing to copy!'); return; }
+                navigator.clipboard.writeText(text)
+                    .then(() => showToast('Document text copied!'))
+                    .catch(() => showToast('Failed to copy!'));
+            });
+        }
+
+        // Print
+        const printDocBtn = document.getElementById('docs-print');
+        if (printDocBtn) {
+            printDocBtn.addEventListener('click', () => { window.print(); });
+        }
+
+        // Download .txt
+        const txtBtn = document.getElementById('docs-download-txt');
+        if (txtBtn) {
+            txtBtn.addEventListener('click', () => {
+                const text = docsEditor.innerText || docsEditor.textContent;
+                if (!text.trim()) { showToast('Document is empty!'); return; }
+                const title = (docsTitle && docsTitle.value.trim()) || 'Nepali-Document';
+                const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = title + '.txt';
+                a.click();
+                URL.revokeObjectURL(url);
+                showToast('Downloaded as .txt');
+            });
+        }
+
+        // Download Word (.docx via .doc HTML method)
+        const wordBtn = document.getElementById('docs-download-word');
+        if (wordBtn) {
+            wordBtn.addEventListener('click', () => {
+                const content = docsEditor.innerHTML;
+                if (!docsEditor.textContent.trim()) { showToast('Document is empty!'); return; }
+                const title = (docsTitle && docsTitle.value.trim()) || 'Nepali-Document';
+
+                const docContent = `
+<!DOCTYPE html>
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+      xmlns:w="urn:schemas-microsoft-com:office:word"
+      xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="utf-8">
+<title>${title}</title>
+<style>
+@font-face { font-family: 'Noto Sans Devanagari'; }
+body { font-family: 'Noto Sans Devanagari', 'Mangal', sans-serif; font-size: 12pt; line-height: 1.7; color: #000; }
+h1 { font-size: 18pt; font-weight: bold; margin-bottom: 8pt; }
+h2 { font-size: 15pt; font-weight: bold; margin-bottom: 6pt; }
+h3 { font-size: 13pt; font-weight: bold; margin-bottom: 5pt; }
+</style>
+</head>
+<body>
+${content}
+</body>
+</html>`;
+
+                const blob = new Blob(['\ufeff' + docContent], { type: 'application/msword' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = title + '.doc';
+                a.click();
+                URL.revokeObjectURL(url);
+                showToast('Downloaded as Word document.');
+            });
+        }
+    }
+
+    // -------------------------------------------------------------
     // Helper Functions for Buttons and Inputs
     // -------------------------------------------------------------
+
     function updateStats(textarea, statId) {
         const statEl = document.getElementById(statId);
         if (statEl) {

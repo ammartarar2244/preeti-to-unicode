@@ -1,0 +1,429 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Free online Nepali word processor. Write in Nepali Unicode with Roman typing and voice dictation. Format, print, and download as Word (.docx). No sign-up, works in your browser.">
+<meta name="robots" content="index, follow">
+<meta name="google-site-verification" content="9qUnL6FCCi_w_sXbiP41HB2JghSw1KwlMZm92Pv5XEU">
+<title>Nepali Docs — Online Nepali Document Writer (नेपाली डक्स) - Definitive Nepali Font Converter & Typing Tool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#b3002d">
+<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+<script>
+    // Initialize Theme immediately to prevent FOUC (Flash of Unstyled Content)
+    (function() {
+        const theme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+    })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Nepali Docs - Online Nepali Document Writer",
+  "operatingSystem": "All",
+  "applicationCategory": "UtilitiesApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0"
+  }
+</script>
+
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="app-sidebar" id="app-sidebar">
+    <div class="sidebar-header">
+        <a href="/" class="logo">
+            <img src="/assets/images/favicon.png" alt="NepaliTools Logo" class="logo-icon-img">
+            <span class="logo-text">Nepali<span class="logo-accent">Tools</span></span>
+        </a>
+        <button id="sidebar-close" class="sidebar-close-btn" aria-label="Close menu">&times;</button>
+    </div>
+    
+    <nav class="sidebar-nav">
+        <div class="nav-group">
+            <h4 class="nav-group-title">🔄 Conversion Tools</h4>
+            <ul class="nav-list">
+                <li><a href="/preeti-to-unicode/" class="nav-link">Preeti to Unicode</a></li>
+                <li><a href="/unicode-to-preeti/" class="nav-link">Unicode to Preeti</a></li>
+                <li><a href="/font-converter/" class="nav-link">Legacy Font Converter</a></li>
+                <li><a href="/batch-converter/" class="nav-link">Batch Docx Converter</a></li>
+            </ul>
+        </div>
+        
+        <div class="nav-group">
+            <h4 class="nav-group-title">⌨️ Typing Tools</h4>
+            <ul class="nav-list">
+                <li><a href="/english-to-nepali-typing/" class="nav-link">English to Nepali</a></li>
+                <li><a href="/nepali-voice-typing/" class="nav-link">Nepali Voice Typing</a></li>
+                <li><a href="/nepali-docs/" class="nav-link">Nepali Docs</a></li>
+                <li><a href="/nepali-typing/" class="nav-link">Nepali Typing Practice</a></li>
+                <li><a href="/transliteration/" class="nav-link">Phonetic Transliteration</a></li>
+            </ul>
+        </div>
+        
+        <div class="nav-group">
+            <h4 class="nav-group-title">📚 Resources & Guides</h4>
+            <ul class="nav-list">
+                <li><a href="/preeti-font-download/" class="nav-link">Preeti Font Download</a></li>
+                <li><a href="/nepali-keyboard-layout/" class="nav-link">Keyboard Layouts</a></li>
+                <li><a href="/character-map/" class="nav-link">Unicode Character Map</a></li>
+                <li><a href="/preeti-vs-unicode/" class="nav-link">Preeti vs Unicode</a></li>
+                <li><a href="/unicode-chart/" class="nav-link">Unicode Encoding Chart</a></li>
+                <li><a href="/faq/" class="nav-link">Frequently Asked Questions</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="sidebar-footer">
+        <div class="sidebar-footer-install" id="sidebar-install-container" style="display: none;">
+            <button id="sidebar-install-btn" class="install-banner-btn">📥 Install App</button>
+        </div>
+        <p class="sidebar-footer-text">Works 100% Offline</p>
+    </div>
+</aside>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+        <div class="app-main">
+            <header class="main-header">
+    <div class="header-container">
+        <div class="header-left">
+            <button id="mobile-nav-toggle" class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="/" class="logo">
+                <img src="/assets/images/favicon.png" alt="NepaliTools Logo" class="logo-icon-img">
+                <span class="logo-text">Nepali<span class="logo-accent">Tools</span></span>
+            </a>
+        </div>
+        
+        <nav class="nav-links" id="nav-menu">
+            <div class="nav-dropdown">
+                <button class="nav-dropbtn">Conversion Tools <span class="arrow-down">▾</span></button>
+                <div class="dropdown-content">
+                    <a href="/preeti-to-unicode/">Preeti to Unicode</a>
+                    <a href="/unicode-to-preeti/">Unicode to Preeti</a>
+                    <a href="/font-converter/">Legacy Font Converter</a>
+                    <a href="/batch-converter/">Batch Docx Converter</a>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <button class="nav-dropbtn">Typing Tools <span class="arrow-down">▾</span></button>
+                <div class="dropdown-content">
+                    <a href="/english-to-nepali-typing/">English to Nepali Typing</a>
+                    <a href="/nepali-voice-typing/">Nepali Voice Typing</a>
+                    <a href="/nepali-docs/">Nepali Docs</a>
+                    <a href="/nepali-typing/">Nepali Typing Practice</a>
+                    <a href="/transliteration/">Phonetic Transliteration</a>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <button class="nav-dropbtn">Resources & Guides <span class="arrow-down">▾</span></button>
+                <div class="dropdown-content">
+                    <a href="/preeti-font-download/">Preeti Font Download</a>
+                    <a href="/nepali-keyboard-layout/">Keyboard Layouts</a>
+                    <a href="/character-map/">Unicode Character Map</a>
+                    <a href="/preeti-vs-unicode/">Preeti vs Unicode Guide</a>
+                    <a href="/faq/">Frequently Asked Questions</a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="header-actions">
+            <button id="theme-toggle" class="theme-btn" aria-label="Toggle light/dark theme">
+                <span class="theme-icon sun-icon">☀️</span>
+                <span class="theme-icon moon-icon">🌙</span>
+            </button>
+            <a href="/english-to-nepali-typing/" class="cta-btn">Start Typing</a>
+        </div>
+    </div>
+</header>
+
+            <main class="content-wrapper">
+                <div class="tool-section nepali-docs-page">
+    <div class="tool-header">
+        <h1 class="tool-title">Nepali Docs (नेपाली डक्स)</h1>
+        <p class="tool-desc">Free online Nepali word processor — type in Roman or speak with voice typing. Format, print, and download as Word. No sign-up needed.</p>
+    </div>
+
+    <!-- Document Editor Card -->
+    <div class="docs-editor-card">
+        <!-- Top Action Bar: Title + Actions -->
+        <div class="docs-top-bar">
+            <input type="text" class="docs-title-input" id="docs-title" placeholder="डकुमेन्टको नाम..." value="" autocomplete="off" spellcheck="false">
+            <span class="docs-save-status" id="docs-save-status">✓ Saved</span>
+            <div class="docs-action-buttons">
+                <button class="docs-action-btn" id="docs-new" title="New Document">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                    New
+                </button>
+                <button class="docs-action-btn" id="docs-copy" title="Copy All Text">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    Copy
+                </button>
+                <button class="docs-action-btn" id="docs-print" title="Print Document">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    Print
+                </button>
+                <button class="docs-action-btn" id="docs-download-txt" title="Download as .txt">.txt</button>
+                <button class="docs-action-btn primary" id="docs-download-word" title="Download as Word (.docx)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    Download Word
+                </button>
+            </div>
+        </div>
+
+        <!-- Formatting Toolbar -->
+        <div class="docs-toolbar" id="docs-toolbar">
+            <!-- Undo/Redo -->
+            <button class="docs-tool-btn" data-cmd="undo" title="Undo (Ctrl+Z)">↶</button>
+            <button class="docs-tool-btn" data-cmd="redo" title="Redo (Ctrl+Y)">↷</button>
+            <span class="docs-toolbar-sep"></span>
+
+            <!-- Headings -->
+            <button class="docs-tool-btn heading-btn" data-cmd="formatBlock" data-val="H1" title="Heading 1">H1</button>
+            <button class="docs-tool-btn heading-btn" data-cmd="formatBlock" data-val="H2" title="Heading 2">H2</button>
+            <button class="docs-tool-btn heading-btn" data-cmd="formatBlock" data-val="H3" title="Heading 3">H3</button>
+            <span class="docs-toolbar-sep"></span>
+
+            <!-- Text Format -->
+            <button class="docs-tool-btn" data-cmd="bold" title="Bold (Ctrl+B)"><b>B</b></button>
+            <button class="docs-tool-btn" data-cmd="italic" title="Italic (Ctrl+I)"><i>I</i></button>
+            <button class="docs-tool-btn" data-cmd="underline" title="Underline (Ctrl+U)"><u>U</u></button>
+            <button class="docs-tool-btn" data-cmd="strikeThrough" title="Strikethrough"><s>S</s></button>
+            <span class="docs-toolbar-sep"></span>
+
+            <!-- Color Pickers -->
+            <div class="docs-color-wrap" title="Text Color">
+                <button class="docs-tool-btn docs-color-btn" id="docs-text-color-btn">
+                    <span style="font-weight:700;">A</span>
+                    <span class="docs-color-indicator" id="docs-text-color-indicator" style="background:#e74c3c;"></span>
+                </button>
+                <input type="color" id="docs-text-color-input" value="#e74c3c" class="docs-hidden-color">
+            </div>
+            <div class="docs-color-wrap" title="Highlight Color">
+                <button class="docs-tool-btn docs-color-btn" id="docs-highlight-btn">
+                    <span style="font-weight:700; background:#ffeaa7; padding:0 3px; border-radius:2px; color:#333;">A</span>
+                    <span class="docs-color-indicator" id="docs-highlight-indicator" style="background:#ffeaa7;"></span>
+                </button>
+                <input type="color" id="docs-highlight-input" value="#ffeaa7" class="docs-hidden-color">
+            </div>
+            <span class="docs-toolbar-sep"></span>
+
+            <!-- Lists -->
+            <button class="docs-tool-btn" data-cmd="insertUnorderedList" title="Bullet List">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><circle cx="3" cy="6" r="1.5" fill="currentColor"></circle><circle cx="3" cy="12" r="1.5" fill="currentColor"></circle><circle cx="3" cy="18" r="1.5" fill="currentColor"></circle></svg>
+            </button>
+            <button class="docs-tool-btn" data-cmd="insertOrderedList" title="Numbered List">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="10" y1="6" x2="21" y2="6"></line><line x1="10" y1="12" x2="21" y2="12"></line><line x1="10" y1="18" x2="21" y2="18"></line><text x="2" y="8" fill="currentColor" style="font:bold 9px sans-serif">1</text><text x="2" y="14" fill="currentColor" style="font:bold 9px sans-serif">2</text><text x="2" y="20" fill="currentColor" style="font:bold 9px sans-serif">3</text></svg>
+            </button>
+            <span class="docs-toolbar-sep"></span>
+
+            <!-- Alignment -->
+            <button class="docs-tool-btn" data-cmd="justifyLeft" title="Align Left">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="15" y2="12"></line><line x1="3" y1="18" x2="18" y2="18"></line></svg>
+            </button>
+            <button class="docs-tool-btn" data-cmd="justifyCenter" title="Align Center">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="6" y1="12" x2="18" y2="12"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
+            </button>
+            <button class="docs-tool-btn" data-cmd="justifyRight" title="Align Right">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="9" y1="12" x2="21" y2="12"></line><line x1="6" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+            <button class="docs-tool-btn" data-cmd="justifyFull" title="Justify">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+            <span class="docs-toolbar-sep"></span>
+
+            <!-- Insert Date -->
+            <button class="docs-tool-btn docs-date-btn" id="docs-insert-date" title="Insert Today's Nepali Date (Bikram Sambat)">मिति</button>
+
+            <!-- Clear Formatting -->
+            <button class="docs-tool-btn" data-cmd="removeFormat" title="Clear Formatting">✕</button>
+        </div>
+
+        <!-- Editable Document Area (A4 paper look) -->
+        <div class="docs-paper-container">
+            <div class="docs-paper" id="docs-editor" contenteditable="true" spellcheck="false" data-placeholder="यहाँ लेख सुरु गर्नुहोस् — रोमनमा टाइप गरी Space थिच्नुहोस् (namaste → नमस्ते), वा तलको माइकबाट बोल्नुहोस्..."></div>
+        </div>
+
+        <!-- Bottom Floating Bar: Voice Toggle + Language Switch -->
+        <div class="docs-voice-bar" id="docs-voice-bar">
+            <button class="docs-mic-btn" id="docs-mic-btn" title="Toggle Voice Typing (Ctrl+M)">
+                <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg>
+            </button>
+            <div class="docs-lang-toggle" id="docs-lang-toggle">
+                <button class="docs-lang-btn" data-lang="en" id="docs-lang-en">EN</button>
+                <button class="docs-lang-btn active" data-lang="ne" id="docs-lang-ne">नेपाली</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEO / Copywriting Section -->
+    <article style="max-width: 800px; margin: 0 auto;">
+        <h2 style="font-family: var(--font-heading); font-size: 1.75rem; margin-bottom: 16px;">Nepali Docs — Online Nepali Document Writer (नेपाली डक्स)</h2>
+
+        <p style="margin-bottom: 16px;">
+            Nepali Docs is a free online word processor made for writing in Nepali. Write letters, applications (निवेदन), essays, news copy, assignments and office documents in नेपाली युनिकोड — straight in your browser, with no software to install and no sign-up. Everything you type is saved automatically in your browser, so your document is right where you left it even after closing the tab.
+        </p>
+        <p style="margin-bottom: 16px;">
+            Two ways to write, built into the same page: type in Roman (write namaste, press Space, get नमस्ते) or speak with voice typing — tap the mic and dictate in Nepali or English. Format your document with headings, bold, lists, colors and alignment, then download it as a Word file, print it, or copy the text anywhere.
+        </p>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-top: 28px; margin-bottom: 12px;">What can you do with Nepali Docs?</h3>
+        <ul style="margin-left: 24px; margin-bottom: 24px; line-height: 1.9;">
+            <li style="margin-bottom: 8px;"><strong>Write in Nepali easily:</strong> Roman typing converts every word as you press Space — no Nepali keyboard needed. Press <kbd>Esc</kbd> to keep a word in English, or <kbd>Ctrl+G</kbd> to switch typing language.</li>
+            <li style="margin-bottom: 8px;"><strong>Voice typing:</strong> Tap the mic and speak — works in both Nepali and English (switch with the EN/नेपाली toggle). Say «पूर्ण विराम» for ।, «नयाँ लाइन» for a new line.</li>
+            <li style="margin-bottom: 8px;"><strong>Format like a word processor:</strong> Headings (H1–H3), bold, italic, underline, strikethrough, text color, highlight, bullet and numbered lists, text alignment, undo/redo.</li>
+            <li style="margin-bottom: 8px;"><strong>Insert today's Nepali date:</strong> One click adds the current Bikram Sambat date — handy for letters and applications.</li>
+            <li style="margin-bottom: 8px;"><strong>Save and share:</strong> Download as a Word (.docx) file that opens in MS Word, Google Docs and LibreOffice; download as plain .txt; print directly (only the document prints, nothing else); or copy all the text.</li>
+        </ul>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-top: 28px; margin-bottom: 12px;">Is my document private?</h3>
+        <p style="margin-bottom: 16px;">
+            Yes. Your document lives only in your own browser (localStorage) — nothing is uploaded to our servers. Voice typing audio is processed by your browser's speech service in real time and is not stored. Clearing your browser data will remove the saved document, so download a copy of anything important.
+        </p>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-top: 28px; margin-bottom: 12px;">Tips for best results</h3>
+        <p style="margin-bottom: 16px;">
+            Use Google Chrome or Microsoft Edge for voice typing (other browsers can still type in Roman). For official documents, insert the Nepali date, write your content, then use Print for a clean printout or Download Word to send the file. The document keeps standard Nepali Unicode, so the text works everywhere — email, Facebook, government portals and office software. If you need Preeti font output for design software, paste your text into our <a href="/unicode-to-preeti/">Unicode to Preeti converter</a>.
+        </p>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 32px; margin-bottom: 12px;">Frequently Asked Questions (FAQ)</h3>
+        <div class="faq-accordion">
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Q: Is Nepali Docs free?
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        Yes — completely free, no sign-up, no word limit and no watermark on your documents.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Q: Where is my document saved?
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        In your own browser, automatically, every few seconds. It stays on your device and is never uploaded. Open the same browser on the same device and your document will be there.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Q: Can I open the downloaded file in Microsoft Word?
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        Yes. The Download Word button saves a .docx file that opens in MS Word, Google Docs and LibreOffice with your formatting preserved.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Q: Can I write English and Nepali in the same document?
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        Yes. Press <kbd>Ctrl+G</kbd> or tap the EN/नेपाली toggle to switch typing language anytime, or press <kbd>Esc</kbd> to keep a single word in English. Voice typing also works in both languages.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Q: Does it work on mobile?
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        Yes — Roman typing and formatting work in any modern mobile browser, and voice typing works in Chrome on Android.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>
+            </main>
+            <footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div class="footer-info">
+                <a href="/" class="logo">
+                    <img src="/assets/images/favicon.png" alt="NepaliTools Logo" class="logo-icon-img">
+                    <span class="logo-text">Nepali<span class="logo-accent">Tools</span></span>
+                </a>
+                <p class="footer-desc">
+                    The definitive, 100% secure, and modern Nepali typing, transliteration, and font conversion platform. Built for publishers, journalists, students, and government workflows.
+                </p>
+                <div class="pwa-status" id="pwa-install-container" style="display: none;">
+                    <button id="pwa-install-btn" class="pwa-btn">Install App (Offline Support)</button>
+                </div>
+            </div>
+            
+            <div class="footer-links-col">
+                <h4 class="footer-title">Conversion Tools</h4>
+                <ul class="footer-links">
+                    <li><a href="/preeti-to-unicode/">Preeti to Unicode</a></li>
+                    <li><a href="/unicode-to-preeti/">Unicode to Preeti</a></li>
+                    <li><a href="/font-converter/">Legacy Font Converter</a></li>
+                    <li><a href="/batch-converter/">Batch Docx Converter</a></li>
+                    <li><a href="/character-map/">Unicode Character Map</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-col">
+                <h4 class="footer-title">Typing Tools</h4>
+                <ul class="footer-links">
+                    <li><a href="/english-to-nepali-typing/">English to Nepali</a></li>
+                    <li><a href="/nepali-voice-typing/">Nepali Voice Typing</a></li>
+                    <li><a href="/nepali-docs/">Nepali Docs</a></li>
+                    <li><a href="/nepali-typing/">Nepali Typing practice</a></li>
+                    <li><a href="/transliteration/">Phonetic Transliteration</a></li>
+                    <li><a href="/nepali-keyboard-layout/">Keyboard Layouts</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-col">
+                <h4 class="footer-title">Guides & Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="/preeti-font-download/">Preeti Font Download</a></li>
+                    <li><a href="/preeti-vs-unicode/">Preeti vs Unicode</a></li>
+                    <li><a href="/faq/">Frequently Asked Questions</a></li>
+                    <li><a href="/unicode-chart/">Unicode Encoding Chart</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 NepaliTools. All rights reserved. Works entirely offline.</p>
+            <div class="footer-meta-links">
+                <a href="/privacy-policy/">Privacy Policy</a>
+                <a href="/terms/">Terms of Use</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Core Script Bundles -->
+<script src="/assets/js/converter.js?v=12"></script>
+<script src="/assets/js/nepalify.js?v=12"></script>
+<script src="/assets/js/main.js?v=12"></script>
+
+        </div>
+    </div>
+</body>
+</html>
