@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nepali Language Tools</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="extension-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <img src="icons/icon-32.png" alt="Logo" class="logo-img">
+        <span class="logo-text">Nepali<span class="logo-accent">Tools</span></span>
+      </div>
+      <a href="https://nepalilanguagetools.com" target="_blank" class="web-link" title="Visit website">
+        <svg class="web-icon" viewBox="0 0 24 24" width="16" height="16">
+          <path fill="currentColor" d="M10 6v2H5v11h11v-5h2v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h6zm11 1v8h-2v-4.586l-7.293 7.293-1.414-1.414L17.586 9H13V7h8z"/>
+        </svg>
+      </a>
+    </header>
+
+    <!-- Tab Navigation -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="converter-tab">🔄 Font Converter</button>
+      <button class="tab-btn" data-tab="typing-tab">⌨️ Nepali Typing</button>
+    </div>
+
+    <!-- Tab Contents -->
+    <main class="content">
+      
+      <!-- Tab 1: Bidirectional Converter -->
+      <div id="converter-tab" class="tab-pane active">
+        <div class="control-row">
+          <div class="select-wrapper">
+            <select id="converter-mode">
+              <option value="preeti2unicode">Preeti ➔ Unicode (Devanagari)</option>
+              <option value="unicode2preeti">Unicode (Devanagari) ➔ Preeti</option>
+            </select>
+          </div>
+          <button id="btn-convert" class="action-btn-primary">Convert</button>
+        </div>
+
+        <div class="editor-layout">
+          <div class="textarea-container">
+            <label for="converter-input" id="lbl-input">Input Text (Preeti)</label>
+            <textarea id="converter-input" placeholder="Type or paste text here..."></textarea>
+            <div class="textarea-footer">
+              <span id="converter-input-stats">0 chars</span>
+              <button id="btn-clear-conv" class="btn-text" title="Clear text">Clear</button>
+            </div>
+          </div>
+
+          <div class="textarea-container">
+            <label for="converter-output" id="lbl-output">Converted Output (Unicode)</label>
+            <textarea id="converter-output" readonly placeholder="Output will appear here..."></textarea>
+            <div class="textarea-footer">
+              <span id="converter-output-stats">0 chars</span>
+              <button id="btn-copy-conv" class="action-btn-secondary" title="Copy to clipboard">
+                <span class="btn-icon">📋</span> Copy
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Keyboard Transliteration -->
+      <div id="typing-tab" class="tab-pane">
+        <div class="control-row">
+          <div class="select-wrapper">
+            <select id="typing-layout">
+              <option value="romanized">Romanized Nepali (Phonetic)</option>
+              <option value="traditional">Traditional Nepali (Preeti Mappings)</option>
+            </select>
+          </div>
+          <span class="typing-status-pill" id="typing-indicator">Nepali Enabled</span>
+        </div>
+
+        <div class="editor-layout">
+          <div class="textarea-container full-width">
+            <label for="typing-input">Type here (English keys automatically map to Nepali)</label>
+            <textarea id="typing-input" class="typing-box" placeholder="Type here... e.g. namaste -> नमस्ते"></textarea>
+            <div class="textarea-footer">
+              <span id="typing-stats">0 words | 0 chars</span>
+              <div class="action-buttons">
+                <button id="btn-clear-type" class="btn-text" title="Clear text">Clear</button>
+                <button id="btn-copy-type" class="action-btn-secondary" title="Copy to clipboard">
+                  <span class="btn-icon">📋</span> Copy
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Nepali Language Tools &copy; 2026. Made with ❤️ for Nepali typing.</p>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="lib/converter.js"></script>
+  <script src="lib/nepalify.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
