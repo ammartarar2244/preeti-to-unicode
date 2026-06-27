@@ -8,6 +8,15 @@ $sidebarTemplate = [System.IO.File]::ReadAllText("templates/sidebar.html", [Syst
 $footerTemplate = [System.IO.File]::ReadAllText("templates/footer.html", [System.Text.Encoding]::UTF8)
 $layoutTemplate = [System.IO.File]::ReadAllText("templates/page_layout.html", [System.Text.Encoding]::UTF8)
 
+# Read and minify main CSS for inlining
+$cssContent = [System.IO.File]::ReadAllText("assets/css/main.css", [System.Text.Encoding]::UTF8)
+$cssContent = $cssContent -replace '(?s)/\*.*?\*/', ''       # remove comments
+$cssContent = $cssContent -replace '\s*([\{\};:,])\s*', '$1'  # remove whitespace around syntax chars
+$cssContent = $cssContent -replace '\s+', ' '                 # collapse multiple spaces
+$cssContent = $cssContent.Trim()
+
+$headTemplate = $headTemplate.Replace("/* MAIN_CSS */", $cssContent)
+
 # 2. Get list of files in src/
 $srcFiles = Get-ChildItem "src" -Filter "*.html"
 
