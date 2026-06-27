@@ -20,7 +20,6 @@ $pages = @(
 
 $assets = @(
     "assets/css/main.css",
-    "assets/css/components.css",
     "assets/js/converter.js",
     "assets/js/nepalify.js",
     "assets/js/main.js",

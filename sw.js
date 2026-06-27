@@ -1,9 +1,8 @@
-const CACHE_NAME = 'nepali-tools-v12';
+const CACHE_NAME = 'nepali-tools-v13';
 const ASSETS = [
   '/',
   '/index.html',
   '/assets/css/main.css',
-  '/assets/css/components.css',
   '/assets/js/converter.js?v=12',
   '/assets/js/nepalify.js?v=12',
   '/assets/js/main.js?v=12',
