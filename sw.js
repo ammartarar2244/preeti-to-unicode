@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nepali-tools-v13';
+const CACHE_NAME = 'nepali-tools-v14';
 const ASSETS = [
   '/',
   '/index.html',
@@ -7,6 +7,7 @@ const ASSETS = [
   '/assets/js/nepalify.js?v=12',
   '/assets/js/main.js?v=12',
   '/assets/images/favicon.png',
+  '/assets/images/logo.webp',
   '/manifest.json',
   '/preeti-to-unicode/',
   '/unicode-to-preeti/',
