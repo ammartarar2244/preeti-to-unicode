@@ -195,20 +195,20 @@
             <article class="tool-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
                 <div>
                     <span style="background-color: var(--primary-glow); color: var(--primary); padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 12px;">
-                        \${post.category}
+                        ${post.category}
                     </span>
                     <h3 class="tool-card-title" style="font-size: 1.25rem; font-weight: 700; line-height: 1.3; margin-bottom: 8px;">
-                        <a href="/blog/\${post.slug}/" style="color: inherit; text-decoration: none; transition: var(--transition-fast);" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='inherit'">
-                            \${post.title}
+                        <a href="/blog/${post.slug}/" style="color: inherit; text-decoration: none; transition: var(--transition-fast);" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='inherit'">
+                            ${post.title}
                         </a>
                     </h3>
                     <p class="tool-card-desc" style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
-                        \${post.excerpt}
+                        ${post.excerpt}
                     </p>
                 </div>
                 <div style="border-top: 1px solid var(--border-color); padding-top: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted);">
-                    <span>📅 \${post.publishDate}</span>
-                    <a href="/blog/\${post.slug}/" style="color: var(--primary); text-decoration: none; font-weight: 600;">Read More →</a>
+                    <span>📅 ${post.publishDate}</span>
+                    <a href="/blog/${post.slug}/" style="color: var(--primary); text-decoration: none; font-weight: 600;">Read More →</a>
                 </div>
             </article>
         `).join('');
