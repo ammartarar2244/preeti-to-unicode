@@ -195,4 +195,125 @@ if (Test-Path "src/data/blogs.json") {
     }
 }
 
+# Rebuild sitemap.xml
+$sitemapXml = @'
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://nepalilanguagetools.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/preeti-to-unicode/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/unicode-to-preeti/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/english-to-nepali-typing/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/nepali-voice-typing/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/nepali-docs/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/nepali-typing/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/transliteration/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/font-converter/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/batch-converter/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/character-map/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/nepali-keyboard-layout/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/preeti-font-download/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/preeti-vs-unicode/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/unicode-chart/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/faq/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/blog/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+'@
+
+if (Test-Path "src/data/blogs.json") {
+    $blogsRaw = Get-Content "src/data/blogs.json" -Raw
+    $blogs = $blogsRaw | ConvertFrom-Json
+    foreach ($b in $blogs) {
+        $sitemapXml += "`r`n  <url>`r`n"
+        $sitemapXml += "    <loc>https://nepalilanguagetools.com/blog/$($b.slug)/</loc>`r`n"
+        $sitemapXml += "    <changefreq>monthly</changefreq>`r`n"
+        $sitemapXml += "    <priority>0.6</priority>`r`n"
+        $sitemapXml += "  </url>"
+    }
+}
+
+$sitemapXml += @'
+
+  <url>
+    <loc>https://nepalilanguagetools.com/privacy-policy/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/terms/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+</urlset>
+'@
+
+[System.IO.File]::WriteAllText("sitemap.xml", $sitemapXml, [System.Text.Encoding]::UTF8)
+Write-Host "Regenerated sitemap.xml with blog posts." -ForegroundColor Yellow
+
 Write-Host "Build complete! All pages compiled." -ForegroundColor Green
