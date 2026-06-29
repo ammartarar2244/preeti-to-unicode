@@ -1,0 +1,46 @@
+<article style="max-width: 800px; margin: 0 auto; padding-top: 40px; padding-bottom: 60px; line-height: 1.8;">
+    <div style="margin-bottom: 24px;">
+        <a href="/blog/" style="text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 6px;">
+            ← Back to Blog
+        </a>
+    </div>
+
+    <header style="margin-bottom: 32px; border-bottom: 1px solid var(--border-color); padding-bottom: 24px;">
+        <span style="background-color: var(--primary-glow); color: var(--primary); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 12px;">
+            {{BLOG_CATEGORY}}
+        </span>
+        <h1 style="font-family: var(--font-heading); font-size: 2.25rem; font-weight: 800; line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.02em;">
+            {{BLOG_TITLE}}
+        </h1>
+        <div style="color: var(--text-muted); font-size: 0.9rem; display: flex; gap: 16px;">
+            <span>📅 Published: {{BLOG_DATE}}</span>
+            <span>✍️ Author: NepaliTools Editorial</span>
+        </div>
+    </header>
+
+    <div style="color: var(--text-muted); font-size: 1.05rem;">
+        {{BLOG_CONTENT}}
+    </div>
+
+    <!-- Related Tools Cross-linking bottom widget -->
+    <div style="margin-top: 56px; border-top: 1px solid var(--border-color); padding-top: 32px;">
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 16px;">Try Our Top Conversion & Typing Tools</h3>
+        <div class="tool-grid">
+            <a href="/preeti-to-unicode/" class="tool-card">
+                <div class="tool-card-icon">🔄</div>
+                <h4 class="tool-card-title">Preeti to Unicode</h4>
+                <p class="tool-card-desc">Convert legacy Preeti font text back to standard web-safe Unicode layout.</p>
+            </a>
+            <a href="/english-to-nepali-typing/" class="tool-card">
+                <div class="tool-card-icon">⌨️</div>
+                <h4 class="tool-card-title">English to Nepali Typing</h4>
+                <p class="tool-card-desc">Type phonetically in English (Roman) and convert to standard Nepali Unicode.</p>
+            </a>
+            <a href="/nepali-typing/" class="tool-card">
+                <div class="tool-card-icon">⏱️</div>
+                <h4 class="tool-card-title">Nepali Typing Practice</h4>
+                <p class="tool-card-desc">Practice and test your Nepali typing speed and accuracy online.</p>
+            </a>
+        </div>
+    </div>
+</article>

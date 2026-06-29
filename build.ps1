@@ -61,6 +61,25 @@ foreach ($file in $srcFiles) {
         $pageContent = $pageContent.Trim()
     }
     
+    if ($baseName -eq "blog") {
+        if (Test-Path "src/data/blogs.json") {
+            $blogsRaw = Get-Content "src/data/blogs.json" -Raw
+            $blogs = $blogsRaw | ConvertFrom-Json
+            $blogMetaList = @()
+            foreach ($b in $blogs) {
+                $blogMetaList += @{
+                    title = $b.title
+                    slug = $b.slug
+                    publishDate = $b.publishDate
+                    excerpt = $b.excerpt
+                    category = $b.category
+                }
+            }
+            $blogMetaJson = ConvertTo-Json -InputObject $blogMetaList -Compress
+            $pageContent = $pageContent.Replace("/* BLOG_POSTS_JSON */", $blogMetaJson)
+        }
+    }
+    
     # Inject variables into Head template
     $pageHead = $headTemplate.Replace("{{TITLE}}", $title)
     $pageHead = $pageHead.Replace("{{META_DESCRIPTION}}", $metaDesc)
@@ -87,6 +106,92 @@ foreach ($file in $srcFiles) {
         $outPath = Join-Path $outDir "index.html"
         [System.IO.File]::WriteAllText($outPath, $finalHTML, [System.Text.Encoding]::UTF8)
         Write-Host "Saved clean page to $outDir/index.html" -ForegroundColor Yellow
+    }
+}
+
+# Compile individual blog posts
+if (Test-Path "src/data/blogs.json") {
+    Write-Host "Compiling individual blog posts..." -ForegroundColor Green
+    $blogsRaw = Get-Content "src/data/blogs.json" -Raw
+    $blogs = $blogsRaw | ConvertFrom-Json
+    $blogPostTemplate = [System.IO.File]::ReadAllText("templates/blog_post.html", [System.Text.Encoding]::UTF8)
+    
+    # Ensure blog root directory exists
+    if (!(Test-Path "blog")) {
+        New-Item -ItemType Directory -Path "blog" | Out-Null
+    }
+    
+    foreach ($b in $blogs) {
+        $postSlug = $b.slug
+        $postTitle = $b.title
+        $postDate = $b.publishDate
+        $postCategory = $b.category
+        $postContent = $b.content
+        $postExcerpt = $b.excerpt
+        
+        $postBody = $blogPostTemplate
+        $postBody = $postBody.Replace("{{BLOG_TITLE}}", $postTitle)
+        $postBody = $postBody.Replace("{{BLOG_CATEGORY}}", $postCategory)
+        $postBody = $postBody.Replace("{{BLOG_DATE}}", $postDate)
+        $postBody = $postBody.Replace("{{BLOG_CONTENT}}", $postContent)
+        
+        $dateCheckScript = @'
+<script>
+    (function() {
+        const publishDate = new Date("{{DATE}}T00:00:00+05:00");
+        if (new Date() < publishDate) {
+            document.documentElement.innerHTML = '<head><meta name="robots" content="noindex, nofollow"><title>Scheduled Post - NepaliTools</title><style>body { background: #0f0f11; color: #e4e4e7; font-family: system-ui, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; } a { color: #b3002d; text-decoration: none; font-weight: bold; }</style></head><body><div><h1>🔒 This post is scheduled for release on ' + publishDate.toLocaleDateString() + '</h1><p><a href="/blog/">Back to Blog Home</a></p></div></body>';
+        }
+    })();
+</script>
+'@
+        $dateCheckScript = $dateCheckScript.Replace("{{DATE}}", $postDate)
+        
+        $blogTitle = "$postTitle - Nepali Language & Typing Blog"
+        $blogMetaDesc = $postExcerpt
+        
+        $blogSchema = @'
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{TITLE}}",
+  "datePublished": "{{DATE}}",
+  "description": "{{EXCERPT}}",
+  "author": {
+    "@type": "Organization",
+    "name": "NepaliTools Editorial"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NepaliTools"
+  }
+}
+</script>
+{{DATE_CHECK_SCRIPT}}
+'@
+        $blogSchema = $blogSchema.Replace("{{TITLE}}", $postTitle)
+        $blogSchema = $blogSchema.Replace("{{DATE}}", $postDate)
+        $blogSchema = $blogSchema.Replace("{{EXCERPT}}", $postExcerpt)
+        $blogSchema = $blogSchema.Replace("{{DATE_CHECK_SCRIPT}}", $dateCheckScript)
+        
+        $pageHead = $headTemplate.Replace("{{TITLE}}", $blogTitle)
+        $pageHead = $pageHead.Replace("{{META_DESCRIPTION}}", $blogMetaDesc)
+        $pageHead = $pageHead.Replace("{{SCHEMA}}", $blogSchema)
+        
+        $finalHTML = $layoutTemplate.Replace("<!-- HEAD -->", $pageHead)
+        $finalHTML = $finalHTML.Replace("<!-- HEADER -->", $headerTemplate)
+        $finalHTML = $finalHTML.Replace("<!-- SIDEBAR -->", $sidebarTemplate)
+        $finalHTML = $finalHTML.Replace("<!-- CONTENT -->", $postBody)
+        $finalHTML = $finalHTML.Replace("<!-- FOOTER -->", $footerTemplate)
+        
+        $postDir = Join-Path "blog" $postSlug
+        if (!(Test-Path $postDir)) {
+            New-Item -ItemType Directory -Path $postDir | Out-Null
+        }
+        $postOutPath = Join-Path $postDir "index.html"
+        [System.IO.File]::WriteAllText($postOutPath, $finalHTML, [System.Text.Encoding]::UTF8)
+        Write-Host "Compiled blog post: blog/$postSlug/index.html" -ForegroundColor Yellow
     }
 }
 
