@@ -51,7 +51,7 @@ foreach ($file in $srcFiles) {
         }
         
         # Extract JSON-LD Schema
-        if ($metaBlock -match "SCHEMA:\s*(\{[\s\S]*\})(?:\r?\n|$)") {
+        if ($metaBlock -match "SCHEMA:\s*([\[\{][\s\S]*[\]\}])(?:\r?\n|$)") {
             $schemaJson = $Matches[1].Trim()
             $schemaTag = "<script type=""application/ld+json"">`r`n$schemaJson`r`n</script>"
         }
