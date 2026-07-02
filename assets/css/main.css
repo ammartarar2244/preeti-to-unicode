@@ -1854,3 +1854,151 @@ html[data-theme="light"] .docs-voice-bar {
     }
 }
 
+/* ============================================================
+   TYPESHALA ONLINE — Virtual Keyboard & Falling Game Styles
+   ============================================================ */
+
+.typeshala-pane {
+    display: none;
+}
+
+.typeshala-pane.active {
+    display: block;
+}
+
+.virtual-keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 16px;
+    max-width: 800px;
+    margin: 24px auto 0;
+    user-select: none;
+}
+
+html[data-theme="light"] .virtual-keyboard {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.keyboard-row {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+}
+
+.keyboard-key {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    height: 46px;
+    min-width: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.keyboard-key .sub-char {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-bottom: 2px;
+}
+
+.keyboard-key.highlight {
+    background-color: var(--primary) !important;
+    color: #ffffff !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 12px var(--primary-glow);
+    transform: scale(1.05);
+    z-index: 5;
+}
+
+/* Specific key widths */
+.keyboard-key[data-key="Backspace"] { width: 85px; }
+.keyboard-key[data-key="Tab"] { width: 55px; }
+.keyboard-key[data-key="CapsLock"] { width: 75px; }
+.keyboard-key[data-key="Enter"] { width: 85px; }
+.keyboard-key[data-key="ShiftLeft"], .keyboard-key[data-key="ShiftRight"] { width: 105px; }
+.keyboard-key[data-key="Space"] { width: 320px; }
+.keyboard-key[data-key="ControlLeft"], .keyboard-key[data-key="ControlRight"], .keyboard-key[data-key="AltLeft"], .keyboard-key[data-key="AltRight"] { width: 55px; }
+
+@media (max-width: 768px) {
+    .virtual-keyboard {
+        display: none; /* Hide visual keyboard on small screens to save space */
+    }
+}
+
+.game-control-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    margin-top: 16px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+html[data-theme="light"] .game-control-bar {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.game-stats {
+    display: flex;
+    gap: 24px;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.game-stat-item span {
+    color: var(--primary);
+}
+
+.game-btn {
+    background-color: var(--primary);
+    color: #ffffff;
+    border: 1px solid var(--primary);
+    padding: 8px 20px;
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    outline: none;
+}
+
+.game-btn:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.game-btn.secondary {
+    background-color: transparent;
+    border-color: var(--border-color);
+    color: var(--text-color);
+    margin-left: 8px;
+}
+
+.game-btn.secondary:hover {
+    background-color: rgba(255,255,255,0.05);
+}
+
+html[data-theme="light"] .game-btn.secondary:hover {
+    background-color: rgba(0,0,0,0.03);
+}
+
+

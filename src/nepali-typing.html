@@ -105,51 +105,163 @@ SCHEMA:
 -->
 <div class="tool-section">
     <div class="tool-header">
-        <h1 class="tool-title">Nepali Typing Practice</h1>
-        <p class="tool-desc">Improve your typing speed and accuracy. Select a lesson, read the target sentence, and start typing in standard Romanized layout.</p>
+        <h1 class="tool-title">Typeshala Online - Nepali Typing Practice</h1>
+        <p class="tool-desc">Improve your typing speed and accuracy. Select a lesson to practice with our virtual keyboard helper, or play the classic falling letters game.</p>
     </div>
 
-    <!-- Practice Panel -->
-    <div class="practice-container">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div class="editor-label">📖 Select Typing Lesson:</div>
-            <select id="lesson-select" style="background-color: var(--border-color); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px 12px; border-radius: var(--border-radius-sm); font-family: var(--font-body); outline: none;">
-                <option value="0">Lesson 1: Introduction to Nepal</option>
-                <option value="1">Lesson 2: Language & Culture</option>
-                <option value="2">Lesson 3: Font Conversion</option>
-                <option value="3">Lesson 4: Digital Technology</option>
-                <option value="4">Lesson 5: Typing Discipline</option>
-                <option value="5">Lesson 6: Pride of Nation</option>
-            </select>
+    <!-- Mode Selector Tabs -->
+    <div class="tab-container" style="margin-bottom: 24px; display: flex; justify-content: center; width: fit-content; margin-left: auto; margin-right: auto;">
+        <button class="tab-btn active" id="typeshala-tab-practice">📖 Practice Lessons</button>
+        <button class="tab-btn" id="typeshala-tab-game">🎮 Typeshala Game</button>
+    </div>
+
+    <!-- Pane 1: Practice Lessons -->
+    <div class="typeshala-pane active" id="pane-practice">
+        <div class="practice-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                <div class="editor-label">📖 Select Typing Lesson:</div>
+                <select id="lesson-select" style="background-color: var(--border-color); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px 12px; border-radius: var(--border-radius-sm); font-family: var(--font-body); outline: none; cursor: pointer;">
+                    <optgroup label="Key Row Mappings">
+                        <option value="0">Lesson 1: Home Row Consonants (क, स, र, ग, म, न, ज, व)</option>
+                        <option value="1">Lesson 2: Home Row Vowels (ा, ि, ी, े, ै, ो)</option>
+                        <option value="2">Lesson 3: Top Row Practice (त, थ, ल, प, ध, भ, श)</option>
+                        <option value="3">Lesson 4: Bottom Row Practice (च, छ, ज, झ, ट, ठ, ड, ढ)</option>
+                    </optgroup>
+                    <optgroup label="Standard Sentences">
+                        <option value="4">Lesson 5: Introduction to Nepal</option>
+                        <option value="5">Lesson 6: Language & Culture</option>
+                        <option value="6">Lesson 7: Font Conversion Basics</option>
+                        <option value="7">Lesson 8: Technology & Future</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <!-- Metric Counter Grid -->
+            <div class="practice-metrics">
+                <div class="metric-card">
+                    <div class="metric-val" id="practice-wpm">0</div>
+                    <div class="metric-lbl">Speed (WPM)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-val" id="practice-accuracy">100%</div>
+                    <div class="metric-lbl">Accuracy</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-val" id="practice-timer">0s</div>
+                    <div class="metric-lbl">Time</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-val">Romanized</div>
+                    <div class="metric-lbl">Layout Mode</div>
+                </div>
+            </div>
+
+            <!-- Target Text Display -->
+            <div class="text-display-box" id="practice-display">
+                <!-- Dynamically populated via main.js -->
+            </div>
+
+            <!-- Input Box -->
+            <input type="text" class="typing-input" id="practice-input" placeholder="यहाँ अभ्यास सुरु गर्नुहोस् (Typing starts here...)" autocomplete="off">
         </div>
 
-        <!-- Metric Counter Grid -->
-        <div class="practice-metrics">
-            <div class="metric-card">
-                <div class="metric-val" id="practice-wpm">0</div>
-                <div class="metric-lbl">Speed (WPM)</div>
+        <!-- Virtual Keyboard Layout Guide -->
+        <div class="virtual-keyboard" id="typeshala-keyboard">
+            <!-- Row 1 -->
+            <div class="keyboard-row">
+                <div class="keyboard-key" data-key="Backquote"><span class="sub-char">~</span>`</div>
+                <div class="keyboard-key" data-key="Digit1"><span class="sub-char">१</span>1</div>
+                <div class="keyboard-key" data-key="Digit2"><span class="sub-char">२</span>2</div>
+                <div class="keyboard-key" data-key="Digit3"><span class="sub-char">३</span>3</div>
+                <div class="keyboard-key" data-key="Digit4"><span class="sub-char">४</span>4</div>
+                <div class="keyboard-key" data-key="Digit5"><span class="sub-char">५</span>5</div>
+                <div class="keyboard-key" data-key="Digit6"><span class="sub-char">६</span>6</div>
+                <div class="keyboard-key" data-key="Digit7"><span class="sub-char">७</span>7</div>
+                <div class="keyboard-key" data-key="Digit8"><span class="sub-char">८</span>8</div>
+                <div class="keyboard-key" data-key="Digit9"><span class="sub-char">९</span>9</div>
+                <div class="keyboard-key" data-key="Digit0"><span class="sub-char">०</span>0</div>
+                <div class="keyboard-key" data-key="Minus"><span class="sub-char">_</span>-</div>
+                <div class="keyboard-key" data-key="Equal"><span class="sub-char">+</span>=</div>
+                <div class="keyboard-key" data-key="Backspace">Backspace</div>
             </div>
-            <div class="metric-card">
-                <div class="metric-val" id="practice-accuracy">100%</div>
-                <div class="metric-lbl">Accuracy</div>
+            <!-- Row 2 -->
+            <div class="keyboard-row">
+                <div class="keyboard-key" data-key="Tab">Tab</div>
+                <div class="keyboard-key" data-key="KeyQ"><span class="sub-char">त्र</span>Q</div>
+                <div class="keyboard-key" data-key="KeyW"><span class="sub-char">ध</span>W</div>
+                <div class="keyboard-key" data-key="KeyE"><span class="sub-char">भ</span>E</div>
+                <div class="keyboard-key" data-key="KeyR"><span class="sub-char">च</span>R</div>
+                <div class="keyboard-key" data-key="KeyT"><span class="sub-char">त</span>T</div>
+                <div class="keyboard-key" data-key="KeyY"><span class="sub-char">थ</span>Y</div>
+                <div class="keyboard-key" data-key="KeyU"><span class="sub-char">श</span>U</div>
+                <div class="keyboard-key" data-key="KeyI"><span class="sub-char">ष</span>I</div>
+                <div class="keyboard-key" data-key="KeyO"><span class="sub-char">ज्ञ</span>O</div>
+                <div class="keyboard-key" data-key="KeyP"><span class="sub-char">प</span>P</div>
+                <div class="keyboard-key" data-key="BracketLeft"><span class="sub-char">्</span>[</div>
+                <div class="keyboard-key" data-key="BracketRight"><span class="sub-char">।</span>]</div>
+                <div class="keyboard-key" data-key="Backslash"><span class="sub-char">॥</span>\</div>
             </div>
-            <div class="metric-card">
-                <div class="metric-val" id="practice-timer">0s</div>
-                <div class="metric-lbl">Time</div>
+            <!-- Row 3 -->
+            <div class="keyboard-row">
+                <div class="keyboard-key" data-key="CapsLock">Caps</div>
+                <div class="keyboard-key" data-key="KeyA"><span class="sub-char">ा</span>A</div>
+                <div class="keyboard-key" data-key="KeyS"><span class="sub-char">क</span>S</div>
+                <div class="keyboard-key" data-key="KeyD"><span class="sub-char">म</span>D</div>
+                <div class="keyboard-key" data-key="KeyF"><span class="sub-char">ा</span>F</div>
+                <div class="keyboard-key" data-key="KeyG"><span class="sub-char">न</span>G</div>
+                <div class="keyboard-key" data-key="KeyH"><span class="sub-char">ज</span>H</div>
+                <div class="keyboard-key" data-key="KeyJ"><span class="sub-char">व</span>J</div>
+                <div class="keyboard-key" data-key="KeyK"><span class="sub-char">क</span>K</div>
+                <div class="keyboard-key" data-key="KeyL"><span class="sub-char">त</span>L</div>
+                <div class="keyboard-key" data-key="Semicolon"><span class="sub-char">;</span>;</div>
+                <div class="keyboard-key" data-key="Quote"><span class="sub-char">'</span>'</div>
+                <div class="keyboard-key" data-key="Enter">Enter</div>
             </div>
-            <div class="metric-card">
-                <div class="metric-val">Romanized</div>
-                <div class="metric-lbl">Layout Mode</div>
+            <!-- Row 4 -->
+            <div class="keyboard-row">
+                <div class="keyboard-key" data-key="ShiftLeft">Shift</div>
+                <div class="keyboard-key" data-key="KeyZ"><span class="sub-char">ि</span>Z</div>
+                <div class="keyboard-key" data-key="KeyX"><span class="sub-char">ी</span>X</div>
+                <div class="keyboard-key" data-key="KeyC"><span class="sub-char">ु</span>C</div>
+                <div class="keyboard-key" data-key="KeyV"><span class="sub-char">ू</span>V</div>
+                <div class="keyboard-key" data-key="KeyB"><span class="sub-char">े</span>B</div>
+                <div class="keyboard-key" data-key="KeyN"><span class="sub-char">ै</span>N</div>
+                <div class="keyboard-key" data-key="KeyM"><span class="sub-char">ो</span>M</div>
+                <div class="keyboard-key" data-key="Comma"><span class="sub-char">ौ</span>,</div>
+                <div class="keyboard-key" data-key="Period"><span class="sub-char">.</span>.</div>
+                <div class="keyboard-key" data-key="Slash"><span class="sub-char">?</span>/</div>
+                <div class="keyboard-key" data-key="ShiftRight">Shift</div>
+            </div>
+            <!-- Row 5 -->
+            <div class="keyboard-row">
+                <div class="keyboard-key" data-key="ControlLeft">Ctrl</div>
+                <div class="keyboard-key" data-key="AltLeft">Alt</div>
+                <div class="keyboard-key" data-key="Space">Space</div>
+                <div class="keyboard-key" data-key="AltRight">Alt</div>
+                <div class="keyboard-key" data-key="ControlRight">Ctrl</div>
             </div>
         </div>
+    </div>
 
-        <!-- Target Text Display -->
-        <div class="text-display-box" id="practice-display">
-            <!-- Dynamically populated via main.js -->
+    <!-- Pane 2: Play Typeshala Game -->
+    <div class="typeshala-pane" id="pane-game">
+        <div style="background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-lg); padding: 24px; box-shadow: var(--card-shadow); text-align: center; position: relative; overflow: hidden;">
+            <canvas id="typeshala-canvas" width="800" height="400" style="background: #0f0f11; border: 1px solid var(--border-color); border-radius: var(--border-radius-md); width: 100%; max-width: 800px; display: block; margin: 0 auto; outline: none;"></canvas>
+            
+            <div class="game-control-bar">
+                <div class="game-stats">
+                    <div class="game-stat-item">⭐ Score: <span id="game-score">0</span></div>
+                    <div class="game-stat-item">❤️ Lives: <span id="game-lives">3</span></div>
+                    <div class="game-stat-item">🚀 Level: <span id="game-level">1</span></div>
+                </div>
+                
+                <div style="display: flex; gap: 8px; align-items: center;">
+                    <!-- Game input capture textbox (highly styled/invisible but interactive) -->
+                    <input type="text" class="typing-input" id="game-input" placeholder="Type here..." autocomplete="off" style="background-color: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px 12px; border-radius: var(--border-radius-sm); font-family: var(--font-devanagari); font-size: 1.1rem; width: 140px; outline: none; transition: border-color 0.2s;" disabled>
+                    <button class="game-btn" id="game-start-btn">Start Game</button>
+                </div>
+            </div>
         </div>
-
-        <!-- Input Box -->
-        <input type="text" class="typing-input" id="practice-input" placeholder="यहाँ अभ्यास सुरु गर्नुहोस्..." autocomplete="off">
     </div>
 
     <article style="max-width: 900px; margin: 0 auto; margin-top: 48px; line-height: 1.8;">

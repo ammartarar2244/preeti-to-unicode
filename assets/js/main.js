@@ -667,17 +667,58 @@ document.addEventListener('DOMContentLoaded', () => {
     // -------------------------------------------------------------
     // 8. Nepali Typing Practice Module (Typeshala Mode)
     // -------------------------------------------------------------
+    // -------------------------------------------------------------
+    // 8. Nepali Typing Practice Module (Typeshala Mode)
+    // -------------------------------------------------------------
     const practiceDisplay = document.getElementById('practice-display');
     const practiceInput = document.getElementById('practice-input');
+    const tabPractice = document.getElementById('typeshala-tab-practice');
+    const tabGame = document.getElementById('typeshala-tab-game');
+    const panePractice = document.getElementById('pane-practice');
+    const paneGame = document.getElementById('pane-game');
+
+    // 8.1 Tabs Control
+    if (tabPractice && tabGame && panePractice && paneGame) {
+        tabPractice.addEventListener('click', () => {
+            tabPractice.classList.add('active');
+            tabGame.classList.remove('active');
+            panePractice.classList.add('active');
+            paneGame.classList.remove('active');
+            // Pause the canvas game if it is active
+            stopGame();
+        });
+        tabGame.addEventListener('click', () => {
+            tabGame.classList.add('active');
+            tabPractice.classList.remove('active');
+            paneGame.classList.add('active');
+            panePractice.classList.remove('active');
+            // Start focusing the game input
+            const gInput = document.getElementById('game-input');
+            if (gInput && !gInput.disabled) {
+                gInput.focus();
+            }
+        });
+    }
+
     if (practiceDisplay && practiceInput) {
-        // Typing practice lessons (Unicode Nepali sentences)
+        // Typing lessons categorized by row difficulty
         const lessons = [
-            "नेपाल एउटा सुन्दर र शान्त देश हो।",
-            "हामी नेपाली हौँ र हामीलाई हाम्रो भाषा मन पर्छ।",
-            "प्रीति फन्टबाट युनिकोडमा रूपान्तरण गर्न निकै सजिलो छ।",
-            "सञ्चार प्रविधिले गर्दा संसार एउटा सानो गाउँ जस्तो भएको छ।",
-            "विद्यार्थीहरूले दैनिक रूपमा नेपाली टाइपिङ अभ्यास गर्नुपर्दछ।",
-            "मलाई मेरो मातृभूमि नेपाल र नेपाली संस्कृतिको गर्व छ।"
+            // Home Row Consonants
+            "क स र ग म न ज व क स र ग म न ज व",
+            // Home Row Vowels
+            "का सि री के सै को का सि री के सै को",
+            // Top Row Practice
+            "त य थ ल प ध भ श त य थ ल प ध भ श",
+            // Bottom Row Practice
+            "च छ ज झ ट ठ ड ढ च छ ज झ ट ठ ड ढ",
+            // Common Phrases
+            "कस्तो छ साथी ? मलाई नेपाली भाषा मन पर्छ।",
+            // Introduction to Nepal
+            "नेपाल एउटा अत्यन्तै सुन्दर र शान्त देश हो।",
+            // Language & Culture
+            "हामी नेपाली हौँ र हाम्रो कला संस्कृति निकै धनी छ।",
+            // Technology & Future
+            "सञ्चार प्रविधिले गर्दा संसार एउटा सानो गाउँ जस्तो भएको छ।"
         ];
 
         let lessonIndex = 0;
@@ -687,7 +728,21 @@ document.addEventListener('DOMContentLoaded', () => {
         let errors = 0;
         let timerInterval = null;
 
-        // Initialize Romanized keyboard layout interception on the practice textbox
+        // Romanized keyboard layout key highlight map
+        const romanizedKeyMap = {
+            'क': 'KeyS', 'स': 'KeyS', 'र': 'KeyR', 'ग': 'KeyG', 'म': 'KeyD', 'न': 'KeyG', 'ज': 'KeyH', 'व': 'KeyJ',
+            'ा': 'KeyA', 'ि': 'KeyZ', 'ी': 'KeyX', 'े': 'KeyB', 'ै': 'KeyN', 'ो': 'KeyM', 'ौ': 'Comma',
+            'त': 'KeyL', 'थ': 'KeyY', 'ल': 'KeyL', 'प': 'KeyP', 'ध': 'KeyW', 'भ': 'KeyE', 'श': 'KeyU', 'ष': 'KeyI', 'ज्ञ': 'KeyO',
+            'च': 'KeyR', 'छ': 'KeyR', '्': 'BracketLeft', '।': 'BracketRight', ' ': 'Space',
+            'a': 'KeyA', 'b': 'KeyB', 'c': 'KeyC', 'd': 'KeyD', 'e': 'KeyE', 'f': 'KeyF', 'g': 'KeyG', 'h': 'KeyH', 'i': 'KeyI',
+            'j': 'KeyJ', 'k': 'KeyK', 'l': 'KeyL', 'm': 'KeyM', 'n': 'KeyN', 'o': 'KeyO', 'p': 'KeyP', 'q': 'KeyQ', 'r': 'KeyR',
+            's': 'KeyS', 't': 'KeyT', 'u': 'KeyU', 'v': 'KeyV', 'w': 'KeyW', 'x': 'KeyX', 'y': 'KeyY', 'z': 'KeyZ',
+            '०': 'Digit0', '१': 'Digit1', '२': 'Digit2', '३': 'Digit3', '४': 'Digit4', '५': 'Digit5', '६': 'Digit6', '७': 'Digit7', '८': 'Digit8', '९': 'Digit9'
+        };
+
+        const shiftChars = new Set(['ध', 'भ', 'थ', 'श', 'ष', 'ज्ञ', 'छ', 'ी', 'ै', 'ौ', 'त्र', '।', '॥', '?', '+', '_', '~']);
+
+        // Intercept input text boxes with romanized layout
         Nepalify.intercept(practiceInput, 'romanized');
 
         const resetPractice = () => {
@@ -703,6 +758,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('practice-timer').textContent = "0s";
             
             renderDisplay();
+            updateKeyboardHighlight();
         };
 
         const renderDisplay = () => {
@@ -727,6 +783,31 @@ document.addEventListener('DOMContentLoaded', () => {
             practiceDisplay.innerHTML = displayHTML;
         };
 
+        const updateKeyboardHighlight = () => {
+            // Remove highlight class from all keys
+            const keys = document.querySelectorAll('.keyboard-key');
+            keys.forEach(k => k.classList.remove('highlight'));
+
+            const inputLength = practiceInput.value.length;
+            if (inputLength < originalText.length) {
+                const nextChar = originalText[inputLength].toLowerCase();
+                const targetKey = romanizedKeyMap[nextChar] || romanizedKeyMap[originalText[inputLength]];
+                
+                if (targetKey) {
+                    const keyEl = document.querySelector(`.keyboard-key[data-key="${targetKey}"]`);
+                    if (keyEl) {
+                        keyEl.classList.add('highlight');
+                    }
+                }
+                
+                // Highlight Shift key if needed
+                if (shiftChars.has(originalText[inputLength])) {
+                    const leftShift = document.querySelector('.keyboard-key[data-key="ShiftLeft"]');
+                    if (leftShift) leftShift.classList.add('highlight');
+                }
+            }
+        };
+
         practiceInput.addEventListener('input', () => {
             if (!startTime) {
                 startTime = new Date();
@@ -745,6 +826,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             renderDisplay();
+            updateKeyboardHighlight();
 
             // Check if lesson is complete
             if (inputVal === originalText) {
@@ -752,6 +834,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 showToast("Lesson Complete! Excellent job!");
                 // Next lesson
                 lessonIndex = (lessonIndex + 1) % lessons.length;
+                const lessonSelect = document.getElementById('lesson-select');
+                if (lessonSelect) {
+                    lessonSelect.value = lessonIndex;
+                }
                 setTimeout(resetPractice, 1500);
             }
         });
@@ -759,13 +845,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const updateStats = () => {
             if (!startTime) return;
             
-            const timeElapsed = (new Date() - startTime) / 1000; // seconds
+            const timeElapsed = (new Date() - startTime) / 1000;
             const inputLength = practiceInput.value.length;
             
-            // Standard Word calculation (5 characters = 1 word)
             const wpm = timeElapsed > 0 ? Math.round((inputLength / 5) / (timeElapsed / 60)) : 0;
-            
-            // Accuracy calculation
             const accuracy = totalKeysPressed > 0 ? Math.round(((totalKeysPressed - errors) / totalKeysPressed) * 100) : 100;
 
             document.getElementById('practice-wpm').textContent = wpm;
@@ -773,7 +856,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('practice-timer').textContent = `${Math.round(timeElapsed)}s`;
         };
 
-        // Reset lessons selector
+        // Lesson selector mapping
         const lessonSelect = document.getElementById('lesson-select');
         if (lessonSelect) {
             lessonSelect.addEventListener('change', (e) => {
@@ -786,8 +869,269 @@ document.addEventListener('DOMContentLoaded', () => {
         resetPractice();
     }
 
+    // 8.2 Typeshala Game Engine (Falling Devanagari Characters)
+    const gameCanvas = document.getElementById('typeshala-canvas');
+    const gameInput = document.getElementById('game-input');
+    const gameStartBtn = document.getElementById('game-start-btn');
+
+    let gameRunning = false;
+    let gameLoopId = null;
+    let spawnIntervalId = null;
+    let score = 0;
+    let lives = 3;
+    let level = 1;
+    let fallingChars = [];
+    let explosionParticles = [];
+    let lastTime = 0;
+
+    const gameCharactersPool = [
+        'क', 'ख', 'ग', 'घ', 'च', 'छ', 'ज', 'झ', 'ट', 'ठ', 
+        'ड', 'ढ', 'त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 
+        'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'ष', 'स', 'ह'
+    ];
+
+    const vibrantColors = [
+        '#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6', 
+        '#ec4899', '#f43f5e', '#06b6d4', '#14b8a6', '#84cc16'
+    ];
+
+    if (gameCanvas && gameInput && gameStartBtn) {
+        const ctx = gameCanvas.getContext('2d');
+        Nepalify.intercept(gameInput, 'romanized');
+
+        // Spawn a new character at the top of the canvas
+        const spawnCharacter = () => {
+            if (!gameRunning) return;
+            
+            const randomChar = gameCharactersPool[Math.floor(Math.random() * gameCharactersPool.length)];
+            const randomX = 50 + Math.random() * (gameCanvas.width - 100);
+            const speed = 1.0 + (level * 0.3) + Math.random() * 0.5;
+            const color = vibrantColors[Math.floor(Math.random() * vibrantColors.length)];
+
+            fallingChars.push({
+                char: randomChar,
+                x: randomX,
+                y: 0,
+                speed: speed,
+                color: color,
+                size: 28 + Math.random() * 6
+            });
+        };
+
+        // Create canvas explosion particle effect
+        const createExplosion = (x, y, color) => {
+            const numParticles = 12 + Math.floor(Math.random() * 8);
+            for (let i = 0; i < numParticles; i++) {
+                particles.push({
+                    x: x,
+                    y: y,
+                    vx: (Math.random() - 0.5) * 6,
+                    vy: (Math.random() - 0.5) * 6,
+                    radius: 2 + Math.random() * 3,
+                    color: color,
+                    alpha: 1.0,
+                    decay: 0.02 + Math.random() * 0.02
+                });
+            }
+        };
+
+        let particles = [];
+
+        // Game Animation Loop
+        const gameLoop = (timestamp) => {
+            if (!gameRunning) return;
+
+            // Clear screen
+            ctx.fillStyle = '#0f0f11';
+            ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
+
+            // Draw grid backdrop
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
+            ctx.lineWidth = 1;
+            for (let x = 0; x < gameCanvas.width; x += 40) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, gameCanvas.height);
+                ctx.stroke();
+            }
+            for (let y = 0; y < gameCanvas.height; y += 40) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(gameCanvas.width, y);
+                ctx.stroke();
+            }
+
+            // Draw and update falling characters
+            ctx.textBaseline = 'middle';
+            ctx.textAlign = 'center';
+            
+            for (let i = fallingChars.length - 1; i >= 0; i--) {
+                const c = fallingChars[i];
+                c.y += c.speed;
+
+                // Draw character with custom glow
+                ctx.shadowColor = c.color;
+                ctx.shadowBlur = 8;
+                ctx.fillStyle = c.color;
+                ctx.font = `bold ${c.size}px 'Noto Sans Devanagari', sans-serif`;
+                ctx.fillText(c.char, c.x, c.y);
+                ctx.shadowBlur = 0; // Reset shadow
+
+                // Check collision with the bottom boundary
+                if (c.y > gameCanvas.height) {
+                    fallingChars.splice(i, 1);
+                    lives--;
+                    document.getElementById('game-lives').textContent = lives;
+
+                    // Red flash effect
+                    ctx.fillStyle = 'rgba(239, 68, 68, 0.2)';
+                    ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
+
+                    if (lives <= 0) {
+                        gameOver();
+                        return;
+                    }
+                }
+            }
+
+            // Draw and update explosion particles
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.alpha -= p.decay;
+
+                if (p.alpha <= 0) {
+                    particles.splice(i, 1);
+                } else {
+                    ctx.save();
+                    ctx.globalAlpha = p.alpha;
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+
+            gameLoopId = requestAnimationFrame(gameLoop);
+        };
+
+        const startGame = () => {
+            gameRunning = true;
+            score = 0;
+            lives = 3;
+            level = 1;
+            fallingChars = [];
+            particles = [];
+
+            document.getElementById('game-score').textContent = score;
+            document.getElementById('game-lives').textContent = lives;
+            document.getElementById('game-level').textContent = level;
+
+            gameInput.disabled = false;
+            gameInput.value = "";
+            gameInput.focus();
+            gameStartBtn.textContent = "Restart Game";
+
+            // Spawn loop
+            if (spawnIntervalId) clearInterval(spawnIntervalId);
+            spawnIntervalId = setInterval(spawnCharacter, 1800);
+
+            // Draw start prompt
+            ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+            gameLoopId = requestAnimationFrame(gameLoop);
+            showToast("Game Started! Type the falling characters!");
+        };
+
+        const stopGame = () => {
+            gameRunning = false;
+            if (gameLoopId) cancelAnimationFrame(gameLoopId);
+            if (spawnIntervalId) clearInterval(spawnIntervalId);
+            gameInput.disabled = true;
+            gameInput.value = "";
+            gameStartBtn.textContent = "Start Game";
+        };
+
+        const gameOver = () => {
+            stopGame();
+            
+            // Draw Game Over overlay
+            ctx.fillStyle = 'rgba(15, 15, 17, 0.85)';
+            ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
+            
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            ctx.fillStyle = '#ef4444';
+            ctx.font = "bold 42px 'Outfit', sans-serif";
+            ctx.fillText("GAME OVER", gameCanvas.width / 2, gameCanvas.height / 2 - 30);
+            
+            ctx.fillStyle = '#e4e4e7';
+            ctx.font = "600 20px 'Inter', sans-serif";
+            ctx.fillText(`Final Score: ${score} points (Level ${level})`, gameCanvas.width / 2, gameCanvas.height / 2 + 20);
+            
+            ctx.fillStyle = '#a1a1aa';
+            ctx.font = "14px 'Inter', sans-serif";
+            ctx.fillText("Click 'Restart Game' to try again", gameCanvas.width / 2, gameCanvas.height / 2 + 60);
+        };
+
+        // Listen for typed inputs to hit the letters
+        gameInput.addEventListener('input', () => {
+            const val = gameInput.value;
+            if (val.length > 0) {
+                const typedChar = val[val.length - 1];
+                
+                // Find matching character closest to the bottom (max Y)
+                let matchedIndex = -1;
+                let maxY = -1;
+
+                for (let i = 0; i < fallingChars.length; i++) {
+                    if (fallingChars[i].char === typedChar && fallingChars[i].y > maxY) {
+                        maxY = fallingChars[i].y;
+                        matchedIndex = i;
+                    }
+                }
+
+                if (matchedIndex !== -1) {
+                    const match = fallingChars[matchedIndex];
+                    createExplosion(match.x, match.y, match.color);
+                    fallingChars.splice(matchedIndex, 1);
+                    
+                    // Increment score
+                    score += 10;
+                    document.getElementById('game-score').textContent = score;
+
+                    // Level Up logic
+                    if (score > 0 && score % 100 === 0) {
+                        level++;
+                        document.getElementById('game-level').textContent = level;
+                        showToast(`Level ${level}! Speeding up!`);
+                        
+                        // Recalculate spawning interval
+                        clearInterval(spawnIntervalId);
+                        const newSpeed = Math.max(700, 1800 - (level * 150));
+                        spawnIntervalId = setInterval(spawnCharacter, newSpeed);
+                    }
+                }
+
+                // Clear input so they can type another letter immediately
+                gameInput.value = "";
+            }
+        });
+
+        // Trigger start/restart
+        gameStartBtn.addEventListener('click', () => {
+            startGame();
+        });
+    }
+
+    // Export global stopGame helper
+    window.stopGame = stopGame;
+
     // -------------------------------------------------------------
-    // 8. Nepali Voice Typing Page Bindings
+    // 9. Nepali Voice Typing Page Bindings
+
     // -------------------------------------------------------------
     const voiceArea = document.getElementById('voice-typing-area');
     if (voiceArea) {
