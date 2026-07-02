@@ -34,6 +34,7 @@ foreach ($file in $srcFiles) {
     $title = "Nepali Tools"
     $metaDesc = "Online Nepali language converter and typing tools."
     $schemaTag = ""
+    $canonicalUrl = ""
     $pageContent = $rawContent
     
     # Parse metadata block if present
@@ -48,6 +49,11 @@ foreach ($file in $srcFiles) {
         # Extract Meta Description
         if ($metaBlock -match "META_DESCRIPTION:\s*(.*?)(?:\r?\n|$)") {
             $metaDesc = $Matches[1].Trim()
+        }
+
+        # Extract Canonical Link
+        if ($metaBlock -match "CANONICAL:\s*(.*?)(?:\r?\n|$)") {
+            $canonicalUrl = $Matches[1].Trim()
         }
         
         # Extract JSON-LD Schema
@@ -79,10 +85,20 @@ foreach ($file in $srcFiles) {
             $pageContent = $pageContent.Replace("/* BLOG_POSTS_JSON */", $blogMetaJson)
         }
     }
+
+    # Determine Canonical link
+    if ($canonicalUrl -eq "") {
+        if ($baseName -eq "index") {
+            $canonicalUrl = "https://nepalilanguagetools.com/"
+        } else {
+            $canonicalUrl = "https://nepalilanguagetools.com/$baseName/"
+        }
+    }
     
     # Inject variables into Head template
     $pageHead = $headTemplate.Replace("{{TITLE}}", $title)
     $pageHead = $pageHead.Replace("{{META_DESCRIPTION}}", $metaDesc)
+    $pageHead = $pageHead.Replace("{{CANONICAL}}", $canonicalUrl)
     $pageHead = $pageHead.Replace("{{SCHEMA}}", $schemaTag)
     
     # Assemble layout
@@ -175,8 +191,11 @@ if (Test-Path "src/data/blogs.json") {
         $blogSchema = $blogSchema.Replace("{{EXCERPT}}", $postExcerpt)
         $blogSchema = $blogSchema.Replace("{{DATE_CHECK_SCRIPT}}", $dateCheckScript)
         
+        $postCanonical = "https://nepalilanguagetools.com/blog/$postSlug/"
+        
         $pageHead = $headTemplate.Replace("{{TITLE}}", $blogTitle)
         $pageHead = $pageHead.Replace("{{META_DESCRIPTION}}", $blogMetaDesc)
+        $pageHead = $pageHead.Replace("{{CANONICAL}}", $postCanonical)
         $pageHead = $pageHead.Replace("{{SCHEMA}}", $blogSchema)
         
         $finalHTML = $layoutTemplate.Replace("<!-- HEAD -->", $pageHead)
