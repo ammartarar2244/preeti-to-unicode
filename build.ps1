@@ -254,11 +254,6 @@ $sitemapXml = @'
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://nepalilanguagetools.com/transliteration/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://nepalilanguagetools.com/font-converter/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -308,12 +303,16 @@ $sitemapXml = @'
 if (Test-Path "src/data/blogs.json") {
     $blogsRaw = Get-Content "src/data/blogs.json" -Raw
     $blogs = $blogsRaw | ConvertFrom-Json
+    $currentDate = Get-Date -Format "yyyy-MM-dd"
     foreach ($b in $blogs) {
-        $sitemapXml += "`r`n  <url>`r`n"
-        $sitemapXml += "    <loc>https://nepalilanguagetools.com/blog/$($b.slug)/</loc>`r`n"
-        $sitemapXml += "    <changefreq>monthly</changefreq>`r`n"
-        $sitemapXml += "    <priority>0.6</priority>`r`n"
-        $sitemapXml += "  </url>"
+        # Only include in sitemap if the publish date is today or in the past
+        if ($b.publishDate -le $currentDate) {
+            $sitemapXml += "`r`n  <url>`r`n"
+            $sitemapXml += "    <loc>https://nepalilanguagetools.com/blog/$($b.slug)/</loc>`r`n"
+            $sitemapXml += "    <changefreq>monthly</changefreq>`r`n"
+            $sitemapXml += "    <priority>0.6</priority>`r`n"
+            $sitemapXml += "  </url>"
+        }
     }
 }
 
