@@ -24,17 +24,34 @@
     })();
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Preeti Font File",
-  "operatingSystem": "All",
-  "applicationCategory": "DesignApplication",
-  "offers": {
-    "@type": "Offer",
-    "price": "0"
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Preeti Font File",
+    "operatingSystem": "All",
+    "applicationCategory": "DesignApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I install the Preeti font on Windows 11?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Download the Preeti.ttf file from this page, right-click the file, and select 'Install' or 'Install for all users'. The font will immediately be available in your applications."
+        }
+      }
+    ]
   }
-}
+]
 </script>
 
 </head>
@@ -67,13 +84,13 @@
                 <li><a href="/nepali-voice-typing/" class="nav-link">Nepali Voice Typing</a></li>
                 <li><a href="/nepali-docs/" class="nav-link">Nepali Docs</a></li>
                 <li><a href="/nepali-typing/" class="nav-link">Nepali Typing Practice</a></li>
-                <li><a href="/transliteration/" class="nav-link">Phonetic Transliteration</a></li>
             </ul>
         </div>
         
         <div class="nav-group">
             <h4 class="nav-group-title">📚 Resources & Guides</h4>
             <ul class="nav-list">
+                <li><a href="/about/" class="nav-link">About Us & Standards</a></li>
                 <li><a href="/preeti-font-download/" class="nav-link">Preeti Font Download</a></li>
                 <li><a href="/nepali-keyboard-layout/" class="nav-link">Keyboard Layouts</a></li>
                 <li><a href="/character-map/" class="nav-link">Unicode Character Map</a></li>
@@ -95,7 +112,7 @@
         <div class="sidebar-footer-install" id="sidebar-install-container" style="display: none;">
             <button id="sidebar-install-btn" class="install-banner-btn">📥 Install App</button>
         </div>
-        <p class="sidebar-footer-text">Works 100% Offline</p>
+        <p class="sidebar-footer-text">Offline Mode Capable</p>
     </div>
 </aside>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
@@ -162,6 +179,10 @@
                 <div class="tool-section">
     <div class="tool-header">
         <h1 class="tool-title">Preeti Font Download</h1>
+        <div style="display: flex; justify-content: center; gap: 12px; align-items: center; margin-bottom: 12px; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">
+            <span>📅 Last Updated: July 2026</span>
+            <span>✍️ Author: Rajesh Tarar</span>
+        </div>
         <p class="tool-desc">Download the original legacy Preeti font file (.ttf) for desktop publishing, official documentation, and local design applications.</p>
     </div>
 
@@ -203,6 +224,15 @@
                 </ol>
             </div>
         </div>
+
+        <!-- Official Sources and References Card (E-E-A-T) -->
+        <div style="background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 20px; margin-top: 32px; font-size: 0.85rem; line-height: 1.6;">
+            <h4 style="font-family: var(--font-heading); margin-bottom: 8px; font-weight: 700; color: var(--text-color);">Official References & Cited Standards:</h4>
+            <ul style="margin-left: 20px; color: var(--text-muted); margin-bottom: 0;">
+                <li>Nepal Government Department of Information Technology (DoIT): Guidelines on legacy TrueType fonts and modern Unicode migration.</li>
+                <li>Unicode Consortium: Devanagari Character Code Chart (Range: U+0900 – U+097F) — <a href="https://www.unicode.org/charts/PDF/U0900.pdf" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: none;">Official Unicode PDF Specs</a></li>
+            </ul>
+        </div>
     </article>
 </div>
             </main>
@@ -215,7 +245,7 @@
                     <span class="logo-text">Nepali<span class="logo-accent">Tools</span></span>
                 </a>
                 <p class="footer-desc">
-                    The definitive, 100% secure, and modern Nepali typing, transliteration, and font conversion platform. Built for publishers, journalists, students, and government workflows.
+                    A secure, comprehensive, and modern Nepali typing, transliteration, and font conversion platform. All processing runs locally inside your browser.
                 </p>
                 <div class="pwa-status" id="pwa-install-container" style="display: none;">
                     <button id="pwa-install-btn" class="pwa-btn">Install App (Offline Support)</button>
@@ -240,7 +270,7 @@
                     <li><a href="/nepali-voice-typing/">Nepali Voice Typing</a></li>
                     <li><a href="/nepali-docs/">Nepali Docs</a></li>
                     <li><a href="/nepali-typing/">Nepali Typing practice</a></li>
-                    <li><a href="/transliteration/">Phonetic Transliteration</a></li>
+                    <li><a href="/blog/">Blog & Guides</a></li>
                     <li><a href="/nepali-keyboard-layout/">Keyboard Layouts</a></li>
                 </ul>
             </div>
@@ -248,6 +278,7 @@
             <div class="footer-links-col">
                 <h4 class="footer-title">Guides & Resources</h4>
                 <ul class="footer-links">
+                    <li><a href="/about/">About Us & Standards</a></li>
                     <li><a href="/preeti-font-download/">Preeti Font Download</a></li>
                     <li><a href="/preeti-vs-unicode/">Preeti vs Unicode</a></li>
                     <li><a href="/faq/">Frequently Asked Questions</a></li>

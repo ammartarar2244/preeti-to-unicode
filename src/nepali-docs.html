@@ -2,21 +2,50 @@
 TITLE: Nepali Docs — Online Nepali Document Writer (नेपाली डक्स)
 META_DESCRIPTION: Free online Nepali word processor. Write in Nepali Unicode with Roman typing and voice dictation. Format, print, and download as Word (.docx). No sign-up, works in your browser.
 SCHEMA:
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Nepali Docs - Online Nepali Document Writer",
-  "operatingSystem": "All",
-  "applicationCategory": "UtilitiesApplication",
-  "offers": {
-    "@type": "Offer",
-    "price": "0"
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Nepali Docs - Online Nepali Document Writer",
+    "operatingSystem": "All",
+    "applicationCategory": "UtilitiesApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I open the downloaded file in Microsoft Word?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The Download Word button saves a .docx file that opens in MS Word, Google Docs and LibreOffice with your formatting preserved."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I write English and Nepali in the same document?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Press Ctrl+G or tap the EN/नेपाली toggle to switch typing language anytime, or press Esc to keep a single word in English. Voice typing also works in both languages."
+        }
+      }
+    ]
   }
-}
+]
 -->
 <div class="tool-section nepali-docs-page">
     <div class="tool-header">
         <h1 class="tool-title">Nepali Docs (नेपाली डक्स)</h1>
+        <div style="display: flex; justify-content: center; gap: 12px; align-items: center; margin-bottom: 12px; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">
+            <span>📅 Last Updated: July 2026</span>
+            <span>✍️ Author: Rajesh Tarar</span>
+        </div>
         <p class="tool-desc">Free online Nepali word processor — type in Roman or speak with voice typing. Format, print, and download as Word. No sign-up needed.</p>
     </div>
 
@@ -219,6 +248,15 @@ SCHEMA:
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Official Sources and References Card (E-E-A-T) -->
+        <div style="background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 20px; margin-top: 32px; font-size: 0.85rem; line-height: 1.6;">
+            <h4 style="font-family: var(--font-heading); margin-bottom: 8px; font-weight: 700; color: var(--text-color);">Official References & Cited Standards:</h4>
+            <ul style="margin-left: 20px; color: var(--text-muted);">
+                <li>Nepal Government Department of Information Technology (DoIT): IT Standards guidelines for Devanagari text processing.</li>
+                <li>Unicode Consortium: Devanagari Code Range Specification U+0900 – U+097F — <a href="https://www.unicode.org/charts/PDF/U0900.pdf" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: none; font-weight: 600;">Official Unicode PDF Specs</a></li>
+            </ul>
         </div>
     </article>
 </div>
