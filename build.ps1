@@ -364,9 +364,59 @@ $sitemapXml = @'
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://nepalilanguagetools.com/learning-center/</loc>
+    <loc>https://nepalilanguagetools.com/guides/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/typing/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/lok-sewa/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/unicode/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/translation/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/publishing/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/government-resources/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/kantipur-vs-unicode/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/sagarmatha-vs-unicode/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/himali-vs-unicode/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/kanchan-vs-unicode/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://nepalilanguagetools.com/preeti-keyboard-guide/</loc>
