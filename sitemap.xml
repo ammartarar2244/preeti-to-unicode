@@ -76,6 +76,11 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://nepalilanguagetools.com/about/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://nepalilanguagetools.com/blog/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -92,6 +97,16 @@
   </url>
   <url>
     <loc>https://nepalilanguagetools.com/blog/download-and-install-preeti-font-windows-11/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/blog/install-preeti-font-macos/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/blog/lok-sewa-nepali-typing-prep-guide/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

@@ -294,6 +294,11 @@ $sitemapXml = @'
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://nepalilanguagetools.com/about/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://nepalilanguagetools.com/blog/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
