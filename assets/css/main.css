@@ -2001,4 +2001,16 @@ html[data-theme="light"] .game-btn.secondary:hover {
     background-color: rgba(0,0,0,0.03);
 }
 
-
+/* Legacy Font ecosystems styling classes */
+.editor-textarea.kantipur-font {
+    font-family: 'Kantipur', 'Preeti', 'Courier New', sans-serif !important;
+}
+.editor-textarea.sagarmatha-font {
+    font-family: 'Sagarmatha', 'Preeti', 'Courier New', sans-serif !important;
+}
+.editor-textarea.himali-font {
+    font-family: 'Himali', 'Preeti', 'Courier New', sans-serif !important;
+}
+.editor-textarea.kanchan-font {
+    font-family: 'Kanchan', 'Preeti', 'Courier New', sans-serif !important;
+}

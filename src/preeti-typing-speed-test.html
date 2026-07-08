@@ -1,0 +1,85 @@
+<!--
+TITLE: Preeti Typing Speed Test Online – Check WPM & Accuracy
+META_DESCRIPTION: Test your typing speed in the traditional Preeti font layout. Measure Words Per Minute (WPM), accuracy, and check highscores offline. Try now!
+SCHEMA:
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Preeti Typing Speed Test",
+    "operatingSystem": "All",
+    "applicationCategory": "EducationalApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+]
+-->
+<div class="tool-section">
+    <div class="tool-header">
+        <h1 class="tool-title">Preeti Typing Speed Test</h1>
+        <div style="display: flex; justify-content: center; gap: 12px; align-items: center; margin-bottom: 12px; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">
+            <span>📅 Last Updated: July 2026</span>
+            <span>✍️ Author: Rajesh Tarar</span>
+        </div>
+        <p class="tool-desc">Test your typing speed (WPM) using the traditional Preeti keyboard mapping. Select your difficulty and press **Start Test**.</p>
+    </div>
+
+    <!-- Test Container -->
+    <div class="converter-card" style="max-width: 900px; margin: 0 auto; padding: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <label for="diff-select" style="font-weight: 600; font-size: 0.9rem;">Difficulty:</label>
+                <select id="diff-select" class="action-btn" style="background-color: rgba(255, 255, 255, 0.05); color: var(--text-color); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: var(--border-radius-sm); outline: none; cursor: pointer;">
+                    <option value="easy">Easy (Simple Words)</option>
+                    <option value="medium" selected>Medium (Standard Text)</option>
+                    <option value="hard">Hard (Complex Compounds)</option>
+                </select>
+            </div>
+            <button class="action-btn primary" id="test-start">Start Test</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px;">
+            <div class="metric-card" style="padding: 16px; text-align: center; background-color: rgba(0,0,0,0.15); border-radius: var(--border-radius-md);">
+                <div class="metric-val" id="test-wpm" style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">0</div>
+                <div class="metric-lbl" style="font-size: 0.75rem; color: var(--text-muted);">Net WPM</div>
+            </div>
+            <div class="metric-card" style="padding: 16px; text-align: center; background-color: rgba(0,0,0,0.15); border-radius: var(--border-radius-md);">
+                <div class="metric-val" id="test-accuracy" style="font-size: 1.5rem; font-weight: 700; color: #10b981;">100%</div>
+                <div class="metric-lbl" style="font-size: 0.75rem; color: var(--text-muted);">Accuracy</div>
+            </div>
+            <div class="metric-card" style="padding: 16px; text-align: center; background-color: rgba(0,0,0,0.15); border-radius: var(--border-radius-md);">
+                <div class="metric-val" id="test-timer" style="font-size: 1.5rem; font-weight: 700; color: var(--text-color);">60s</div>
+                <div class="metric-lbl" style="font-size: 0.75rem; color: var(--text-muted);">Time Remaining</div>
+            </div>
+            <div class="metric-card" style="padding: 16px; text-align: center; background-color: rgba(0,0,0,0.15); border-radius: var(--border-radius-md);">
+                <div class="metric-val" style="font-size: 1.25rem; font-weight: 700; color: var(--text-color);">Preeti</div>
+                <div class="metric-lbl" style="font-size: 0.75rem; color: var(--text-muted);">Layout</div>
+            </div>
+        </div>
+
+        <!-- Target Text Display -->
+        <div class="text-display-box" id="test-display" style="min-height: 120px; font-size: 1.4rem; line-height: 2; padding: 24px; background-color: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); margin-bottom: 20px; font-family: 'Preeti', 'Courier New', sans-serif; letter-spacing: 0.05em; text-align: left;"></div>
+
+        <!-- Input Box -->
+        <input type="text" class="typing-input" id="test-input" placeholder="यहाँ थिचेर टाइपिङ सुरु गर्नुहोस्..." autocomplete="off" disabled style="width: 100%; padding: 16px 20px; font-size: 1.25rem; background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); color: var(--text-color); outline: none; font-family: 'Preeti', 'Courier New', sans-serif;">
+    </div>
+</div>
+
+<script src="/assets/js/typing-hub.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const test = TypingHub.initSpeedTest(
+            'preeti',
+            'test-display',
+            'test-input',
+            'test-wpm',
+            'test-accuracy',
+            'test-timer',
+            'diff-select',
+            'test-start'
+        );
+    });
+</script>

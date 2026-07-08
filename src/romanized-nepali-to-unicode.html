@@ -1,0 +1,148 @@
+<!--
+TITLE: Romanized Nepali to Unicode Converter – Phonetic Roman Typing
+META_DESCRIPTION: Convert phonetic Romanized Latin spelling to standard web-safe Devanagari Unicode. Free, secure, fast, and works offline. Try now!
+SCHEMA:
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Romanized Nepali to Unicode Converter",
+    "operatingSystem": "All",
+    "applicationCategory": "UtilitiesApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+]
+-->
+<div class="tool-section">
+    <div class="tool-header">
+        <h1 class="tool-title">Romanized Nepali to Unicode</h1>
+        <div style="display: flex; justify-content: center; gap: 12px; align-items: center; margin-bottom: 12px; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">
+            <span>📅 Last Updated: July 2026</span>
+            <span>✍️ Author: Rajesh Tarar</span>
+        </div>
+        <p class="tool-desc">Type in phonetic Roman English letters (e.g., *kasto* or *mero*) below, and the tool will automatically output standard Devanagari Unicode script.</p>
+    </div>
+
+    <!-- Converter Card -->
+    <div class="converter-card">
+        <div class="editor-grid" style="grid-template-columns: 1fr;">
+            <div class="editor-pane">
+                <div class="editor-header">
+                    <span class="editor-label">✏️ Romanized Input Box</span>
+                    <div class="editor-actions">
+                        <button class="action-btn" id="clear-btn">Clear</button>
+                        <button class="action-btn primary" id="copy-btn">Copy Text</button>
+                    </div>
+                </div>
+                <textarea class="editor-textarea nepali-font" id="typing-area" placeholder="टाइपिङ सुरु गर्नुहोस् (kasto cha -> कस्तो छ)..." autofocus style="min-height: 350px; font-size: 1.25rem;"></textarea>
+                <div class="editor-footer">
+                    <span id="char-count">0 characters</span>
+                    <span id="word-count">0 words</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help guidelines mapping sheet -->
+    <article style="max-width: 900px; margin: 40px auto 0 auto; line-height: 1.8;">
+        <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 16px; color: var(--text-color);">Phonetic Romanized Layout Chart</h2>
+        <p style="margin-bottom: 24px; color: var(--text-muted);">
+            Write easily by sounding out words phonetically. Our engine compiles Latin characters into matching Devanagari code points in real-time.
+        </p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; flex-wrap: wrap;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; color: var(--text-muted);">
+                <thead>
+                    <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-color);">
+                        <th style="padding: 10px 0;">Roman Keys</th>
+                        <th style="padding: 10px 0;">Devanagari</th>
+                        <th style="padding: 10px 0;">Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px 0;">ka, kha, ga</td>
+                        <td style="padding: 10px 0;">क, ख, ग</td>
+                        <td style="padding: 10px 0;">k = क</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px 0;">a, aa, i, ee</td>
+                        <td style="padding: 10px 0;">ा, ा, ि, ी</td>
+                        <td style="padding: 10px 0;">kaa = का</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; color: var(--text-muted);">
+                <thead>
+                    <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-color);">
+                        <th style="padding: 10px 0;">Roman Keys</th>
+                        <th style="padding: 10px 0;">Devanagari</th>
+                        <th style="padding: 10px 0;">Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px 0;">ta, tha, da</td>
+                        <td style="padding: 10px 0;">त, थ, द</td>
+                        <td style="padding: 10px 0;">ta = त</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px 0;">Ta, Tha, Da</td>
+                        <td style="padding: 10px 0;">ट, ठ, ड</td>
+                        <td style="padding: 10px 0;">Ta = ट</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const area = document.getElementById('typing-area');
+        const clear = document.getElementById('clear-btn');
+        const copy = document.getElementById('copy-btn');
+        const chars = document.getElementById('char-count');
+        const words = document.getElementById('word-count');
+
+        if (area) {
+            // Apply romanized interception
+            if (typeof Nepalify !== 'undefined') {
+                Nepalify.intercept(area, 'romanized');
+            }
+
+            const updateStats = () => {
+                const val = area.value;
+                if (chars) chars.textContent = val.length + " characters";
+                if (words) {
+                    const count = val.trim() ? val.trim().split(/\s+/).length : 0;
+                    words.textContent = count + " words";
+                }
+            };
+
+            area.addEventListener('input', updateStats);
+
+            if (clear) {
+                clear.addEventListener('click', () => {
+                    area.value = "";
+                    updateStats();
+                    area.focus();
+                });
+            }
+
+            if (copy) {
+                copy.addEventListener('click', () => {
+                    if (!area.value) return;
+                    navigator.clipboard.writeText(area.value)
+                        .then(() => window.showToast?.("Text copied!"))
+                        .catch(e => console.error(e));
+                });
+            }
+        }
+    });
+</script>

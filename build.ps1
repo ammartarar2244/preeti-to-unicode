@@ -234,9 +234,64 @@ $sitemapXml = @'
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://nepalilanguagetools.com/kantipur-to-unicode/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/unicode-to-kantipur/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/sagarmatha-to-unicode/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/unicode-to-sagarmatha/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/himali-to-unicode/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/unicode-to-himali/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/kanchan-to-unicode/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/unicode-to-kanchan/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://nepalilanguagetools.com/english-to-nepali-typing/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/english-to-nepali-translator/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/nepali-to-english-translator/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/romanized-nepali-to-unicode/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://nepalilanguagetools.com/nepali-voice-typing/</loc>
@@ -249,9 +304,89 @@ $sitemapXml = @'
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://nepalilanguagetools.com/nepali-typing/</loc>
+    <loc>https://nepalilanguagetools.com/nepali-typing-practice/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/nepali-typing-speed-test/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/preeti-typing-practice/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/preeti-typing-speed-test/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/lok-sewa-typing-practice/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/lok-sewa-typing-test/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/fonts/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/preeti-font-download/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/kantipur-font-download/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/sagarmatha-font-download/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/himali-font-download/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/kanchan-font-download/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/learning-center/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/preeti-keyboard-guide/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/unicode-keyboard-guide/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/preeti-character-map/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nepalilanguagetools.com/unicode-character-map/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://nepalilanguagetools.com/font-converter/</loc>
@@ -270,11 +405,6 @@ $sitemapXml = @'
   </url>
   <url>
     <loc>https://nepalilanguagetools.com/nepali-keyboard-layout/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://nepalilanguagetools.com/preeti-font-download/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

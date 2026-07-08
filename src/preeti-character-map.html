@@ -1,0 +1,51 @@
+<!--
+TITLE: Preeti Character Map – Legacy Font Glyph Table
+META_DESCRIPTION: Find and copy legacy Preeti characters, consonants, vowels, and numbers layouts using our interactive glyph map.
+SCHEMA:
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Preeti Character Map",
+    "description": "Interactive glyph index and keyboard layout table for the legacy Preeti ASCII font.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "NepaliTools"
+    }
+  }
+]
+-->
+<div class="tool-section">
+    <div class="tool-header">
+        <h1 class="tool-title">Preeti Character Map</h1>
+        <div style="display: flex; justify-content: center; gap: 12px; align-items: center; margin-bottom: 12px; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">
+            <span>📅 Last Updated: July 2026</span>
+            <span>✍️ Author: Rajesh Tarar</span>
+        </div>
+        <p class="tool-desc">Browse, locate, and copy characters mapped in the legacy Preeti typeface layout.</p>
+    </div>
+
+    <!-- Character Map Grid -->
+    <div class="converter-card" style="max-width: 900px; margin: 0 auto; padding: 24px;">
+        <h2 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 16px; color: var(--text-color);">Interactive Character Grid</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 8px;" id="char-grid"></div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const grid = document.getElementById('char-grid');
+        // Standard Preeti layout visual glyph representations
+        const glyphs = [
+            "s", "v", "u", "U", "g", "d", "n", "j", "z", "i", "a", "k|m", "e", "k", "Q", "q", "N", "¡", "¢", "1", "2", "4", ">", "?", "B", "I"
+        ];
+        
+        if (grid) {
+            grid.innerHTML = glyphs.map(g => `
+                <div class="keyboard-key" style="height: 64px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 1.25rem; font-family: 'Preeti', 'Courier New', sans-serif; cursor: pointer; border: 1px solid var(--border-color); border-radius: 6px; background-color: rgba(255,255,255,0.03);" onclick="navigator.clipboard.writeText('${g}').then(() => window.showToast?.('Copied: ${g}'))">
+                    ${g}
+                </div>
+            `).join('');
+        }
+    });
+</script>

@@ -1,0 +1,51 @@
+<!--
+TITLE: Nepali Unicode Character Map – Devanagari Glyph Index
+META_DESCRIPTION: Find, copy, and explore standard Devanagari Unicode characters, consonants, vowels, and numbers layouts using our interactive glyph map.
+SCHEMA:
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Nepali Unicode Character Map",
+    "description": "Interactive glyph index and code points range table for standard Devanagari Unicode.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "NepaliTools"
+    }
+  }
+]
+-->
+<div class="tool-section">
+    <div class="tool-header">
+        <h1 class="tool-title">Nepali Unicode Character Map</h1>
+        <div style="display: flex; justify-content: center; gap: 12px; align-items: center; margin-bottom: 12px; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">
+            <span>📅 Last Updated: July 2026</span>
+            <span>✍️ Author: Rajesh Tarar</span>
+        </div>
+        <p class="tool-desc">Browse, locate, and copy characters mapped in the standard Devanagari Unicode system.</p>
+    </div>
+
+    <!-- Character Map Grid -->
+    <div class="converter-card" style="max-width: 900px; margin: 0 auto; padding: 24px;">
+        <h2 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 16px; color: var(--text-color);">Interactive Character Grid</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 8px;" id="char-grid"></div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const grid = document.getElementById('char-grid');
+        // Standard Devanagari Unicode glyphs
+        const glyphs = [
+            "अ", "आ", "इ", "ई", "उ", "ऊ", "ऋ", "ए", "ऐ", "ओ", "औ", "क", "ख", "ग", "घ", "ङ", "च", "छ", "ज", "झ", "ञ", "ट", "ठ", "ड", "ढ", "ण", "त", "थ", "द", "ध", "न", "प", "फ", "ब", "भ", "म", "य", "र", "ल", "व", "श", "ष", "स", "ह", "ा", "ि", "ी", "ु", "ू", "ृ", "े", "ै", "ो", "ौ", "्", "ं", "ः", "ँ"
+        ];
+        
+        if (grid) {
+            grid.innerHTML = glyphs.map(g => `
+                <div class="keyboard-key" style="height: 64px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 1.25rem; font-family: var(--font-devanagari); cursor: pointer; border: 1px solid var(--border-color); border-radius: 6px; background-color: rgba(255,255,255,0.03);" onclick="navigator.clipboard.writeText('${g}').then(() => window.showToast?.('Copied: ${g}'))">
+                    ${g}
+                </div>
+            `).join('');
+        }
+    });
+</script>

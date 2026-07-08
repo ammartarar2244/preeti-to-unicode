@@ -1,0 +1,109 @@
+<!--
+TITLE: Kantipur to Unicode Converter Online – Legacy Font Conversion
+META_DESCRIPTION: Convert legacy Kantipur font text to standard web-safe Devanagari Unicode online. Free, secure, highly accurate, and offline capable.
+SCHEMA:
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Kantipur to Unicode Converter",
+    "operatingSystem": "All",
+    "applicationCategory": "UtilitiesApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the Kantipur font?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Kantipur is a widely used legacy ASCII Devanagari font in Nepal, commonly used by local newspaper houses and print media designers. Like Preeti, it maps Devanagari characters onto standard English Latin keyboard keys."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are my files secure during conversion?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Our conversion logic runs 100% locally inside your web browser sandbox using client-side JavaScript. No text is uploaded to any server."
+        }
+      }
+    ]
+  }
+]
+-->
+<div class="tool-section">
+    <div class="tool-header">
+        <h1 class="tool-title">Kantipur to Unicode Converter</h1>
+        <div style="display: flex; justify-content: center; gap: 12px; align-items: center; margin-bottom: 12px; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">
+            <span>📅 Last Updated: July 2026</span>
+            <span>✍️ Author: Rajesh Tarar</span>
+        </div>
+        <p class="tool-desc">Paste your legacy Kantipur font text below to convert it to standard, web-safe Unicode Devanagari instantly.</p>
+    </div>
+
+    <!-- Converter Card -->
+    <div class="converter-card">
+        <div class="editor-grid">
+            <div class="editor-pane">
+                <div class="editor-header">
+                    <span class="editor-label">✏️ Kantipur Font Input</span>
+                    <div class="editor-actions">
+                        <button class="action-btn" id="preeti-clear">Clear</button>
+                    </div>
+                </div>
+                <textarea class="editor-textarea kantipur-font" id="preeti-input" placeholder="sf7df08\" autofocus></textarea>
+                <div class="editor-footer">
+                    <span id="preeti-count">0 characters</span>
+                    <span>Legacy Kantipur layout</span>
+                </div>
+            </div>
+            
+            <div class="editor-pane">
+                <div class="editor-header">
+                    <span class="editor-label">✨ Unicode Devanagari Output</span>
+                    <div class="editor-actions">
+                        <button class="action-btn primary" id="preeti-copy">Copy Unicode</button>
+                    </div>
+                </div>
+                <textarea class="editor-textarea nepali-font" id="unicode-output" readonly placeholder="काठमाण्डू"></textarea>
+                <div class="editor-footer">
+                    <span id="unicode-count">0 characters</span>
+                    <span>Standard UTF-8</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <article style="max-width: 900px; margin: 0 auto; line-height: 1.8; margin-top: 40px;">
+        <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 16px; color: var(--text-color);">How to Convert Kantipur Font to Unicode Online</h2>
+        
+        <p style="margin-bottom: 16px; color: var(--text-muted);">
+            The Kantipur font has been a staple in Nepalese print media and desktop publishing workflows. However, sharing files written in Kantipur requires the recipient to have the same font installed, which is not suitable for search engines or web platforms. Converting your Kantipur content to standard <strong>Devanagari Unicode</strong> solves this incompatibility.
+        </p>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 28px; margin-bottom: 12px; color: var(--text-color);">Conversion Steps:</h3>
+        <ol style="margin-left: 20px; color: var(--text-muted); margin-bottom: 24px;">
+            <li style="margin-bottom: 8px;">Copy the text from your legacy document (MS Word, InDesign, etc.).</li>
+            <li style="margin-bottom: 8px;">Paste the text into the <strong>Kantipur Font Input</strong> box above.</li>
+            <li style="margin-bottom: 8px;">The converter will automatically output standard Devanagari in the right pane.</li>
+            <li style="margin-bottom: 8px;">Click <strong>Copy Unicode</strong> to copy it to your clipboard.</li>
+        </ol>
+
+        <!-- Official Sources and References Card -->
+        <div style="background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 20px; font-size: 0.85rem; line-height: 1.6; margin-top: 32px;">
+            <h4 style="font-family: var(--font-heading); margin-bottom: 8px; font-weight: 700; color: var(--text-color);">Official References & Cited Standards:</h4>
+            <ul style="margin-left: 20px; color: var(--text-muted);">
+                <li>Unicode Consortium: Devanagari Code Range Specification U+0900 – U+097F — <a href="https://www.unicode.org/charts/PDF/U0900.pdf" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: none; font-weight: 600;">Unicode PDF Specs</a></li>
+                <li>Nepal Government Department of Information Technology (DoIT): IT Standards guidelines for Devanagari fonts.</li>
+            </ul>
+        </div>
+    </article>
+</div>

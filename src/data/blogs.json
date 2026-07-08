@@ -1,4 +1,4 @@
-﻿[
+[
     {
         "title":  "The Ultimate Guide to Nepali Unicode Typing",
         "category":  "Unicode Guide",
@@ -238,5 +238,69 @@
         "publishDate":  "2026-08-26",
         "excerpt":  "The history and future of standardized Devanagari Unicode adoption in government administration.",
         "content":  "\u003ch2\u003eThe Shift to Standard Encoding\u003c/h2\u003e\u003cp\u003eFor decades, government offices in Nepal used legacy ASCII fonts for official correspondence. This created archival issues because the files were not searchable. To solve this, the government is standardizing on Unicode.\u003c/p\u003e\u003ch2\u003eThe Future of Digital Governance\u003c/h2\u003e\u003cp\u003eAdopting standard \u003cstrong\u003eNepali Unicode\u003c/strong\u003e is a key step toward digital governance. It allows records to be indexed, searched, and accessed across all departments, creating a more efficient and accessible administrative system.\u003c/p\u003e"
+    },
+    {
+        "title": "What is Preeti Font: The Pioneer of Nepali Touch Typing",
+        "category": "Educational",
+        "slug": "what-is-preeti-font",
+        "publishDate": "2026-07-06",
+        "excerpt": "A deep dive into Preeti Font, its keyboard layout mappings, ASCII characters, and its historical role in early Nepali digital publishing.",
+        "content": "<h2>The Origins of Preeti Font</h2><p>Developed in the early days of desktop publishing in Nepal, <strong>Preeti</strong> is the pioneer ASCII typeface that mapped Devanagari character shapes directly to standard English QWERTY keyboard values. It enabled printing presses and government departments to type in Nepali for the first time.</p><h2>How ASCII Mappings Work</h2><p>Because early operating systems could not read Devanagari natively, designers mapped Devanagari characters to Latin keys. For example, typing the sequence <code>g]kfn</code> displays visually as <code>नेपाल</code> in document processors with the Preeti font file installed. Today, modern tools use converters to translate this visual layout to standard Unicode.</p>"
+    },
+    {
+        "title": "What is Nepali Unicode: Standardizing Devanagari Online",
+        "category": "Educational",
+        "slug": "what-is-nepali-unicode",
+        "publishDate": "2026-07-06",
+        "excerpt": "Learn about standard Devanagari Unicode encoding, UTF-8 mapping, and why Unicode is crucial for digital indexing and search engines.",
+        "content": "<h2>Understanding Unicode Devanagari</h2><p>Unlike legacy fonts that replace Latin character visuals, <strong>Nepali Unicode</strong> assigns a unique standard hexadecimal value to every Devanagari glyph. This ensures that when you send a message, it renders correctly on any device without installing special fonts.</p><h2>The Core Benefits</h2><p>Unicode makes Devanagari text fully searchable and indexable by engines like Google and Bing. It also enables modern speech-to-text dictation and local offline caching on Progressive Web Apps.</p>"
+    },
+    {
+        "title": "History of Nepali Fonts: From Typewriters to System Unicode",
+        "category": "History",
+        "slug": "history-of-nepali-fonts",
+        "publishDate": "2026-07-06",
+        "excerpt": "Discover the evolutionary journey of Devanagari typography in Nepal, covering typewriter keys, legacy ASCII layouts, and standard UTF-8.",
+        "content": "<h2>Early Devanagari Typewriters</h2><p>The history of Nepali typing began with mechanical typewriters layout setups. In the late 20th century, digital type designers created typefaces like Preeti, Kantipur, Sagarmatha, and PCS Himali to bring Devanagari to early computing.</p><h2>The Modern Era</h2><p>With the release of standard Devanagari UTF-8 support by the Unicode Consortium, Nepal began transitioning away from legacy layouts. Today, standard Unicode is the default for government portals, news sites, and social media platforms.</p>"
+    },
+    {
+        "title": "How to Type Nepali: Mastering Devanagari Touch Typing",
+        "category": "Educational",
+        "slug": "how-to-type-nepali",
+        "publishDate": "2026-07-06",
+        "excerpt": "A complete beginner's guide to touch-typing in Nepali. Learn home row placements, shift key triggers, and accuracy tips.",
+        "content": "<h2>Getting Started with Touch Typing</h2><p>To type fast in Nepali, you must train your finger muscle memory. Place your hands on the Home Row (A-S-D-F and J-K-L-;). Use structured typing practice tools to drill letters systematically before trying speed tests.</p><h2>Key Layout Rules</h2><p>Nepali Romanized typing lets you spell words phonetically, making it the easiest way to start. Traditional layouts require learning the specific character key maps but offer higher efficiency for professional typesetters.</p>"
+    },
+    {
+        "title": "How to Install Nepali Fonts: TTF Setup on All Operating Systems",
+        "category": "Educational",
+        "slug": "how-to-install-nepali-fonts",
+        "publishDate": "2026-07-06",
+        "excerpt": "Step-by-step installation instructions for TrueType (.ttf) legacy fonts on Windows 11/10, macOS, Linux, and Adobe suites.",
+        "content": "<h2>System-Wide Font Setup</h2><p>To read legacy files formatted in Preeti, Kantipur, or Sagarmatha, you must install the font files locally. On Windows, right-click the downloaded <code>.ttf</code> file and select Install. On Mac, open the file in Font Book and click Install Font.</p><h2>Configuring Design Tools</h2><p>Once installed, restart applications like Adobe InDesign, MS Word, or Photoshop. You can select the typeface from the text styles dropdown and begin formatting.</p>"
+    },
+    {
+        "title": "Common Nepali Typing Mistakes and How to Fix Them",
+        "category": "Educational",
+        "slug": "common-nepali-typing-mistakes",
+        "publishDate": "2026-07-06",
+        "excerpt": "Learn how to detect and resolve displaced vowel matras, halant glitched characters, and spelling errors in your text.",
+        "content": "<h2>The Vowel Shift Error</h2><p>A frequent typing error occurs with the short vowel 'i' matra (ि). In legacy layouts, it is typed before the consonant cluster, while Unicode expects it logically after. Converters handle this swap automatically, but manual typists must type consonant followed by matra.</p><h2>Handling Conjunct Glyphs</h2><p>To type compound characters like 'क्त', type the first consonant, the halanta mark (्), and then the second consonant. This signals the browser's engine to merge them cleanly.</p>"
+    },
+    {
+        "title": "Unicode Standards Explained: Devanagari Code Points Index",
+        "category": "Technical",
+        "slug": "unicode-standards-explained",
+        "publishDate": "2026-07-06",
+        "excerpt": "A deep dive into the official U+0900 – U+097F code block range, character sets, and collation regulations for Nepali.",
+        "content": "<h2>Official Devanagari Code Range</h2><p>The Unicode Consortium reserves the block U+0900 to U+097F for Devanagari. It is used to index vowels, consonants, numbers, and diacritics for languages like Nepali, Hindi, and Sanskrit.</p><h2>Collation and Sorting</h2><p>Unicode defines standard sorting regulations, enabling search engines and databases to collate Nepali words alphabetically, which was impossible with legacy ASCII codes.</p>"
+    },
+    {
+        "title": "Nepali Digital Publishing Guide: SEO & Formatting Standards",
+        "category": "SEO Tips",
+        "slug": "nepali-digital-publishing-guide",
+        "publishDate": "2026-07-06",
+        "excerpt": "SEO guidelines and standards for publishers to optimize their Devanagari content for search engines and mobile devices.",
+        "content": "<h2>Optimizing for Devanagari Search</h2><p>If you run a local blog or news agency, writing in Unicode is mandatory for search engine optimization. Google indexes native text strings, so using legacy ASCII fonts will prevent your articles from ranking on Devanagari search queries.</p><h2>Mobile Usability Guidelines</h2><p>Ensure your font size is legible (minimum 16px) on mobile screens. Set the line height to 1.6 to prevent overlapping of top and bottom vowel marks.</p>"
     }
 ]

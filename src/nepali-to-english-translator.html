@@ -1,0 +1,103 @@
+<!--
+TITLE: Nepali to English Translator Online - Free Translation
+META_DESCRIPTION: Translate standard Devanagari Nepali text to English sentences online. Highly accurate, fast, secure, and free translation tool.
+SCHEMA:
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Nepali to English Translator",
+    "operatingSystem": "All",
+    "applicationCategory": "UtilitiesApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is this translation service free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, our Nepali to English translation tool is 100% free with no daily limits or login requirements."
+        }
+      }
+    ]
+  }
+]
+-->
+<div class="tool-section">
+    <div class="tool-header">
+        <h1 class="tool-title">Nepali to English Translator</h1>
+        <div style="display: flex; justify-content: center; gap: 12px; align-items: center; margin-bottom: 12px; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">
+            <span>📅 Last Updated: July 2026</span>
+            <span>✍️ Author: Rajesh Tarar</span>
+        </div>
+        <p class="tool-desc">Type or paste Nepali Devanagari text below and click **Translate** to translate it into standard English instantly.</p>
+    </div>
+
+    <!-- Translator Card -->
+    <div class="converter-card">
+        <div class="editor-grid">
+            <div class="editor-pane">
+                <div class="editor-header">
+                    <span class="editor-label">📝 Nepali Text Input</span>
+                    <div class="editor-actions">
+                        <button class="action-btn" id="trans-clear">Clear</button>
+                    </div>
+                </div>
+                <!-- Interactive interceptor layout typing is Romanized to help typing Nepali -->
+                <textarea class="editor-textarea nepali-font" id="trans-input" placeholder="यहाँ नेपाली लेख्नुहोस् (उदा: नेपालमा स्वागत छ)..." autofocus></textarea>
+                <div class="editor-footer" style="justify-content: space-between;">
+                    <span>Press **Translate** to start</span>
+                    <button class="action-btn primary" id="trans-submit">Translate</button>
+                </div>
+            </div>
+            
+            <div class="editor-pane">
+                <div class="editor-header">
+                    <span class="editor-label">✨ English Translation Output</span>
+                    <div class="editor-actions">
+                        <button class="action-btn primary" id="trans-copy">Copy Text</button>
+                    </div>
+                </div>
+                <textarea class="editor-textarea" id="trans-output" readonly placeholder="English translation will appear here..."></textarea>
+                <div class="editor-footer">
+                    <span>Standard English ASCII</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <article style="max-width: 900px; margin: 40px auto 0 auto; line-height: 1.8;">
+        <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 16px; color: var(--text-color);">High-Speed Nepali to English Translation Online</h2>
+        <p style="margin-bottom: 16px; color: var(--text-muted);">
+            Our translation utility helps you translate Devanagari scripts, official government letters, or social media posts into standard English. No sign-up, secure browser-based execution.
+        </p>
+    </article>
+</div>
+
+<script src="/assets/js/translator.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Intercept input textarea for easy Nepali writing
+        if (typeof Nepalify !== 'undefined') {
+            Nepalify.intercept(document.getElementById('trans-input'), 'romanized');
+        }
+
+        NepaliTranslator.initTranslator(
+            'ne',
+            'en',
+            'trans-input',
+            'trans-output',
+            'trans-submit',
+            'trans-clear',
+            'trans-copy'
+        );
+    });
+</script>

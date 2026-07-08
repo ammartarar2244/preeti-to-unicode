@@ -1,0 +1,156 @@
+<!--
+TITLE: Nepali Typing Practice Online – Romanized Drills
+META_DESCRIPTION: Practice Nepali typing online with structured Romanized lessons. Keyboard highlighter, accuracy metrics, and word speed stats. Try now!
+SCHEMA:
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Nepali Typing Practice Online",
+    "operatingSystem": "All",
+    "applicationCategory": "EducationalApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+]
+-->
+<div class="tool-section">
+    <div class="tool-header">
+        <h1 class="tool-title">Nepali Typing Practice</h1>
+        <div style="display: flex; justify-content: center; gap: 12px; align-items: center; margin-bottom: 12px; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">
+            <span>📅 Last Updated: July 2026</span>
+            <span>✍️ Author: Rajesh Tarar</span>
+        </div>
+        <p class="tool-desc">Select a structured lesson to practice Devanagari character touch-typing with our interactive keyboard highlighting system.</p>
+    </div>
+
+    <!-- Practice Container -->
+    <div class="converter-card" style="max-width: 900px; margin: 0 auto; padding: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <label for="lesson-select" style="font-weight: 600; font-size: 0.9rem;">Select Lesson:</label>
+                <select id="lesson-select" class="action-btn" style="background-color: rgba(255, 255, 255, 0.05); color: var(--text-color); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: var(--border-radius-sm); outline: none; cursor: pointer;"></select>
+            </div>
+            <button class="action-btn" id="practice-reset" style="background-color: rgba(255,255,255,0.05); color: var(--text-color);">Reset Lesson</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px;">
+            <div class="metric-card" style="padding: 16px; text-align: center; background-color: rgba(0,0,0,0.15); border-radius: var(--border-radius-md);">
+                <div class="metric-val" id="practice-wpm" style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">0</div>
+                <div class="metric-lbl" style="font-size: 0.75rem; color: var(--text-muted);">WPM Speed</div>
+            </div>
+            <div class="metric-card" style="padding: 16px; text-align: center; background-color: rgba(0,0,0,0.15); border-radius: var(--border-radius-md);">
+                <div class="metric-val" id="practice-accuracy" style="font-size: 1.5rem; font-weight: 700; color: #10b981;">100%</div>
+                <div class="metric-lbl" style="font-size: 0.75rem; color: var(--text-muted);">Accuracy</div>
+            </div>
+            <div class="metric-card" style="padding: 16px; text-align: center; background-color: rgba(0,0,0,0.15); border-radius: var(--border-radius-md);">
+                <div class="metric-val" id="practice-timer" style="font-size: 1.5rem; font-weight: 700; color: var(--text-color);">0s</div>
+                <div class="metric-lbl" style="font-size: 0.75rem; color: var(--text-muted);">Elapsed Time</div>
+            </div>
+            <div class="metric-card" style="padding: 16px; text-align: center; background-color: rgba(0,0,0,0.15); border-radius: var(--border-radius-md);">
+                <div class="metric-val" style="font-size: 1.25rem; font-weight: 700; color: var(--text-color);">Romanized</div>
+                <div class="metric-lbl" style="font-size: 0.75rem; color: var(--text-muted);">Layout</div>
+            </div>
+        </div>
+
+        <!-- Target Text Display -->
+        <div class="text-display-box" id="practice-display" style="min-height: 120px; font-size: 1.5rem; line-height: 2; padding: 24px; background-color: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); margin-bottom: 20px; font-family: var(--font-devanagari); letter-spacing: 0.05em; text-align: left;"></div>
+
+        <!-- Input Box -->
+        <input type="text" class="typing-input" id="practice-input" placeholder="यहाँ अभ्यास सुरु गर्नुहोस् (Start typing here...)" autocomplete="off" style="width: 100%; padding: 16px 20px; font-size: 1.25rem; background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); color: var(--text-color); outline: none; margin-bottom: 32px; font-family: var(--font-devanagari);">
+
+        <!-- Virtual Keyboard Layout Guide -->
+        <div class="virtual-keyboard" id="practice-keyboard" style="display: flex; flex-direction: column; gap: 6px; background-color: rgba(0,0,0,0.25); border: 1px solid var(--border-color); padding: 16px; border-radius: var(--border-radius-md);">
+            <!-- Row 1 -->
+            <div class="keyboard-row" style="display: flex; gap: 6px; justify-content: center;">
+                <div class="keyboard-key" data-key="Backquote" style="flex: 1; min-width: 32px; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03); color: var(--text-muted);"><span style="font-size: 0.65rem; color: var(--primary);">~</span>`</div>
+                <div class="keyboard-key" data-key="Digit1" style="flex: 1; min-width: 32px; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03); color: var(--text-muted);"><span style="font-size: 0.65rem; color: var(--primary);">१</span>1</div>
+                <div class="keyboard-key" data-key="Digit2" style="flex: 1; min-width: 32px; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03); color: var(--text-muted);"><span style="font-size: 0.65rem; color: var(--primary);">२</span>2</div>
+                <div class="keyboard-key" data-key="Digit3" style="flex: 1; min-width: 32px; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03); color: var(--text-muted);"><span style="font-size: 0.65rem; color: var(--primary);">३</span>3</div>
+                <div class="keyboard-key" data-key="Digit4" style="flex: 1; min-width: 32px; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03); color: var(--text-muted);"><span style="font-size: 0.65rem; color: var(--primary);">४</span>4</div>
+                <div class="keyboard-key" data-key="Digit5" style="flex: 1; min-width: 32px; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03); color: var(--text-muted);"><span style="font-size: 0.65rem; color: var(--primary);">५</span>5</div>
+                <div class="keyboard-key" data-key="Digit6" style="flex: 1; min-width: 32px; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03); color: var(--text-muted);"><span style="font-size: 0.65rem; color: var(--primary);">६</span>6</div>
+                <div class="keyboard-key" data-key="Digit7" style="flex: 1; min-width: 32px; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03); color: var(--text-muted);"><span style="font-size: 0.65rem; color: var(--primary);">७</span>7</div>
+                <div class="keyboard-key" data-key="Digit8" style="flex: 1; min-width: 32px; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03); color: var(--text-muted);"><span style="font-size: 0.65rem; color: var(--primary);">८</span>8</div>
+                <div class="keyboard-key" data-key="Digit9" style="flex: 1; min-width: 32px; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03); color: var(--text-muted);"><span style="font-size: 0.65rem; color: var(--primary);">९</span>9</div>
+                <div class="keyboard-key" data-key="Digit0" style="flex: 1; min-width: 32px; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03); color: var(--text-muted);"><span style="font-size: 0.65rem; color: var(--primary);">०</span>0</div>
+                <div class="keyboard-key" data-key="Minus" style="flex: 1; min-width: 32px; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03); color: var(--text-muted);"><span style="font-size: 0.65rem; color: var(--primary);">_</span>-</div>
+                <div class="keyboard-key" data-key="Equal" style="flex: 1; min-width: 32px; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03); color: var(--text-muted);"><span style="font-size: 0.65rem; color: var(--primary);">+</span>=</div>
+                <div class="keyboard-key" data-key="Backspace" style="flex: 2; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.05);">Backspace</div>
+            </div>
+            <!-- Row 2 -->
+            <div class="keyboard-row" style="display: flex; gap: 6px; justify-content: center;">
+                <div class="keyboard-key" data-key="Tab" style="flex: 1.5; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.05);">Tab</div>
+                <div class="keyboard-key" data-key="KeyQ" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">त्र</span>Q</div>
+                <div class="keyboard-key" data-key="KeyW" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">ध</span>W</div>
+                <div class="keyboard-key" data-key="KeyE" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">भ</span>E</div>
+                <div class="keyboard-key" data-key="KeyR" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">च</span>R</div>
+                <div class="keyboard-key" data-key="KeyT" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">त</span>T</div>
+                <div class="keyboard-key" data-key="KeyY" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">थ</span>Y</div>
+                <div class="keyboard-key" data-key="KeyU" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">श</span>U</div>
+                <div class="keyboard-key" data-key="KeyI" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">ष</span>I</div>
+                <div class="keyboard-key" data-key="KeyO" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">ज्ञ</span>O</div>
+                <div class="keyboard-key" data-key="KeyP" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">प</span>P</div>
+                <div class="keyboard-key" data-key="BracketLeft" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">्</span>[</div>
+                <div class="keyboard-key" data-key="BracketRight" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">।</span>]</div>
+                <div class="keyboard-key" data-key="Backslash" style="flex: 1.5; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">॥</span>\</div>
+            </div>
+            <!-- Row 3 -->
+            <div class="keyboard-row" style="display: flex; gap: 6px; justify-content: center;">
+                <div class="keyboard-key" data-key="CapsLock" style="flex: 1.8; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.05);">Caps</div>
+                <div class="keyboard-key" data-key="KeyA" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">ा</span>A</div>
+                <div class="keyboard-key" data-key="KeyS" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">क</span>S</div>
+                <div class="keyboard-key" data-key="KeyD" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">म</span>D</div>
+                <div class="keyboard-key" data-key="KeyF" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">ा</span>F</div>
+                <div class="keyboard-key" data-key="KeyG" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">न</span>G</div>
+                <div class="keyboard-key" data-key="KeyH" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">ज</span>H</div>
+                <div class="keyboard-key" data-key="KeyJ" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">व</span>J</div>
+                <div class="keyboard-key" data-key="KeyK" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">क</span>K</div>
+                <div class="keyboard-key" data-key="KeyL" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">त</span>L</div>
+                <div class="keyboard-key" data-key="Semicolon" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">;</span>;</div>
+                <div class="keyboard-key" data-key="Quote" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">'</span>'</div>
+                <div class="keyboard-key" data-key="Enter" style="flex: 2.2; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.05);">Enter</div>
+            </div>
+            <!-- Row 4 -->
+            <div class="keyboard-row" style="display: flex; gap: 6px; justify-content: center;">
+                <div class="keyboard-key" data-key="ShiftLeft" style="flex: 2.5; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.05);">Shift</div>
+                <div class="keyboard-key" data-key="KeyZ" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">ि</span>Z</div>
+                <div class="keyboard-key" data-key="KeyX" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">ी</span>X</div>
+                <div class="keyboard-key" data-key="KeyC" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">च</span>C</div>
+                <div class="keyboard-key" data-key="KeyV" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">छ</span>V</div>
+                <div class="keyboard-key" data-key="KeyB" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">े</span>B</div>
+                <div class="keyboard-key" data-key="KeyN" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">ै</span>N</div>
+                <div class="keyboard-key" data-key="KeyM" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">ो</span>M</div>
+                <div class="keyboard-key" data-key="Comma" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">ौ</span>,</div>
+                <div class="keyboard-key" data-key="Period" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">।</span>.</div>
+                <div class="keyboard-key" data-key="Slash" style="flex: 1; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.03);"><span style="font-size: 0.65rem; color: var(--primary);">?</span>/</div>
+                <div class="keyboard-key" data-key="ShiftRight" style="flex: 2.5; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; background-color: rgba(255,255,255,0.05);">Shift</div>
+            </div>
+            <!-- Spacebar -->
+            <div class="keyboard-row" style="display: flex; gap: 6px; justify-content: center;">
+                <div class="keyboard-key" data-key="Space" style="width: 320px; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; display: flex; align-items: center; justify-content: center; background-color: rgba(255,255,255,0.03);">Space</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/assets/js/typing-hub.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const practice = TypingHub.initPractice(
+            'romanized', 
+            'practice-display', 
+            'practice-input', 
+            'practice-wpm', 
+            'practice-accuracy', 
+            'practice-timer', 
+            'lesson-select'
+        );
+        document.getElementById('practice-reset').addEventListener('click', () => {
+            practice.reset();
+        });
+    });
+</script>

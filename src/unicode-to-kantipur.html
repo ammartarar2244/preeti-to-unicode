@@ -1,0 +1,93 @@
+<!--
+TITLE: Unicode to Kantipur Converter Online – Convert Devanagari to Kantipur Font
+META_DESCRIPTION: Convert standard Devanagari Unicode text back to legacy Kantipur font layout. Free, secure, highly accurate, and offline capable.
+SCHEMA:
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Unicode to Kantipur Converter",
+    "operatingSystem": "All",
+    "applicationCategory": "UtilitiesApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why convert standard Unicode to Kantipur?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Many printing presses and graphic designers in Nepal still use legacy desktop applications configured for ASCII fonts. Converting standard Unicode to Kantipur maps Devanagari characters back into visual ASCII keys, keeping layouts intact for printing."
+        }
+      }
+    ]
+  }
+]
+-->
+<div class="tool-section">
+    <div class="tool-header">
+        <h1 class="tool-title">Unicode to Kantipur Converter</h1>
+        <div style="display: flex; justify-content: center; gap: 12px; align-items: center; margin-bottom: 12px; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">
+            <span>📅 Last Updated: July 2026</span>
+            <span>✍️ Author: Rajesh Tarar</span>
+        </div>
+        <p class="tool-desc">Convert standard Nepali Unicode Devanagari text back to the legacy Kantipur font format for desktop publishing and print tools.</p>
+    </div>
+
+    <!-- Converter Card -->
+    <div class="converter-card">
+        <div class="editor-grid">
+            <div class="editor-pane">
+                <div class="editor-header">
+                    <span class="editor-label">✏️ Unicode Devanagari Input</span>
+                    <div class="editor-actions">
+                        <button class="action-btn" id="unicode-clear">Clear</button>
+                    </div>
+                </div>
+                <textarea class="editor-textarea nepali-font" id="unicode-input" placeholder="काठमाडौं यहाँ लेख्नुहोस्..."></textarea>
+                <div class="editor-footer">
+                    <span id="unicode-inp-count">0 characters</span>
+                    <span>Standard UTF-8</span>
+                </div>
+            </div>
+            
+            <div class="editor-pane">
+                <div class="editor-header">
+                    <span class="editor-label">✨ Kantipur Output Text</span>
+                    <div class="editor-actions">
+                        <button class="action-btn primary" id="unicode-copy">Copy Kantipur</button>
+                    </div>
+                </div>
+                <textarea class="editor-textarea kantipur-font" id="preeti-output" readonly placeholder="sf7df08' oxfF n]Vg'xf];\"></textarea>
+                <div class="editor-footer">
+                    <span id="preeti-out-count">0 characters</span>
+                    <span>Legacy Kantipur layout</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <article style="max-width: 900px; margin: 0 auto; line-height: 1.8; margin-top: 40px;">
+        <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 16px; color: var(--text-color);">How to Convert Unicode to Kantipur Font</h2>
+        
+        <p style="margin-bottom: 16px; color: var(--text-muted);">
+            If you need to import text written on standard smartphones or websites into print media setups using legacy typesetting fonts, this tool helps you reverse the mapping from Unicode back to the legacy ASCII layout.
+        </p>
+
+        <!-- Official Sources and References Card -->
+        <div style="background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 20px; font-size: 0.85rem; line-height: 1.6; margin-top: 32px;">
+            <h4 style="font-family: var(--font-heading); margin-bottom: 8px; font-weight: 700; color: var(--text-color);">Official References & Cited Standards:</h4>
+            <ul style="margin-left: 20px; color: var(--text-muted);">
+                <li>Unicode Consortium: Devanagari Code Range Specification U+0900 – U+097F — <a href="https://www.unicode.org/charts/PDF/U0900.pdf" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: none; font-weight: 600;">Unicode PDF Specs</a></li>
+                <li>Nepal Government Department of Information Technology (DoIT): IT Standards guidelines for legacy font mapping.</li>
+            </ul>
+        </div>
+    </article>
+</div>

@@ -1,0 +1,92 @@
+<!--
+TITLE: Unicode to Sagarmatha Converter Online – Convert Devanagari to Sagarmatha Font
+META_DESCRIPTION: Convert standard Devanagari Unicode text back to legacy Sagarmatha font layout. Free, secure, highly accurate, and offline capable.
+SCHEMA:
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Unicode to Sagarmatha Converter",
+    "operatingSystem": "All",
+    "applicationCategory": "UtilitiesApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why convert standard Unicode to Sagarmatha?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Literary and traditional publishing editors in Nepal often use legacy publishing suites configured for ASCII fonts. Converting standard Unicode to Sagarmatha maps characters back to visual layout parameters."
+        }
+      }
+    ]
+  }
+]
+-->
+<div class="tool-section">
+    <div class="tool-header">
+        <h1 class="tool-title">Unicode to Sagarmatha Converter</h1>
+        <div style="display: flex; justify-content: center; gap: 12px; align-items: center; margin-bottom: 12px; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">
+            <span>📅 Last Updated: July 2026</span>
+            <span>✍️ Author: Rajesh Tarar</span>
+        </div>
+        <p class="tool-desc">Convert standard Nepali Unicode Devanagari text back to the legacy Sagarmatha font format for desktop publishing.</p>
+    </div>
+
+    <!-- Converter Card -->
+    <div class="converter-card">
+        <div class="editor-grid">
+            <div class="editor-pane">
+                <div class="editor-header">
+                    <span class="editor-label">✏️ Unicode Devanagari Input</span>
+                    <div class="editor-actions">
+                        <button class="action-btn" id="unicode-clear">Clear</button>
+                    </div>
+                </div>
+                <textarea class="editor-textarea nepali-font" id="unicode-input" placeholder="काठमाडौं यहाँ लेख्नुहोस्..."></textarea>
+                <div class="editor-footer">
+                    <span id="unicode-inp-count">0 characters</span>
+                    <span>Standard UTF-8</span>
+                </div>
+            </div>
+            
+            <div class="editor-pane">
+                <div class="editor-header">
+                    <span class="editor-label">✨ Sagarmatha Output Text</span>
+                    <div class="editor-actions">
+                        <button class="action-btn primary" id="unicode-copy">Copy Sagarmatha</button>
+                    </div>
+                </div>
+                <textarea class="editor-textarea sagarmatha-font" id="preeti-output" readonly placeholder="sf7df08' oxfF n]Vg'xf];\"></textarea>
+                <div class="editor-footer">
+                    <span id="preeti-out-count">0 characters</span>
+                    <span>Legacy Sagarmatha layout</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <article style="max-width: 900px; margin: 0 auto; line-height: 1.8; margin-top: 40px;">
+        <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 16px; color: var(--text-color);">How to Convert Unicode to Sagarmatha Font</h2>
+        <p style="margin-bottom: 16px; color: var(--text-muted);">
+            If you need to import text written on standard smartphones or websites into print media setups using legacy typesetting fonts, this tool helps you reverse the mapping from Unicode back to the legacy Sagarmatha layout.
+        </p>
+
+        <!-- Official Sources and References Card -->
+        <div style="background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 20px; font-size: 0.85rem; line-height: 1.6; margin-top: 32px;">
+            <h4 style="font-family: var(--font-heading); margin-bottom: 8px; font-weight: 700; color: var(--text-color);">Official References & Cited Standards:</h4>
+            <ul style="margin-left: 20px; color: var(--text-muted);">
+                <li>Unicode Consortium: Devanagari Code Range Specification U+0900 – U+097F — <a href="https://www.unicode.org/charts/PDF/U0900.pdf" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: none; font-weight: 600;">Unicode PDF Specs</a></li>
+                <li>Nepal Government Department of Information Technology (DoIT): IT Standards guidelines for legacy font mapping.</li>
+            </ul>
+        </div>
+    </article>
+</div>

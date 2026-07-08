@@ -1,0 +1,83 @@
+<!--
+TITLE: Preeti Typing Practice Online – Traditional Keyboard Layout
+META_DESCRIPTION: Practice typing in the traditional Preeti keyboard layout. Structured lessons, keyboard mappings, and live WPM tracking. Try now!
+SCHEMA:
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Preeti Typing Practice Online",
+    "operatingSystem": "All",
+    "applicationCategory": "EducationalApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+]
+-->
+<div class="tool-section">
+    <div class="tool-header">
+        <h1 class="tool-title">Preeti Typing Practice</h1>
+        <div style="display: flex; justify-content: center; gap: 12px; align-items: center; margin-bottom: 12px; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">
+            <span>📅 Last Updated: July 2026</span>
+            <span>✍️ Author: Rajesh Tarar</span>
+        </div>
+        <p class="tool-desc">Master the traditional Preeti layout. Practice Devanagari touch-typing with original ASCII mappings and real-time speed metrics.</p>
+    </div>
+
+    <!-- Practice Container -->
+    <div class="converter-card" style="max-width: 900px; margin: 0 auto; padding: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <label for="lesson-select" style="font-weight: 600; font-size: 0.9rem;">Select Lesson:</label>
+                <select id="lesson-select" class="action-btn" style="background-color: rgba(255, 255, 255, 0.05); color: var(--text-color); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: var(--border-radius-sm); outline: none; cursor: pointer;"></select>
+            </div>
+            <button class="action-btn" id="practice-reset" style="background-color: rgba(255,255,255,0.05); color: var(--text-color);">Reset Lesson</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px;">
+            <div class="metric-card" style="padding: 16px; text-align: center; background-color: rgba(0,0,0,0.15); border-radius: var(--border-radius-md);">
+                <div class="metric-val" id="practice-wpm" style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">0</div>
+                <div class="metric-lbl" style="font-size: 0.75rem; color: var(--text-muted);">WPM Speed</div>
+            </div>
+            <div class="metric-card" style="padding: 16px; text-align: center; background-color: rgba(0,0,0,0.15); border-radius: var(--border-radius-md);">
+                <div class="metric-val" id="practice-accuracy" style="font-size: 1.5rem; font-weight: 700; color: #10b981;">100%</div>
+                <div class="metric-lbl" style="font-size: 0.75rem; color: var(--text-muted);">Accuracy</div>
+            </div>
+            <div class="metric-card" style="padding: 16px; text-align: center; background-color: rgba(0,0,0,0.15); border-radius: var(--border-radius-md);">
+                <div class="metric-val" id="practice-timer" style="font-size: 1.5rem; font-weight: 700; color: var(--text-color);">0s</div>
+                <div class="metric-lbl" style="font-size: 0.75rem; color: var(--text-muted);">Elapsed Time</div>
+            </div>
+            <div class="metric-card" style="padding: 16px; text-align: center; background-color: rgba(0,0,0,0.15); border-radius: var(--border-radius-md);">
+                <div class="metric-val" style="font-size: 1.25rem; font-weight: 700; color: var(--text-color);">Traditional</div>
+                <div class="metric-lbl" style="font-size: 0.75rem; color: var(--text-muted);">Layout</div>
+            </div>
+        </div>
+
+        <!-- Target Text Display -->
+        <div class="text-display-box" id="practice-display" style="min-height: 120px; font-size: 1.5rem; line-height: 2; padding: 24px; background-color: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); margin-bottom: 20px; font-family: 'Preeti', 'Courier New', sans-serif; letter-spacing: 0.05em; text-align: left;"></div>
+
+        <!-- Input Box -->
+        <input type="text" class="typing-input" id="practice-input" placeholder="यहाँ अभ्यास सुरु गर्नुहोस्..." autocomplete="off" style="width: 100%; padding: 16px 20px; font-size: 1.25rem; background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); color: var(--text-color); outline: none; margin-bottom: 32px; font-family: 'Preeti', 'Courier New', sans-serif;">
+    </div>
+</div>
+
+<script src="/assets/js/typing-hub.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const practice = TypingHub.initPractice(
+            'preeti', 
+            'practice-display', 
+            'practice-input', 
+            'practice-wpm', 
+            'practice-accuracy', 
+            'practice-timer', 
+            'lesson-select'
+        );
+        document.getElementById('practice-reset').addEventListener('click', () => {
+            practice.reset();
+        });
+    });
+</script>
