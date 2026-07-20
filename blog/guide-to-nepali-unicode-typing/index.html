@@ -8,10 +8,10 @@
 <meta name="robots" content="index, follow">
 
 <!-- OpenGraph -->
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:title" content="The Ultimate Guide to Nepali Unicode Typing - Nepali Language & Typing Blog">
 <meta property="og:description" content="Learn how standard Nepali Unicode is transforming communication in Nepal. Build solid typing speed without installing legacy fonts.">
-<meta property="og:url" content="https://nepalilanguagetools.com/guide-to-nepali-unicode-typing/">
+<meta property="og:url" content="https://nepalilanguagetools.com/blog/guide-to-nepali-unicode-typing/">
 <meta property="og:image" content="https://nepalilanguagetools.com/assets/images/og-image.png">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Nepali Language Tools">
@@ -51,6 +51,11 @@
     "@type": "Organization",
     "name": "NepaliTools Editorial"
   },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nepalilanguagetools.com/blog/guide-to-nepali-unicode-typing/"
+  },
+  "image": "https://nepalilanguagetools.com/assets/images/og-image.png",
   "publisher": {
     "@type": "Organization",
     "name": "NepaliTools"
@@ -61,11 +66,33 @@
     (function() {
         const publishDate = new Date("2026-06-29T00:00:00+05:00");
         if (new Date() < publishDate) {
-            document.documentElement.innerHTML = '<head><meta name="robots" content="noindex, nofollow"><title>Scheduled Post - NepaliTools</title><style>body { background: #0f0f11; color: #e4e4e7; font-family: system-ui, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; } a { color: #b3002d; text-decoration: none; font-weight: bold; }</style></head><body><div><h1>ðŸ”’ This post is scheduled for release on ' + publishDate.toLocaleDateString() + '</h1><p><a href="/blog/">Back to Blog Home</a></p></div></body>';
+            document.documentElement.innerHTML = '<head><meta name="robots" content="noindex, nofollow"><title>Scheduled Post - NepaliTools</title><style>body { background: #0f0f11; color: #e4e4e7; font-family: system-ui, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; } a { color: #b3002d; text-decoration: none; font-weight: bold; }</style><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://nepalilanguagetools.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://nepalilanguagetools.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "The Ultimate Guide to Nepali Unicode Typing"}
+  ]
+}
+</script>
+</head><body><div><h1>ðŸ”’ This post is scheduled for release on ' + publishDate.toLocaleDateString() + '</h1><p><a href="/blog/">Back to Blog Home</a></p></div></body>';
         }
     })();
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://nepalilanguagetools.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://nepalilanguagetools.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "The Ultimate Guide to Nepali Unicode Typing"}
+  ]
+}
+</script>
 </head>
 <body>
     <div class="app-layout">
@@ -338,6 +365,7 @@
             <div class="footer-meta-links">
                 <a href="/privacy-policy/">Privacy Policy</a>
                 <a href="/terms/">Terms of Use</a>
+                <a href="/sitemap/">Sitemap</a>
             </div>
         </div>
     </div>
