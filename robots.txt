@@ -1,3 +1,12 @@
 User-agent: *
 Allow: /
+
+Disallow: /test_e2e.html
+Disallow: /test_input.html
+Disallow: /test_main.html
+Disallow: /test_sync.html
+Disallow: /chrome-extension/
+Disallow: /src/
+Disallow: /templates/
+
 Sitemap: https://nepalilanguagetools.com/sitemap.xml

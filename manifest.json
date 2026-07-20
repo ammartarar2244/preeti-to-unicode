@@ -1,21 +1,27 @@
 {
   "short_name": "NepaliTools",
-  "name": "Definitive Nepali Typing & Conversion Platform",
+  "name": "Nepali Language Tools — Unicode & Typing Suite",
+  "description": "Free, privacy-first Nepali language tools. Convert Preeti, Kantipur, and legacy fonts to Unicode, type phonetically in Devanagari, test your typing speed, and create documents — all offline-capable.",
   "icons": [
     {
       "src": "/assets/images/icon-192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
       "src": "/assets/images/icon-512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
+  "id": "/",
   "start_url": "/",
+  "scope": "/",
   "background_color": "#0f0f11",
   "theme_color": "#b3002d",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "categories": ["utilities", "education", "productivity"]
 }

@@ -42,3 +42,25 @@
         Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
     </IfModule>
 </Files>
+
+# 4. Security Headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Permissions-Policy "geolocation=(), microphone=(self), camera=()"
+</IfModule>
+
+# 5. Cache-Control for HTML (short cache + revalidation)
+<FilesMatch "\.(html)$">
+    <IfModule mod_headers.c>
+        Header set Cache-Control "public, max-age=3600, must-revalidate"
+    </IfModule>
+</FilesMatch>
+
+# 6. Cache-Control for shared CSS
+<FilesMatch "shared\.css">
+    <IfModule mod_headers.c>
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </IfModule>
+</FilesMatch>
