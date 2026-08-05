@@ -159,3 +159,120 @@ if (typeof window !== 'undefined') {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = NepaliConverter;
 }
+
+// UI Event Bindings for Converter Tools
+if (typeof window !== 'undefined') {
+    document.addEventListener("DOMContentLoaded", () => {
+        // --- 1. Real-time Counters ---
+        const bindCounters = (textareaId, counterId) => {
+            const textarea = document.getElementById(textareaId);
+            const counter = document.getElementById(counterId);
+            if (!textarea || !counter) return;
+
+            const updateCount = () => {
+                const text = textarea.value;
+                const chars = text.length;
+                // Simple word count: split by whitespace, filter out empty strings
+                const words = text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
+                counter.textContent = `${chars} chars | ${words} words`;
+            };
+
+            // Bind events
+            textarea.addEventListener("input", updateCount);
+            // Initial call
+            updateCount();
+        };
+
+        // Try binding common IDs (some pages use different IDs, but we will standardize)
+        bindCounters("preeti-input", "preeti-count");
+        bindCounters("unicode-output", "unicode-count");
+        bindCounters("source-input", "source-count");
+        bindCounters("target-output", "target-count");
+
+
+        // --- 2. Copy to Clipboard ---
+        const bindCopy = (buttonId, textareaId) => {
+            const btn = document.getElementById(buttonId);
+            const textarea = document.getElementById(textareaId);
+            if (!btn || !textarea) return;
+
+            btn.addEventListener("click", () => {
+                if (!textarea.value) return;
+                
+                // Modern Clipboard API
+                navigator.clipboard.writeText(textarea.value).then(() => {
+                    const originalText = btn.textContent;
+                    btn.textContent = "Copied! ✅";
+                    btn.style.backgroundColor = "var(--success-color, #2e7d32)";
+                    
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.style.backgroundColor = ""; // revert to CSS original
+                    }, 2000);
+                }).catch(err => {
+                    console.error("Failed to copy text: ", err);
+                    alert("Failed to copy to clipboard.");
+                });
+            });
+        };
+
+        bindCopy("preeti-copy", "unicode-output");
+        bindCopy("unicode-copy", "preeti-output"); // In unicode-to-preeti, output is preeti
+        bindCopy("typing-copy", "unicode-output");
+        bindCopy("trans-copy", "target-output");
+        bindCopy("docs-copy", "unicode-output");
+
+        // --- 3. Download as .txt ---
+        const bindDownload = (buttonId, textareaId, defaultFileName) => {
+            const btn = document.getElementById(buttonId);
+            const textarea = document.getElementById(textareaId);
+            if (!btn || !textarea) return;
+
+            btn.addEventListener("click", () => {
+                if (!textarea.value) return;
+                
+                const blob = new Blob([textarea.value], { type: "text/plain;charset=utf-8" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = defaultFileName;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+        };
+
+        // Download button bindings
+        bindDownload("preeti-download", "unicode-output", "unicode_text.txt");
+        bindDownload("unicode-download", "preeti-output", "preeti_text.txt");
+        bindDownload("typing-download", "unicode-output", "typed_text.txt");
+        bindDownload("trans-download", "target-output", "translated_text.txt");
+        bindDownload("docs-download", "unicode-output", "nepali_document.txt");
+        
+        // --- 4. Clear Button ---
+        const bindClear = (buttonId, inputId, outputId) => {
+            const btn = document.getElementById(buttonId);
+            const input = document.getElementById(inputId);
+            const output = document.getElementById(outputId);
+            
+            if (!btn || !input) return;
+            
+            btn.addEventListener("click", () => {
+                input.value = "";
+                if (output) output.value = "";
+                // trigger input event to update counters
+                input.dispatchEvent(new Event("input"));
+                if (output) output.dispatchEvent(new Event("input"));
+                input.focus();
+            });
+        };
+        
+        bindClear("preeti-clear", "preeti-input", "unicode-output");
+        bindClear("unicode-clear", "unicode-input", "preeti-output");
+        bindClear("typing-clear", "roman-input", "unicode-output");
+        bindClear("trans-clear", "source-input", "target-output");
+        bindClear("docs-clear", "docs-input", "unicode-output");
+    });
+}
+
