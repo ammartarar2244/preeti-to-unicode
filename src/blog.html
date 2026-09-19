@@ -47,7 +47,9 @@ SCHEMA:
             return;
         }
 
-        grid.innerHTML = activePosts.map(post => `
+        // Only render if not already pre-rendered by compiler
+        if (grid.children.length === 0) {
+            grid.innerHTML = activePosts.map(post => `
             <article class="tool-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
                 <div>
                     <span style="background-color: var(--primary-glow); color: var(--primary); padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 12px;">

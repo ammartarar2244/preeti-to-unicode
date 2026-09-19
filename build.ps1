@@ -69,10 +69,15 @@ foreach ($file in $srcFiles) {
     
     if ($baseName -eq "blog") {
         if (Test-Path "src/data/blogs.json") {
-            $blogsRaw = Get-Content "src/data/blogs.json" -Raw
+            $blogsRaw = [System.IO.File]::ReadAllText("src/data/blogs.json", [System.Text.Encoding]::UTF8)
             $blogs = $blogsRaw | ConvertFrom-Json
             $blogMetaList = @()
-            foreach ($b in $blogs) {
+            $blogCardsHtml = ""
+            $currentDateStr = Get-Date -Format "yyyy-MM-dd"
+            
+            $sortedBlogs = $blogs | Sort-Object publishDate -Descending
+            foreach ($b in $sortedBlogs) {
+                if ($b.publishDate -gt $currentDateStr) { continue }
                 $blogMetaList += @{
                     title = $b.title
                     slug = $b.slug
@@ -80,9 +85,33 @@ foreach ($file in $srcFiles) {
                     excerpt = $b.excerpt
                     category = $b.category
                 }
+                
+                $card = @"
+        <article class="tool-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+            <div>
+                <span style="background-color: var(--primary-glow); color: var(--primary); padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 12px;">
+                    $($b.category)
+                </span>
+                <h3 class="tool-card-title" style="font-size: 1.25rem; font-weight: 700; line-height: 1.3; margin-bottom: 8px;">
+                    <a href="/blog/$($b.slug)/" style="color: inherit; text-decoration: none; transition: var(--transition-fast);">
+                        $($b.title)
+                    </a>
+                </h3>
+                <p class="tool-card-desc" style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
+                    $($b.excerpt)
+                </p>
+            </div>
+            <div style="border-top: 1px solid var(--border-color); padding-top: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted);">
+                <span>📅 $($b.publishDate)</span>
+                <a href="/blog/$($b.slug)/" style="color: var(--primary); text-decoration: none; font-weight: 600;">Read More →</a>
+            </div>
+        </article>
+"@
+                $blogCardsHtml += $card
             }
-            $blogMetaJson = ConvertTo-Json -InputObject $blogMetaList -Compress
+            $blogMetaJson = $blogMetaList | ConvertTo-Json -Compress
             $pageContent = $pageContent.Replace("/* BLOG_POSTS_JSON */", $blogMetaJson)
+            $pageContent = $pageContent.Replace("<!-- JS will populate active posts here -->", $blogCardsHtml)
         }
     }
 
@@ -136,8 +165,9 @@ if (Test-Path "src/data/blogs.json") {
     if (!(Test-Path "blog")) {
         New-Item -ItemType Directory -Path "blog" | Out-Null
     }
-    
+    $currentDateStr = Get-Date -Format "yyyy-MM-dd"
     foreach ($b in $blogs) {
+        if ($b.publishDate -gt $currentDateStr) { continue }
         $postSlug = $b.slug
         $postTitle = $b.title
         $postDate = $b.publishDate
@@ -150,20 +180,7 @@ if (Test-Path "src/data/blogs.json") {
         $postBody = $postBody.Replace("{{BLOG_CATEGORY}}", $postCategory)
         $postBody = $postBody.Replace("{{BLOG_DATE}}", $postDate)
         $postBody = $postBody.Replace("{{BLOG_CONTENT}}", $postContent)
-        
-        $dateCheckScript = @'
-<script>
-    (function() {
-        const publishDate = new Date("{{DATE}}T00:00:00+05:00");
-        if (new Date() < publishDate) {
-            document.documentElement.innerHTML = '<head><meta name="robots" content="noindex, nofollow"><title>Scheduled Post - NepaliTools</title><style>body { background: #0f0f11; color: #e4e4e7; font-family: system-ui, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; } a { color: #b3002d; text-decoration: none; font-weight: bold; }</style></head><body><div><h1>🔒 This post is scheduled for release on ' + publishDate.toLocaleDateString() + '</h1><p><a href="/blog/">Back to Blog Home</a></p></div></body>';
-        }
-    })();
-</script>
-'@
-        $dateCheckScript = $dateCheckScript.Replace("{{DATE}}", $postDate)
-        
-        $blogTitle = "$postTitle - Nepali Language & Typing Blog"
+        $blogTitle = $postTitle
         $blogMetaDesc = $postExcerpt
         
         $blogSchema = @'
@@ -184,12 +201,10 @@ if (Test-Path "src/data/blogs.json") {
   }
 }
 </script>
-{{DATE_CHECK_SCRIPT}}
 '@
         $blogSchema = $blogSchema.Replace("{{TITLE}}", $postTitle)
         $blogSchema = $blogSchema.Replace("{{DATE}}", $postDate)
         $blogSchema = $blogSchema.Replace("{{EXCERPT}}", $postExcerpt)
-        $blogSchema = $blogSchema.Replace("{{DATE_CHECK_SCRIPT}}", $dateCheckScript)
         
         $postCanonical = "https://nepalilanguagetools.com/blog/$postSlug/"
         
@@ -489,11 +504,14 @@ if (Test-Path "src/data/blogs.json") {
     $blogsRaw = Get-Content "src/data/blogs.json" -Raw
     $blogs = $blogsRaw | ConvertFrom-Json
     $currentDate = Get-Date -Format "yyyy-MM-dd"
+    $currentDateStr = Get-Date -Format "yyyy-MM-dd"
     foreach ($b in $blogs) {
+        if ($b.publishDate -gt $currentDateStr) { continue }
         # Only include in sitemap if the publish date is today or in the past
         if ($b.publishDate -le $currentDate) {
             $sitemapXml += "`r`n  <url>`r`n"
             $sitemapXml += "    <loc>https://nepalilanguagetools.com/blog/$($b.slug)/</loc>`r`n"
+            $sitemapXml += "    <lastmod>$($b.publishDate)</lastmod>`r`n"
             $sitemapXml += "    <changefreq>monthly</changefreq>`r`n"
             $sitemapXml += "    <priority>0.6</priority>`r`n"
             $sitemapXml += "  </url>"
@@ -516,7 +534,24 @@ $sitemapXml += @'
 </urlset>
 '@
 
+# Inject <lastmod> into every static <url> block
+$sitemapXml = [regex]::Replace($sitemapXml, '(?ms)<url>\s*<loc>(https://nepalilanguagetools\.com/(?!blog/)[^<]*)</loc>', {
+    param($match)
+    return "<url>`r`n    <loc>$($match.Groups[1].Value)</loc>`r`n    <lastmod>$currentDate</lastmod>"
+})
+
 [System.IO.File]::WriteAllText("sitemap.xml", $sitemapXml, [System.Text.Encoding]::UTF8)
-Write-Host "Regenerated sitemap.xml with blog posts." -ForegroundColor Yellow
+Write-Host "Regenerated sitemap.xml with <lastmod> timestamps and all blog posts." -ForegroundColor Yellow
+
+try {
+    Write-Host "Submitting sitemap to Google Search Console API..." -ForegroundColor Cyan
+    $submitScript = "C:\Users\ammar\.gemini\antigravity\brain\50ac6b3e-158e-42dd-a233-0c27db079a0e\scratch\submit_sitemap.ps1"
+    if (Test-Path $submitScript) {
+        & powershell -ExecutionPolicy Bypass -File $submitScript
+    }
+} catch {
+    Write-Host "Notice: Search Console submission warning: $_" -ForegroundColor Yellow
+}
 
 Write-Host "Build complete! All pages compiled." -ForegroundColor Green
+

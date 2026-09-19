@@ -75,15 +75,57 @@ SCHEMA:
     </div>
 
     <article style="max-width: 900px; margin: 0 auto; line-height: 1.8; margin-top: 40px;">
-        <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 16px; color: var(--text-color);">How to Convert Unicode to Kantipur Font</h2>
+        <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 16px; color: var(--text-color);">Why Convert Unicode Devanagari to Kantipur Font?</h2>
         
         <p style="margin-bottom: 16px; color: var(--text-muted);">
-            If you need to import text written on standard smartphones or websites into print media setups using legacy typesetting fonts, this tool helps you reverse the mapping from Unicode back to the legacy ASCII layout.
+            While standard Devanagari Unicode is the universal format for websites, mobile devices, and official online portals, major printing presses, book publishers, and newspaper houses in Nepal remain anchored to legacy ASCII workflows. Older versions of Adobe InDesign, PageMaker, Illustrator, and CorelDRAW handle 8-bit ASCII typefaces like Kantipur with zero layout shift and instantaneous RIP processing. This reverse conversion tool bridges the modern web and traditional print media seamlessly.
         </p>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 28px; margin-bottom: 12px; color: var(--text-color);">How to Use the Unicode to Kantipur Converter:</h3>
+        <ol style="margin-left: 20px; color: var(--text-muted); margin-bottom: 24px;">
+            <li style="margin-bottom: 8px;">Paste standard Nepali Unicode text (from Word, web, or mobile) into the left box.</li>
+            <li style="margin-bottom: 8px;">The converter translates Devanagari code points into the corresponding ASCII keystroke sequence.</li>
+            <li style="margin-bottom: 8px;">Click <strong>Copy Kantipur</strong> to copy the resulting raw ASCII string.</li>
+            <li style="margin-bottom: 8px;">Paste the text into InDesign or Word, select all, and set the font family to <strong>Kantipur</strong>. Your text will immediately display in elegant, traditional Kantipur typography.</li>
+        </ol>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 28px; margin-bottom: 12px; color: var(--text-color);">Solving Reverse Vowel Reordering for Print Typesetters</h3>
+        <p style="margin-bottom: 16px; color: var(--text-muted);">
+            In logical Unicode, the short "i" vowel mark (ि) is stored <em>after</em> the consonant it modifies (क + ि = कि). However, legacy Kantipur typesetting requires the glyph <code>l</code> to be physically placed <em>before</em> the consonant (e.g., <code>l</code> + <code>s</code> = कि). Our high-precision algorithm executes reverse vowel migration, accurately formats trailing matras, and restores traditional ligatures so your print plates require zero manual typesetting corrections.
+        </p>
+
+        <!-- FAQ Section -->
+        <div style="margin-top: 36px;">
+            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 16px; color: var(--text-color);">Frequently Asked Questions</h3>
+            <div class="faq-accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Why does the converted output look like random English characters?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            That is normal and expected! Kantipur is an ASCII font that replaces Latin letters with Nepali shapes. The output text represents the precise keystrokes needed. Once you paste it into your document and change the font to "Kantipur", it will instantly appear as Nepali script.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Can I convert back from Kantipur to Unicode later?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            Yes! You can use our <a href="/kantipur-to-unicode/" style="color: var(--primary); font-weight: 600;">Kantipur to Unicode Converter</a> anytime to restore legacy files back to standard, searchable Unicode Devanagari.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Official Sources and References Card -->
         <div style="background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 20px; font-size: 0.85rem; line-height: 1.6; margin-top: 32px;">
-            <h4 style="font-family: var(--font-heading); margin-bottom: 8px; font-weight: 700; color: var(--text-color);">Official References & Cited Standards:</h4>
+            <h4 style="font-family: var(--font-heading); margin-bottom: 8px; font-weight: 700; color: var(--text-color);">Official References &amp; Cited Standards:</h4>
             <ul style="margin-left: 20px; color: var(--text-muted);">
                 <li>Unicode Consortium: Devanagari Code Range Specification U+0900 – U+097F — <a href="https://www.unicode.org/charts/PDF/U0900.pdf" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: none; font-weight: 600;">Unicode PDF Specs</a></li>
                 <li>Nepal Government Department of Information Technology (DoIT): IT Standards guidelines for legacy font mapping.</li>

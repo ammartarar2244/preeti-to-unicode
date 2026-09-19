@@ -1,16 +1,65 @@
 <!--
-TITLE: Preeti Keyboard Layout Guide – Traditional Key Mapping
-META_DESCRIPTION: Complete reference guide for the traditional Preeti keyboard layout. Learn standard ASCII key mappings and shift key commands.
+TITLE: Preeti Keyboard Layout & Typing Chart – Key Mapping Guide
+META_DESCRIPTION: Complete Preeti keyboard layout guide and printable typing chart. Master traditional Nepali typing keys, Shift combinations, numbers, and ligature shortcuts.
 SCHEMA:
 [
   {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    "name": "How to Type Preeti Font",
+    "name": "How to Master Preeti Keyboard Layout",
     "step": [
       {
         "@type": "HowToStep",
-        "text": "Locate the key maps: typing 's' outputs 'क', typing 'g' outputs 'न', and typing 'd' outputs 'म'."
+        "name": "Learn Home Row Keys",
+        "text": "Place fingers on the home row: 's' types क, 'd' types म, 'f' types ा, 'g' types न, and 'h' types ज."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Use Shift Key for Half Characters",
+        "text": "Press Shift with a consonant key to type half-letters (e.g., Shift + s = क्, Shift + d = म्, Shift + g = न्)."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Understand Vowel Matra Placement",
+        "text": "In Preeti, type the short 'i' matra (key 'l') before the consonant, or convert through our Unicode tool for auto-reordering."
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the Preeti keyboard layout?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Preeti keyboard layout is the traditional Devanagari typewriter mapping created in Nepal. It maps Devanagari consonants, vowels, and matras directly onto physical Latin QWERTY keys."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I type half letters in Preeti?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most half-letters are typed by holding Shift while pressing the respective consonant key (e.g. Shift + S for क्, Shift + D for म्, Shift + G for न्)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I print this Preeti keyboard chart?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, click the 'Print Cheat Sheet' button to generate a clean, printer-friendly PDF reference sheet without web headers or ads."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does Preeti text look like gibberish without the font?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Preeti uses ASCII glyph mapping rather than standardized Unicode. Without the Preeti font file installed, the operating system displays the underlying English characters (e.g. 'g]kfn' instead of 'नेपाल'). Converting to Unicode permanently fixes this."
+        }
       }
     ]
   }
@@ -18,58 +67,445 @@ SCHEMA:
 -->
 <div class="tool-section">
     <div class="tool-header">
-        <h1 class="tool-title">Preeti Keyboard Layout Guide</h1>
+        <h1 class="tool-title">Preeti Keyboard Layout &amp; Typing Chart</h1>
         <div style="display: flex; justify-content: center; gap: 12px; align-items: center; margin-bottom: 12px; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">
-            <span>📅 Last Updated: July 2026</span>
-            <span>✍️ Author: Rajesh Tarar</span>
+            <span>📅 Updated: September 2026</span>
+            <span>✍️ Verified by Nepali Language Tools</span>
+            <span>⏱️ 5 Min Read</span>
         </div>
-        <p class="tool-desc">A comprehensive reference map showing how Devanagari characters map to physical QWERTY keys in the traditional Preeti font layout.</p>
+        <p class="tool-desc">The definitive reference guide for traditional Preeti keyboard typing. Learn complete QWERTY key mappings, Shift key combinations, numbers, and ligature shortcuts.</p>
+        
+        <div style="margin-top: 16px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+            <button onclick="window.print()" class="action-btn primary" style="padding: 10px 20px; font-size: 0.95rem;">🖨️ Print / Save PDF Cheat Sheet</button>
+            <a href="/preeti-typing-practice/" class="action-btn" style="padding: 10px 20px; font-size: 0.95rem; text-decoration: none;">⌨️ Practice Preeti Typing</a>
+            <a href="/preeti-to-unicode/" class="action-btn" style="padding: 10px 20px; font-size: 0.95rem; text-decoration: none;">🔄 Preeti to Unicode Converter</a>
+        </div>
     </div>
 
-    <!-- Keyboard Layout Guide Container -->
-    <div class="converter-card" style="max-width: 900px; margin: 0 auto; padding: 24px;">
-        <h2 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 16px; color: var(--text-color);">Traditional Preeti Mappings Table</h2>
+    <!-- Main Container -->
+    <div class="converter-card" style="max-width: 960px; margin: 0 auto; padding: 28px;">
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 16px; color: var(--text-color);">1. Home Row Keys (आधार पङ्क्ति)</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px;">The home row forms the foundation of Nepali touch typing. Rest your fingers on A-S-D-F and J-K-L-;</p>
         
-        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 32px;">
-            <thead>
-                <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-color);">
-                    <th style="padding: 12px;">QWERTY Key</th>
-                    <th style="padding: 12px;">Preeti Glyph (Normal)</th>
-                    <th style="padding: 12px;">Preeti Glyph (With Shift)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr style="border-bottom: 1px dashed var(--border-color);">
-                    <td style="padding: 12px; font-weight: 600;">a</td>
-                    <td style="padding: 12px;">ै (Double matra)</td>
-                    <td style="padding: 12px;">ा (Vowel Aa matra)</td>
-                </tr>
-                <tr style="border-bottom: 1px dashed var(--border-color);">
-                    <td style="padding: 12px; font-weight: 600;">s</td>
-                    <td style="padding: 12px;">क</td>
-                    <td style="padding: 12px;">क् (Half Ka)</td>
-                </tr>
-                <tr style="border-bottom: 1px dashed var(--border-color);">
-                    <td style="padding: 12px; font-weight: 600;">d</td>
-                    <td style="padding: 12px;">म</td>
-                    <td style="padding: 12px;">म् (Half Ma)</td>
-                </tr>
-                <tr style="border-bottom: 1px dashed var(--border-color);">
-                    <td style="padding: 12px; font-weight: 600;">f</td>
-                    <td style="padding: 12px;">ा</td>
-                    <td style="padding: 12px;">ा (Aa matra)</td>
-                </tr>
-                <tr style="border-bottom: 1px dashed var(--border-color);">
-                    <td style="padding: 12px; font-weight: 600;">g</td>
-                    <td style="padding: 12px;">न</td>
-                    <td style="padding: 12px;">न् (Half Na)</td>
-                </tr>
-                <tr style="border-bottom: 1px dashed var(--border-color);">
-                    <td style="padding: 12px; font-weight: 600;">h</td>
-                    <td style="padding: 12px;">ज</td>
-                    <td style="padding: 12px;">ज् (Half Ja)</td>
-                </tr>
-            </tbody>
-        </table>
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem; color: var(--text-muted); margin-bottom: 32px;">
+                <thead>
+                    <tr style="border-bottom: 2px solid var(--border-color); color: var(--text-color);">
+                        <th style="padding: 12px;">QWERTY Key</th>
+                        <th style="padding: 12px;">Normal Key</th>
+                        <th style="padding: 12px;">Preeti Output</th>
+                        <th style="padding: 12px;">With Shift</th>
+                        <th style="padding: 12px;">Shift Preeti Output</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">a</td>
+                        <td style="padding: 10px;">ै</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">ै (Double Matra)</td>
+                        <td style="padding: 10px; font-weight: 700;">A</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">ा (Aa Matra)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">s</td>
+                        <td style="padding: 10px;">क</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">क</td>
+                        <td style="padding: 10px; font-weight: 700;">S</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">क् (Half Ka)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">d</td>
+                        <td style="padding: 10px;">म</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">म</td>
+                        <td style="padding: 10px; font-weight: 700;">D</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">म् (Half Ma)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">f</td>
+                        <td style="padding: 10px;">ा</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">ा (Aa Kar)</td>
+                        <td style="padding: 10px; font-weight: 700;">F</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">ँ (Chandrabindu)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">g</td>
+                        <td style="padding: 10px;">न</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">न</td>
+                        <td style="padding: 10px; font-weight: 700;">G</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">न् (Half Na)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">h</td>
+                        <td style="padding: 10px;">ज</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">ज</td>
+                        <td style="padding: 10px; font-weight: 700;">H</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">ज् (Half Ja)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">j</td>
+                        <td style="padding: 10px;">व</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">व</td>
+                        <td style="padding: 10px; font-weight: 700;">J</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">व् (Half Va)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">k</td>
+                        <td style="padding: 10px;">प</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">प</td>
+                        <td style="padding: 10px; font-weight: 700;">K</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">प् (Half Pa)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">l</td>
+                        <td style="padding: 10px;">ि</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">ि (Hrasva Ikar)</td>
+                        <td style="padding: 10px; font-weight: 700;">L</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">ी (Dirgha Ikar)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">;</td>
+                        <td style="padding: 10px;">स</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">स</td>
+                        <td style="padding: 10px; font-weight: 700;">:</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">स् (Half Sa)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">'</td>
+                        <td style="padding: 10px;">ु</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">ु (Hrasva Ukar)</td>
+                        <td style="padding: 10px; font-weight: 700;">"</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">ू (Dirgha Ukar)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-top: 24px; margin-bottom: 16px; color: var(--text-color);">2. Top Row Keys (माथिल्लो पङ्क्ति: Q-W-E-R-T-Y)</h2>
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem; color: var(--text-muted); margin-bottom: 32px;">
+                <thead>
+                    <tr style="border-bottom: 2px solid var(--border-color); color: var(--text-color);">
+                        <th style="padding: 12px;">QWERTY Key</th>
+                        <th style="padding: 12px;">Preeti Normal</th>
+                        <th style="padding: 12px;">Shift Key</th>
+                        <th style="padding: 12px;">Shift Preeti Output</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">q</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">त्र (Tra)</td>
+                        <td style="padding: 10px; font-weight: 700;">Q</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">त्त (Tta)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">w</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">ध</td>
+                        <td style="padding: 10px; font-weight: 700;">W</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">ध् (Half Dha)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">e</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">भ</td>
+                        <td style="padding: 10px; font-weight: 700;">E</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">भ् (Half Bha)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">r</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">च</td>
+                        <td style="padding: 10px; font-weight: 700;">R</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">च् (Half Cha)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">t</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">त</td>
+                        <td style="padding: 10px; font-weight: 700;">T</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">त् (Half Ta)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">y</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">थ</td>
+                        <td style="padding: 10px; font-weight: 700;">Y</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">थ् (Half Tha)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">u</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">ग</td>
+                        <td style="padding: 10px; font-weight: 700;">U</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">ग् (Half Ga)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">i</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">ष (Petchiryo Sa)</td>
+                        <td style="padding: 10px; font-weight: 700;">I</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">ष् (Half Sha)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">o</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">घ</td>
+                        <td style="padding: 10px; font-weight: 700;">O</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">घ् (Half Gha)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">p</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">उ (Vowel U)</td>
+                        <td style="padding: 10px; font-weight: 700;">P</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">ए (Vowel E)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">[</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">ृ (Rri Matra)</td>
+                        <td style="padding: 10px; font-weight: 700;">{</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">र् (Reph over letter)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">]</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">े (Single Matra)</td>
+                        <td style="padding: 10px; font-weight: 700;">}</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">ै (Aai Matra)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-top: 24px; margin-bottom: 16px; color: var(--text-color);">3. Bottom Row Keys (तल्लो पङ्क्ति: Z-X-C-V-B-N-M)</h2>
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem; color: var(--text-muted); margin-bottom: 32px;">
+                <thead>
+                    <tr style="border-bottom: 2px solid var(--border-color); color: var(--text-color);">
+                        <th style="padding: 12px;">QWERTY Key</th>
+                        <th style="padding: 12px;">Preeti Normal</th>
+                        <th style="padding: 12px;">Shift Key</th>
+                        <th style="padding: 12px;">Shift Preeti Output</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">z</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">श (Talabya Sa)</td>
+                        <td style="padding: 10px; font-weight: 700;">Z</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">श् (Half Sha)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">x</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">ह (Ha)</td>
+                        <td style="padding: 10px; font-weight: 700;">X</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">ह् (Half Ha)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">c</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">अ (Vowel A)</td>
+                        <td style="padding: 10px; font-weight: 700;">C</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">ऋ (Vowel Rri)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">v</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">ख (Kha)</td>
+                        <td style="padding: 10px; font-weight: 700;">V</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">ख् (Half Kha)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">b</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">द (Da)</td>
+                        <td style="padding: 10px; font-weight: 700;">B</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">द्य (Dya)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">n</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">ल (La)</td>
+                        <td style="padding: 10px; font-weight: 700;">N</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">ल् (Half La)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">m</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">ब (Ba)</td>
+                        <td style="padding: 10px; font-weight: 700;">M</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">ब् (Half Ba)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">/</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">र (Ra)</td>
+                        <td style="padding: 10px; font-weight: 700;">?</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem;">रु (Ru)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-top: 24px; margin-bottom: 16px; color: var(--text-color);">4. Numbers &amp; Nepali Digits (०, १, २, ३, ४, ५, ६, ७, ८, ९)</h2>
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem; color: var(--text-muted); margin-bottom: 32px;">
+                <thead>
+                    <tr style="border-bottom: 2px solid var(--border-color); color: var(--text-color);">
+                        <th style="padding: 12px;">QWERTY Key</th>
+                        <th style="padding: 12px;">Preeti Output</th>
+                        <th style="padding: 12px;">QWERTY Key</th>
+                        <th style="padding: 12px;">Preeti Output</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">1</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">१</td>
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">6</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">६</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">2</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">२</td>
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">7</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">७</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">3</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">३</td>
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">8</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">८</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">4</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">४</td>
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">9</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">९</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">5</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">५</td>
+                        <td style="padding: 10px; font-weight: 700; color: var(--text-color);">0</td>
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.1rem; color: var(--primary);">०</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-top: 24px; margin-bottom: 16px; color: var(--text-color);">5. Essential Preeti Ligatures &amp; Special Shortcuts</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px;">Complex conjuncts and ligatures are written either via direct keys or Alt codes in legacy word processors:</p>
+        
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem; color: var(--text-muted); margin-bottom: 32px;">
+                <thead>
+                    <tr style="border-bottom: 2px solid var(--border-color); color: var(--text-color);">
+                        <th style="padding: 12px;">Devanagari Ligature</th>
+                        <th style="padding: 12px;">Preeti Key Shortcut</th>
+                        <th style="padding: 12px;">Alt Code</th>
+                        <th style="padding: 12px;">Example Word</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.2rem; font-weight: 700; color: var(--primary);">त्र</td>
+                        <td style="padding: 10px; font-weight: 600;">q</td>
+                        <td style="padding: 10px;">-</td>
+                        <td style="padding: 10px;">मित्र (Friend)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.2rem; font-weight: 700; color: var(--primary);">ज्ञ</td>
+                        <td style="padding: 10px; font-weight: 600;">Shift + U</td>
+                        <td style="padding: 10px;">-</td>
+                        <td style="padding: 10px;">ज्ञान (Knowledge)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.2rem; font-weight: 700; color: var(--primary);">क्ष</td>
+                        <td style="padding: 10px; font-weight: 600;">Shift + ` (Tilde)</td>
+                        <td style="padding: 10px;">-</td>
+                        <td style="padding: 10px;">परीक्षा (Exam)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.2rem; font-weight: 700; color: var(--primary);">श्र</td>
+                        <td style="padding: 10px; font-weight: 600;">Shift + *</td>
+                        <td style="padding: 10px;">-</td>
+                        <td style="padding: 10px;">श्रीमान् (Sir / Husband)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.2rem; font-weight: 700; color: var(--primary);">द्ध</td>
+                        <td style="padding: 10px; font-weight: 600;">Alt + 0165</td>
+                        <td style="padding: 10px;">Alt + 0165</td>
+                        <td style="padding: 10px;">बुद्ध (Buddha)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.2rem; font-weight: 700; color: var(--primary);">द्व</td>
+                        <td style="padding: 10px; font-weight: 600;">Alt + 0166</td>
+                        <td style="padding: 10px;">Alt + 0166</td>
+                        <td style="padding: 10px;">द्वार (Gate)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.2rem; font-weight: 700; color: var(--primary);">ट्ट</td>
+                        <td style="padding: 10px; font-weight: 600;">Alt + 0177</td>
+                        <td style="padding: 10px;">Alt + 0177</td>
+                        <td style="padding: 10px;">छुट्टी (Holiday)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px dashed var(--border-color);">
+                        <td style="padding: 10px; font-family: 'Noto Sans Devanagari'; font-size: 1.2rem; font-weight: 700; color: var(--primary);">। (पूर्णविराम)</td>
+                        <td style="padding: 10px; font-weight: 600;">Shift + > (Period)</td>
+                        <td style="padding: 10px;">-</td>
+                        <td style="padding: 10px;">Devanagari Full Stop</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Printable Note -->
+        <div style="background-color: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 20px; margin-top: 16px;">
+            <h3 style="font-family: var(--font-heading); font-size: 1.1rem; color: var(--text-color); margin-bottom: 8px;">💡 Pro Typing Tip for Beginners</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                In the Preeti layout, the short <strong>'i'</strong> vowel mark (ि) is keyed <em>before</em> the letter it attaches to (type <code>l</code> then <code>s</code> for <strong>कि</strong>). If you write in modern Unicode Devanagari, you type the consonant first and the matra second. To write without memorizing legacy key positions, try our free phonetic <a href="/english-to-nepali-typing/" style="color: var(--primary); font-weight: 600; text-decoration: none;">English to Nepali Typing Tool</a>.
+            </p>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div style="max-width: 960px; margin: 40px auto 0;">
+        <h2 style="font-family: var(--font-heading); font-size: 1.6rem; text-align: center; margin-bottom: 24px; color: var(--text-color);">Frequently Asked Questions (FAQs)</h2>
+        
+        <div class="faq-accordion">
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span>What is the Preeti keyboard layout?</span>
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        The Preeti layout is the earliest standardized Devanagari typewriter layout created for personal computers in Nepal. It maps Devanagari glyphs onto regular US English QWERTY keyboard keys, making it possible to produce Nepali publications, government notices, and news articles on early PC software.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span>How do I type half letters in Preeti?</span>
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        Most half-letters are produced by holding the <strong>Shift</strong> key while typing the respective consonant key. For example, typing <code>s</code> yields 'क', while <code>Shift + s</code> produces 'क्'. Similarly, <code>d</code> gives 'म' while <code>Shift + d</code> yields 'म्'.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span>Can I print or save this keyboard chart as a PDF?</span>
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        Yes! Click the <strong>Print / Save PDF Cheat Sheet</strong> button at the top of this page. The page includes custom print styles that format the tables cleanly for standard A4 paper without website navigation or dark background colors.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    <span>Why does Preeti text turn into symbols when sent via email or mobile?</span>
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        Preeti is an ASCII font that replaces Latin letters with Nepali glyphs. If the recipient does not have the Preeti TrueType font installed on their device, their system falls back to English, displaying gibberish like <code>g]kfn</code> instead of <code>नेपाल</code>. Converting your document using our <a href="/preeti-to-unicode/" style="color: var(--primary); font-weight: 600;">Preeti to Unicode Converter</a> makes it universally legible on any smartphone, computer, or web browser.
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+

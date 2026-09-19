@@ -86,23 +86,73 @@ SCHEMA:
         <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 16px; color: var(--text-color);">How to Convert Kantipur Font to Unicode Online</h2>
         
         <p style="margin-bottom: 16px; color: var(--text-muted);">
-            The Kantipur font has been a staple in Nepalese print media and desktop publishing workflows. However, sharing files written in Kantipur requires the recipient to have the same font installed, which is not suitable for search engines or web platforms. Converting your Kantipur content to standard <strong>Devanagari Unicode</strong> solves this incompatibility.
+            The Kantipur font has been a staple in Nepalese print media, national dailies, and desktop publishing workflows. However, sharing files written in Kantipur requires the recipient to have the same font installed, which is not suitable for search engines, mobile devices, or modern web platforms. Converting your Kantipur content to standard <strong>Devanagari Unicode</strong> solves this incompatibility permanently.
         </p>
 
         <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 28px; margin-bottom: 12px; color: var(--text-color);">Conversion Steps:</h3>
         <ol style="margin-left: 20px; color: var(--text-muted); margin-bottom: 24px;">
-            <li style="margin-bottom: 8px;">Copy the text from your legacy document (MS Word, InDesign, etc.).</li>
+            <li style="margin-bottom: 8px;">Copy the text from your legacy document (MS Word, InDesign, PageMaker, etc.).</li>
             <li style="margin-bottom: 8px;">Paste the text into the <strong>Kantipur Font Input</strong> box above.</li>
-            <li style="margin-bottom: 8px;">The converter will automatically output standard Devanagari in the right pane.</li>
-            <li style="margin-bottom: 8px;">Click <strong>Copy Unicode</strong> to copy it to your clipboard.</li>
+            <li style="margin-bottom: 8px;">Our client-side JavaScript engine instantly converts the legacy glyph mappings into clean Devanagari UTF-8.</li>
+            <li style="margin-bottom: 8px;">Click <strong>Copy Unicode</strong> to paste it into emails, websites, social media, or government online forms.</li>
         </ol>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 28px; margin-bottom: 12px; color: var(--text-color);">Kantipur Font vs Preeti Font: What Is the Difference?</h3>
+        <p style="margin-bottom: 16px; color: var(--text-muted);">
+            While Kantipur and Preeti share a very similar typewriter keyboard layout, Kantipur features custom typographic weight distributions, tighter letter spacing (kerning), and distinctive conjunct glyph designs favored by major Kathmandu newspaper houses. However, both fonts suffer from the same digital drawback: they are 8-bit ASCII fonts. When transferred to a computer without the <code>Kantipur.ttf</code> file installed, the text appears as random English characters (e.g. <code>sflGtk'/</code> instead of <code>कान्तिपुर</code>). Unicode assigns standard global hexadecimal code points (U+0900 to U+097F) so your words display reliably on iPhones, Androids, and Windows PCs.
+        </p>
+
+        <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 28px; margin-bottom: 12px; color: var(--text-color);">How Our Engine Solves Vowel Reordering &amp; Ligature Glitches</h3>
+        <p style="margin-bottom: 16px; color: var(--text-muted);">
+            In traditional Kantipur typesetting, the short "i" matra (ह्रस्व इकार 'ि') is physically typed <em>before</em> the consonant (e.g., <code>l</code> + <code>s</code> = कि). In logical Unicode Devanagari, the consonant must precede the combining vowel mark. Our converter uses lookahead regex parsing to swap visual prefixes into logical linguistic order, fix complex halant clusters (क्, त्, म्), and properly attach the Reph (र्) and anusvara (ं) diacritics.
+        </p>
+
+        <!-- FAQ Section -->
+        <div style="margin-top: 36px;">
+            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 16px; color: var(--text-color);">Frequently Asked Questions</h3>
+            <div class="faq-accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Why does Kantipur text appear as English symbols?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            Kantipur uses non-standard ASCII mapping where Latin keyboard keystrokes are simply rendered with Nepali shapes. Without the Kantipur font installed on the viewing device, the raw English letters (like <code>sf7df08\</code> for काठमाण्डू) are shown instead. Converting to Unicode solves this.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Is this Kantipur to Unicode converter safe for confidential documents?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            Yes, 100%. All processing occurs in your local browser sandbox using client-side JavaScript. None of your text, personal data, or legal drafts are sent to our servers or stored in any database.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Can I convert large MS Word (.docx) files formatted in Kantipur?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            Yes! For individual paragraphs, copy and paste into the box above. For entire Word documents, you can also use our dedicated <a href="/batch-converter/" style="color: var(--primary); font-weight: 600;">Batch Word File Converter</a> to process multiple files in seconds.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Official Sources and References Card -->
         <div style="background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 20px; font-size: 0.85rem; line-height: 1.6; margin-top: 32px;">
-            <h4 style="font-family: var(--font-heading); margin-bottom: 8px; font-weight: 700; color: var(--text-color);">Official References & Cited Standards:</h4>
+            <h4 style="font-family: var(--font-heading); margin-bottom: 8px; font-weight: 700; color: var(--text-color);">Official References &amp; Cited Standards:</h4>
             <ul style="margin-left: 20px; color: var(--text-muted);">
                 <li>Unicode Consortium: Devanagari Code Range Specification U+0900 – U+097F — <a href="https://www.unicode.org/charts/PDF/U0900.pdf" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: none; font-weight: 600;">Unicode PDF Specs</a></li>
-                <li>Nepal Government Department of Information Technology (DoIT): IT Standards guidelines for Devanagari fonts.</li>
+                <li>Nepal Government Department of Information Technology (DoIT): IT Standards guidelines for Devanagari fonts and digital archives.</li>
             </ul>
         </div>
     </article>

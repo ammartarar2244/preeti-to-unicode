@@ -14,6 +14,16 @@ desktop.ini
 .DS_Store
 
 # IDE and Editor Files
+# IDE and Editor Files
+/.vscode/
+/.vs/
+
+
+# Google Cloud Service Account Credentials
+service-account.json
+service-account.p12
+*.p12
+check_indexing.ps1
 .vscode/
 .idea/
 *.suo
