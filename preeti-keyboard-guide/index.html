@@ -251,7 +251,128 @@
     </div>
 
     <!-- Main Container -->
-    <div class="converter-card" style="max-width: 960px; margin: 0 auto; padding: 28px;">
+    <div class="converter-card" style="max-width: 980px; margin: 0 auto; padding: 28px;">
+        <!-- Visual Interactive Keyboard Diagram -->
+        <section id="keyboard-diagram" style="margin-bottom: 36px; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-lg); padding: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+                <div>
+                    <h2 style="font-family: var(--font-heading); font-size: 1.4rem; color: var(--text-color); margin: 0 0 4px 0;">Interactive Preeti Keyboard Layout Diagram</h2>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0;">Click or hover any key to inspect its Devanagari normal, Shift, and Alt outputs.</p>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <button id="toggle-shift-view" class="action-btn" style="font-size: 0.85rem; padding: 6px 12px;">Toggle Shift View</button>
+                </div>
+            </div>
+
+            <!-- Active Key Inspector Box -->
+            <div id="key-inspector" style="background: rgba(var(--primary-rgb, 59, 130, 246), 0.08); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 12px 16px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                <div style="display: flex; align-items: center; gap: 14px;">
+                    <div id="inspect-key-badge" style="background: var(--primary); color: #fff; font-weight: 800; font-size: 1.4rem; width: 44px; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">S</div>
+                    <div>
+                        <div id="inspect-title" style="font-weight: 700; color: var(--text-color); font-size: 1rem;">Key 'S' → Normal: <span style="color: var(--primary); font-size: 1.2rem;">क</span> | With Shift: <span style="color: var(--primary); font-size: 1.2rem;">क्</span></div>
+                        <div id="inspect-desc" style="color: var(--text-muted); font-size: 0.85rem;">Standard consonant 'Ka' (क). Used with Shift for half-letter 'K' (क्). Example: कलम (Pen).</div>
+                    </div>
+                </div>
+                <span style="font-size: 0.75rem; background: var(--surface-color); border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 4px; color: var(--text-muted);">Home Row (Index Finger)</span>
+            </div>
+
+            <!-- Visual Keyboard Container -->
+            <div style="overflow-x: auto; padding-bottom: 8px;">
+                <div class="preeti-kb-grid" style="min-width: 820px; display: flex; flex-direction: column; gap: 6px; user-select: none;">
+                    <!-- Row 1: Numbers -->
+                    <div style="display: flex; gap: 6px;">
+                        <div class="pk-key" data-k="`" data-norm="~" data-sh="क्ष" data-row="num" style="flex: 1;"><span class="pk-sh">क्ष</span><span class="pk-norm">~</span><span class="pk-q">`</span></div>
+                        <div class="pk-key" data-k="1" data-norm="१" data-sh="ज्ञ" data-row="num" style="flex: 1;"><span class="pk-sh">ज्ञ</span><span class="pk-norm">१</span><span class="pk-q">1</span></div>
+                        <div class="pk-key" data-k="2" data-norm="२" data-sh="द्घ" data-row="num" style="flex: 1;"><span class="pk-sh">द्घ</span><span class="pk-norm">२</span><span class="pk-q">2</span></div>
+                        <div class="pk-key" data-k="3" data-norm="३" data-sh="घ" data-row="num" style="flex: 1;"><span class="pk-sh">घ</span><span class="pk-norm">३</span><span class="pk-q">3</span></div>
+                        <div class="pk-key" data-k="4" data-norm="४" data-sh="द्ध" data-row="num" style="flex: 1;"><span class="pk-sh">द्ध</span><span class="pk-norm">४</span><span class="pk-q">4</span></div>
+                        <div class="pk-key" data-k="5" data-norm="५" data-sh="छ" data-row="num" style="flex: 1;"><span class="pk-sh">छ</span><span class="pk-norm">५</span><span class="pk-q">5</span></div>
+                        <div class="pk-key" data-k="6" data-norm="६" data-sh="ट" data-row="num" style="flex: 1;"><span class="pk-sh">ट</span><span class="pk-norm">६</span><span class="pk-q">6</span></div>
+                        <div class="pk-key" data-k="7" data-norm="७" data-sh="ठ" data-row="num" style="flex: 1;"><span class="pk-sh">ठ</span><span class="pk-norm">७</span><span class="pk-q">7</span></div>
+                        <div class="pk-key" data-k="8" data-norm="८" data-sh="ड" data-row="num" style="flex: 1;"><span class="pk-sh">ड</span><span class="pk-norm">८</span><span class="pk-q">8</span></div>
+                        <div class="pk-key" data-k="9" data-norm="९" data-sh="ढ" data-row="num" style="flex: 1;"><span class="pk-sh">ढ</span><span class="pk-norm">९</span><span class="pk-q">9</span></div>
+                        <div class="pk-key" data-k="0" data-norm="०" data-sh="ण" data-row="num" style="flex: 1;"><span class="pk-sh">ण</span><span class="pk-norm">०</span><span class="pk-q">0</span></div>
+                        <div class="pk-key" data-k="-" data-norm="(" data-sh=")" data-row="num" style="flex: 1;"><span class="pk-sh">)</span><span class="pk-norm">(</span><span class="pk-q">-</span></div>
+                        <div class="pk-key" data-k="=" data-norm="." data-sh="+" data-row="num" style="flex: 1;"><span class="pk-sh">+</span><span class="pk-norm">.</span><span class="pk-q">=</span></div>
+                        <div class="pk-key pk-key-special" style="flex: 1.5; font-size: 0.75rem;">Backspace</div>
+                    </div>
+                    <!-- Row 2: Top Row -->
+                    <div style="display: flex; gap: 6px;">
+                        <div class="pk-key pk-key-special" style="flex: 1.4; font-size: 0.75rem;">Tab</div>
+                        <div class="pk-key" data-k="q" data-norm="त्र" data-sh="१" data-row="top" style="flex: 1;"><span class="pk-sh">१</span><span class="pk-norm">त्र</span><span class="pk-q">Q</span></div>
+                        <div class="pk-key" data-k="w" data-norm="ध" data-sh="ध्" data-row="top" style="flex: 1;"><span class="pk-sh">ध्</span><span class="pk-norm">ध</span><span class="pk-q">W</span></div>
+                        <div class="pk-key" data-k="e" data-norm="भ" data-sh="भ्" data-row="top" style="flex: 1;"><span class="pk-sh">भ्</span><span class="pk-norm">भ</span><span class="pk-q">E</span></div>
+                        <div class="pk-key" data-k="r" data-norm="च" data-sh="च्" data-row="top" style="flex: 1;"><span class="pk-sh">च्</span><span class="pk-norm">च</span><span class="pk-q">R</span></div>
+                        <div class="pk-key" data-k="t" data-norm="त" data-sh="त्" data-row="top" style="flex: 1;"><span class="pk-sh">त्</span><span class="pk-norm">त</span><span class="pk-q">T</span></div>
+                        <div class="pk-key" data-k="y" data-norm="थ" data-sh="थ्" data-row="top" style="flex: 1;"><span class="pk-sh">थ्</span><span class="pk-norm">थ</span><span class="pk-q">Y</span></div>
+                        <div class="pk-key" data-k="u" data-norm="ग" data-sh="ग्" data-row="top" style="flex: 1;"><span class="pk-sh">ग्</span><span class="pk-norm">ग</span><span class="pk-q">U</span></div>
+                        <div class="pk-key" data-k="i" data-norm="ष" data-sh="ष्" data-row="top" style="flex: 1;"><span class="pk-sh">ष्</span><span class="pk-norm">ष</span><span class="pk-q">I</span></div>
+                        <div class="pk-key" data-k="o" data-norm="इ" data-sh="ई" data-row="top" style="flex: 1;"><span class="pk-sh">ई</span><span class="pk-norm">इ</span><span class="pk-q">O</span></div>
+                        <div class="pk-key" data-k="p" data-norm="प" data-sh="प्" data-row="top" style="flex: 1;"><span class="pk-sh">प्</span><span class="pk-norm">प</span><span class="pk-q">P</span></div>
+                        <div class="pk-key" data-k="[" data-norm="र्" data-sh="ृ" data-row="top" style="flex: 1;"><span class="pk-sh">ृ</span><span class="pk-norm">र्</span><span class="pk-q">[</span></div>
+                        <div class="pk-key" data-k="]" data-norm="े" data-sh="ै" data-row="top" style="flex: 1;"><span class="pk-sh">ै</span><span class="pk-norm">े</span><span class="pk-q">]</span></div>
+                        <div class="pk-key" data-k="\" data-norm="ं" data-sh="ः" data-row="top" style="flex: 1;"><span class="pk-sh">ः</span><span class="pk-norm">ं</span><span class="pk-q">\</span></div>
+                    </div>
+                    <!-- Row 3: Home Row (Highlighted) -->
+                    <div style="display: flex; gap: 6px;">
+                        <div class="pk-key pk-key-special" style="flex: 1.7; font-size: 0.75rem;">Caps Lock</div>
+                        <div class="pk-key pk-home" data-k="a" data-norm="ब" data-sh="ब्" data-row="home" style="flex: 1;"><span class="pk-sh">ब्</span><span class="pk-norm">ब</span><span class="pk-q">A</span></div>
+                        <div class="pk-key pk-home" data-k="s" data-norm="क" data-sh="क्" data-row="home" style="flex: 1;"><span class="pk-sh">क्</span><span class="pk-norm">क</span><span class="pk-q">S</span></div>
+                        <div class="pk-key pk-home" data-k="d" data-norm="म" data-sh="म्" data-row="home" style="flex: 1;"><span class="pk-sh">म्</span><span class="pk-norm">म</span><span class="pk-q">D</span></div>
+                        <div class="pk-key pk-home" data-k="f" data-norm="ा" data-sh="ँ" data-row="home" style="flex: 1;"><span class="pk-sh">ँ</span><span class="pk-norm">ा</span><span class="pk-q">F</span></div>
+                        <div class="pk-key pk-home" data-k="g" data-norm="न" data-sh="न्" data-row="home" style="flex: 1;"><span class="pk-sh">न्</span><span class="pk-norm">न</span><span class="pk-q">G</span></div>
+                        <div class="pk-key pk-home" data-k="h" data-norm="ज" data-sh="ज्" data-row="home" style="flex: 1;"><span class="pk-sh">ज्</span><span class="pk-norm">ज</span><span class="pk-q">H</span></div>
+                        <div class="pk-key pk-home" data-k="j" data-norm="व" data-sh="व्" data-row="home" style="flex: 1;"><span class="pk-sh">व्</span><span class="pk-norm">व</span><span class="pk-q">J</span></div>
+                        <div class="pk-key pk-home" data-k="k" data-norm="प" data-sh="प्" data-row="home" style="flex: 1;"><span class="pk-sh">प्</span><span class="pk-norm">प</span><span class="pk-q">K</span></div>
+                        <div class="pk-key pk-home" data-k="l" data-norm="ि" data-sh="ी" data-row="home" style="flex: 1;"><span class="pk-sh">ी</span><span class="pk-norm">ि</span><span class="pk-q">L</span></div>
+                        <div class="pk-key pk-home" data-k=";" data-norm="स" data-sh="स्" data-row="home" style="flex: 1;"><span class="pk-sh">स्</span><span class="pk-norm">स</span><span class="pk-q">;</span></div>
+                        <div class="pk-key pk-home" data-k="'" data-norm="ु" data-sh="ू" data-row="home" style="flex: 1;"><span class="pk-sh">ू</span><span class="pk-norm">ु</span><span class="pk-q">'</span></div>
+                        <div class="pk-key pk-key-special" style="flex: 2; font-size: 0.75rem;">Enter</div>
+                    </div>
+                    <!-- Row 4: Bottom Row -->
+                    <div style="display: flex; gap: 6px;">
+                        <div class="pk-key pk-key-special" style="flex: 2.2; font-size: 0.75rem;">Shift</div>
+                        <div class="pk-key" data-k="z" data-norm="श" data-sh="श्" data-row="bot" style="flex: 1;"><span class="pk-sh">श्</span><span class="pk-norm">श</span><span class="pk-q">Z</span></div>
+                        <div class="pk-key" data-k="x" data-norm="ह" data-sh="ह्" data-row="bot" style="flex: 1;"><span class="pk-sh">ह्</span><span class="pk-norm">ह</span><span class="pk-q">X</span></div>
+                        <div class="pk-key" data-k="c" data-norm="अ" data-sh="आ" data-row="bot" style="flex: 1;"><span class="pk-sh">आ</span><span class="pk-norm">अ</span><span class="pk-q">C</span></div>
+                        <div class="pk-key" data-k="v" data-norm="ख" data-sh="ख्" data-row="bot" style="flex: 1;"><span class="pk-sh">ख्</span><span class="pk-norm">ख</span><span class="pk-q">V</span></div>
+                        <div class="pk-key" data-k="b" data-norm="द" data-sh="द्" data-row="bot" style="flex: 1;"><span class="pk-sh">द्</span><span class="pk-norm">द</span><span class="pk-q">B</span></div>
+                        <div class="pk-key" data-k="n" data-norm="ल" data-sh="ल्" data-row="bot" style="flex: 1;"><span class="pk-sh">ल्</span><span class="pk-norm">ल</span><span class="pk-q">N</span></div>
+                        <div class="pk-key" data-k="m" data-norm="फ" data-sh="फ्" data-row="bot" style="flex: 1;"><span class="pk-sh">फ्</span><span class="pk-norm">फ</span><span class="pk-q">M</span></div>
+                        <div class="pk-key" data-k="," data-norm="," data-sh="?" data-row="bot" style="flex: 1;"><span class="pk-sh">?</span><span class="pk-norm">,</span><span class="pk-q">,</span></div>
+                        <div class="pk-key" data-k="." data-norm="।" data-sh="!" data-row="bot" style="flex: 1;"><span class="pk-sh">!</span><span class="pk-norm">।</span><span class="pk-q">.</span></div>
+                        <div class="pk-key" data-k="/" data-norm="र" data-sh="रु" data-row="bot" style="flex: 1;"><span class="pk-sh">रु</span><span class="pk-norm">र</span><span class="pk-q">/</span></div>
+                        <div class="pk-key pk-key-special" style="flex: 2.2; font-size: 0.75rem;">Shift</div>
+                    </div>
+                    <!-- Row 5: Space -->
+                    <div style="display: flex; gap: 6px; justify-content: center;">
+                        <div class="pk-key pk-key-special" style="flex: 1.5; font-size: 0.75rem;">Ctrl</div>
+                        <div class="pk-key pk-key-special" style="flex: 1.5; font-size: 0.75rem;">Alt</div>
+                        <div class="pk-key" data-k="space" data-norm="Space" data-sh="Space" style="flex: 7; font-size: 0.85rem; font-weight: 600;">Space Bar (खाली ठाउँ)</div>
+                        <div class="pk-key pk-key-special" style="flex: 1.5; font-size: 0.75rem;">Alt Gr</div>
+                        <div class="pk-key pk-key-special" style="flex: 1.5; font-size: 0.75rem;">Ctrl</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Keyboard Legend & Quick Info -->
+            <div style="display: flex; gap: 16px; margin-top: 14px; font-size: 0.8rem; color: var(--text-muted); flex-wrap: wrap;">
+                <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 3px; background: rgba(var(--primary-rgb, 59, 130, 246), 0.2); border: 1px solid var(--primary); display: inline-block;"></span> Home Row Keys (ASDF JKL;)</span>
+                <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="color: var(--primary); font-weight: 700;">Top-Left Character:</span> Shift State</span>
+                <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="color: var(--text-color); font-weight: 700;">Center-Right Character:</span> Normal State</span>
+            </div>
+        </section>
+
+        <!-- Quick Instant Key Search Box -->
+        <div style="margin-bottom: 28px; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 16px;">
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                <label for="char-quick-search" style="font-weight: 700; color: var(--text-color); font-size: 0.95rem; white-space: nowrap;">🔍 Quick Letter / Key Search:</label>
+                <input type="text" id="char-quick-search" placeholder="Type letter to find key (e.g. क, ज्ञ, s, Alt, shift)..." style="flex: 1; min-width: 240px; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--bg-color); color: var(--text-color); font-size: 0.95rem;">
+                <button id="clear-search-btn" class="action-btn" style="padding: 9px 14px; font-size: 0.85rem;">Clear</button>
+            </div>
+            <div id="search-feedback" style="margin-top: 8px; font-size: 0.8rem; color: var(--text-muted); display: none;"></div>
+        </div>
+
         <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 16px; color: var(--text-color);">1. Home Row Keys (आधार पङ्क्ति)</h2>
         <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px;">The home row forms the foundation of Nepali touch typing. Rest your fingers on A-S-D-F and J-K-L-;</p>
         
@@ -676,6 +797,222 @@
         </div>
     </div>
 </div>
+
+<style>
+.pk-key {
+    position: relative;
+    height: 52px;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-shadow: 0 2px 0 var(--border-color);
+    cursor: pointer;
+    transition: all 0.12s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pk-key:hover, .pk-key.active {
+    border-color: var(--primary);
+    background: rgba(var(--primary-rgb, 59, 130, 246), 0.1);
+    transform: translateY(1px);
+    box-shadow: 0 1px 0 var(--primary);
+}
+.pk-key.highlight-match {
+    border-color: #f59e0b !important;
+    background: rgba(245, 158, 11, 0.2) !important;
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.5) !important;
+}
+.pk-home {
+    border-bottom: 2px solid var(--primary);
+}
+.pk-sh {
+    position: absolute;
+    top: 3px;
+    left: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary);
+    font-family: 'Noto Sans Devanagari', sans-serif;
+}
+.pk-q {
+    position: absolute;
+    bottom: 3px;
+    left: 6px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+.pk-norm {
+    position: absolute;
+    bottom: 3px;
+    right: 7px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-color);
+    font-family: 'Noto Sans Devanagari', sans-serif;
+}
+.pk-key-special {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-muted);
+    font-weight: 600;
+}
+.shift-active-mode .pk-sh {
+    font-size: 1.15rem;
+    color: #f59e0b;
+    top: auto;
+    bottom: 3px;
+    right: 7px;
+    left: auto;
+}
+.shift-active-mode .pk-norm {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    top: 3px;
+    left: 6px;
+    bottom: auto;
+    right: auto;
+}
+.row-highlight {
+    background-color: rgba(245, 158, 11, 0.15) !important;
+    border-left: 3px solid #f59e0b !important;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const keys = document.querySelectorAll('.pk-key[data-k]');
+    const badge = document.getElementById('inspect-key-badge');
+    const title = document.getElementById('inspect-title');
+    const desc = document.getElementById('inspect-desc');
+    const kbGrid = document.querySelector('.preeti-kb-grid');
+    const toggleShiftBtn = document.getElementById('toggle-shift-view');
+    const searchInput = document.getElementById('char-quick-search');
+    const clearBtn = document.getElementById('clear-search-btn');
+    const feedback = document.getElementById('search-feedback');
+    const tableRows = document.querySelectorAll('.converter-card tbody tr');
+
+    const keyDescriptions = {
+        's': "Consonant 'Ka' (क). Used with Shift for half-letter 'K' (क्). Example: कलम (Pen).",
+        'd': "Consonant 'Ma' (म). Used with Shift for half-letter 'M' (म्). Example: मन (Heart).",
+        'f': "Vowel Matra 'Aa' (ा). Used with Shift for Chandrabindu (ँ). Example: आमा.",
+        'g': "Consonant 'Na' (न). Used with Shift for half-letter 'N' (न्). Example: नदी.",
+        'h': "Consonant 'Ja' (ज). Used with Shift for half-letter 'J' (ज्). Example: जल.",
+        'j': "Consonant 'Va/Ba' (व). Used with Shift for half-letter 'V' (व्). Example: वन.",
+        'k': "Consonant 'Pa' (प). Used with Shift for half-letter 'P' (प्). Example: पानी.",
+        'l': "Vowel Matra short 'i' (ि). Typed before the consonant. With Shift gives long 'ee' (ी).",
+        ';': "Consonant 'Sa' (स). Used with Shift for half-letter 'S' (स्). Example: समय.",
+        "'": "Vowel Matra short 'u' (ु). Used with Shift for long 'oo' (ू).",
+        'a': "Vowel Matra 'Ai' (ै). Used with Shift for 'Aa' matra (ा).",
+        'q': "Conjunct ligature 'Tra' (त्र). Used with Shift for number '1' (१).",
+        'w': "Consonant 'Dha' (ध). Used with Shift for half-letter 'Dh' (ध्).",
+        'e': "Consonant 'Bha' (भ). Used with Shift for half-letter 'Bh' (भ्).",
+        'r': "Consonant 'Cha' (च). Used with Shift for half-letter 'Ch' (च्).",
+        't': "Consonant 'Ta' (त). Used with Shift for half-letter 'T' (त्).",
+        'y': "Consonant 'Tha' (थ). Used with Shift for half-letter 'Th' (थ्).",
+        'u': "Consonant 'Ga' (ग). Used with Shift for half-letter 'G' (ग्).",
+        'i': "Consonant retroflex 'Sha' (ष). Used with Shift for half-letter (ष्).",
+        'o': "Independent Vowel 'I' (इ). Used with Shift for 'Ee' (ई).",
+        'p': "Consonant 'Pa' (प). Used with Shift for half-letter 'P' (प्).",
+        '[': "Reph mark 'R' (र्). Placed on top of letters. With Shift: Ri (ृ).",
+        ']': "Vowel Matra 'E' (े). With Shift: 'Ai' (ै).",
+        'z': "Consonant palatal 'Sha' (श). With Shift: half-letter (श्).",
+        'x': "Consonant 'Ha' (ह). With Shift: half-letter (ह्).",
+        'c': "Independent Vowel 'A' (अ). With Shift: 'Aa' (आ).",
+        'v': "Consonant 'Kha' (ख). With Shift: half-letter 'Kh' (ख्).",
+        'b': "Consonant 'Da' (द). With Shift: half-letter 'D' (द्).",
+        'n': "Consonant 'La' (ल). With Shift: half-letter 'L' (ल्).",
+        'm': "Consonant 'Pha' (फ). With Shift: half-letter 'Ph' (फ्).",
+        '/': "Consonant 'Ra' (र). With Shift: 'Ru' (रु).",
+        '.': "Purna Viram / Full Stop (।). With Shift: Exclamation mark (!)."
+    };
+
+    function updateInspector(k, norm, sh) {
+        if (!k) return;
+        badge.textContent = k.toUpperCase();
+        title.innerHTML = `Key '${k.toUpperCase()}' → Normal: <span style="color:var(--primary); font-size:1.2rem;">${norm}</span> | With Shift: <span style="color:#f59e0b; font-size:1.2rem;">${sh}</span>`;
+        const explanation = keyDescriptions[k.toLowerCase()] || `Types '${norm}' in normal mode, and '${sh}' when holding Shift.`;
+        desc.textContent = explanation;
+    }
+
+    keys.forEach(k => {
+        k.addEventListener('mouseenter', () => {
+            updateInspector(k.dataset.k, k.dataset.norm, k.dataset.sh);
+        });
+        k.addEventListener('click', () => {
+            keys.forEach(el => el.classList.remove('active'));
+            k.classList.add('active');
+            updateInspector(k.dataset.k, k.dataset.norm, k.dataset.sh);
+            // Pre-fill search with this character to highlight in table
+            searchInput.value = k.dataset.norm;
+            performSearch(k.dataset.norm);
+        });
+    });
+
+    let shiftMode = false;
+    if (toggleShiftBtn) {
+        toggleShiftBtn.addEventListener('click', () => {
+            shiftMode = !shiftMode;
+            kbGrid.classList.toggle('shift-active-mode', shiftMode);
+            toggleShiftBtn.textContent = shiftMode ? "Show Normal View" : "Toggle Shift View";
+            toggleShiftBtn.classList.toggle('primary', shiftMode);
+        });
+    }
+
+    function performSearch(query) {
+        const q = query.trim().toLowerCase();
+        let matchCount = 0;
+        keys.forEach(k => k.classList.remove('highlight-match'));
+        tableRows.forEach(tr => tr.classList.remove('row-highlight'));
+
+        if (!q) {
+            feedback.style.display = 'none';
+            return;
+        }
+
+        // Match virtual keyboard
+        keys.forEach(k => {
+            const keyVal = (k.dataset.k || '').toLowerCase();
+            const normVal = (k.dataset.norm || '').toLowerCase();
+            const shVal = (k.dataset.sh || '').toLowerCase();
+            if (keyVal === q || normVal === q || shVal === q) {
+                k.classList.add('highlight-match');
+            }
+        });
+
+        // Match table rows
+        let firstMatchRow = null;
+        tableRows.forEach(tr => {
+            const text = tr.textContent.toLowerCase();
+            if (text.includes(q)) {
+                tr.classList.add('row-highlight');
+                matchCount++;
+                if (!firstMatchRow) firstMatchRow = tr;
+            }
+        });
+
+        feedback.style.display = 'block';
+        if (matchCount > 0) {
+            feedback.innerHTML = `Found <strong>${matchCount}</strong> match(es). Scroll down to view highlighted table rows.`;
+            feedback.style.color = 'var(--primary)';
+        } else {
+            feedback.innerHTML = `No exact matches found for "${query}". Try searching an English key letter (e.g. <code>s</code>) or Nepali glyph.`;
+            feedback.style.color = 'var(--text-muted)';
+        }
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => performSearch(e.target.value));
+    }
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            performSearch('');
+            searchInput.focus();
+        });
+    }
+});
+</script>
             </main>
             <footer class="main-footer">
     <div class="footer-container">

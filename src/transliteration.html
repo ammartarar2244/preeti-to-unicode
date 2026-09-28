@@ -1,5 +1,5 @@
 <!--
-TITLE: Nepali Transliteration Online – Fast English to Nepali Converter
+TITLE: Nepali Transliteration Online – English to Nepali Typing
 CANONICAL: https://nepalilanguagetools.com/transliteration/
 META_DESCRIPTION: Instant online Nepali transliteration tool. Convert Romanized English (Latin) script to Nepali Devanagari Unicode phonetically in real-time. Free & works offline.
 SCHEMA:
@@ -43,6 +43,14 @@ SCHEMA:
           "@type": "Answer",
           "text": "Yes! All output is 100% standard Devanagari Unicode. You can click 'Copy Text' and paste it directly into Microsoft Word, Excel, WhatsApp, Facebook, TikTok, or government forms."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this Nepali transliteration tool work offline?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! The transliterator operates 100% locally in your web browser. Once loaded, you can type, convert, and copy text completely offline without any internet connection."
+        }
       }
     ]
   }
@@ -54,8 +62,19 @@ SCHEMA:
         <div style="display: flex; justify-content: center; gap: 12px; align-items: center; margin-bottom: 12px; font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">
             <span>📅 Last Updated: September 2026</span>
             <span>✍️ Author: Rajesh Tarar</span>
+            <span>⚡ Instant Client-Side Engine</span>
         </div>
         <p class="tool-desc">Type phonetically in Latin characters (Romanized English) to generate standard Nepali Devanagari Unicode characters instantly in real time.</p>
+    </div>
+
+    <!-- Quick Example Try Pills -->
+    <div style="max-width: 900px; margin: 0 auto 16px auto; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 0.85rem;">
+        <span style="font-weight: 700; color: var(--text-muted);">⚡ Quick Try:</span>
+        <button class="translit-pill" data-text="namaste " style="background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 20px; padding: 4px 12px; cursor: pointer; color: var(--text-color); font-size: 0.85rem; transition: 0.15s;">namaste → <strong>नमस्ते</strong></button>
+        <button class="translit-pill" data-text="nepal " style="background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 20px; padding: 4px 12px; cursor: pointer; color: var(--text-color); font-size: 0.85rem; transition: 0.15s;">nepal → <strong>नेपाल</strong></button>
+        <button class="translit-pill" data-text="dhanyabad " style="background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 20px; padding: 4px 12px; cursor: pointer; color: var(--text-color); font-size: 0.85rem; transition: 0.15s;">dhanyabad → <strong>धन्यवाद</strong></button>
+        <button class="translit-pill" data-text="mero saathi " style="background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 20px; padding: 4px 12px; cursor: pointer; color: var(--text-color); font-size: 0.85rem; transition: 0.15s;">mero saathi → <strong>मेरो साथी</strong></button>
+        <button class="translit-pill" data-text="kasto cha " style="background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 20px; padding: 4px 12px; cursor: pointer; color: var(--text-color); font-size: 0.85rem; transition: 0.15s;">kasto cha → <strong>कस्तो छ</strong></button>
     </div>
 
     <!-- Converter Card -->
@@ -178,6 +197,49 @@ SCHEMA:
                     </div>
                 </div>
             </div>
+            <div class="accordion-item">
+                <button class="accordion-header">
+                    Q: Does this Nepali transliteration tool work offline?
+                    <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body">
+                    <div class="accordion-content">
+                        Yes! The transliterator operates 100% locally in your web browser. Once loaded, you can type, convert, and copy text completely offline without any internet connection.
+                    </div>
+                </div>
+            </div>
         </div>
     </article>
 </div>
+
+<style>
+.translit-pill:hover {
+    border-color: var(--primary) !important;
+    background: rgba(var(--primary-rgb, 59, 130, 246), 0.1) !important;
+    transform: translateY(-1px);
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const pills = document.querySelectorAll('.translit-pill');
+    const area = document.getElementById('typing-area');
+    if (!area) return;
+
+    pills.forEach(p => {
+        p.addEventListener('click', function() {
+            const txt = this.getAttribute('data-text');
+            area.focus();
+            // Append or insert
+            const start = area.selectionStart;
+            const end = area.selectionEnd;
+            const cur = area.value;
+            area.value = cur.substring(0, start) + txt + cur.substring(end);
+            area.selectionStart = area.selectionEnd = start + txt.length;
+            // Dispatch input event to trigger transliteration conversion
+            area.dispatchEvent(new Event('input', { bubbles: true }));
+            area.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, key: ' ' }));
+        });
+    });
+});
+</script>
